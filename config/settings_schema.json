@@ -3,7 +3,9 @@
     "name": "theme_info",
     "theme_name": "GameHub",
     "theme_version": "1.0.0",
-    "theme_author": "Placeholder"
+    "theme_author": "Placeholder",
+    "theme_documentation_url": "https://github.com/MaickelOliveira/gamehub-theme",
+    "theme_support_url": "https://github.com/MaickelOliveira/gamehub-theme/issues"
   },
   {
     "name": "Logo",
