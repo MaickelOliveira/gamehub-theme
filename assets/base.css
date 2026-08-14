@@ -63,12 +63,31 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 /* ---------- Announcement bar ---------- */
 .announcement-bar {
-  background: var(--color-text);
-  color: var(--color-background);
-  text-align: center;
-  font-size: 0.85rem;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  overflow: hidden;
 }
-.announcement-bar p { margin: 0; padding: 0.55rem 1rem; }
+.announcement-bar__track {
+  display: flex;
+  width: max-content;
+  animation: announcement-marquee 22s linear infinite;
+}
+.announcement-bar p {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.25rem;
+}
+@keyframes announcement-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .announcement-bar__track { animation: none; }
+}
 
 /* ---------- Header ---------- */
 .site-header {
@@ -260,6 +279,41 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   padding-bottom: 3rem;
 }
 .hero__content { max-width: 560px; }
+
+/* ---------- Collection hero (categoria/plataforma) ---------- */
+.collection-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: min(60vh, 560px);
+  display: flex;
+  align-items: flex-end;
+  color: #F4F2FA;
+}
+.collection-hero__media { position: absolute; inset: 0; z-index: 0; background: var(--color-surface); }
+.collection-hero__image { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.collection-hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(10,15,11,0.9) 0%, rgba(10,15,11,0.45) 55%, rgba(10,15,11,0.1) 100%);
+}
+.collection-hero__fade {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  height: clamp(60px, 12vw, 140px);
+  background: linear-gradient(to bottom, transparent, var(--color-background));
+  opacity: 0;
+}
+.collection-hero__inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: clamp(1.8rem, 4vw, 3rem) 1.25rem;
+}
+.collection-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0 0.3rem;
+}
+.collection-hero__count { margin: 0; color: #C7C2D9; font-size: 0.92rem; font-family: var(--font-body); }
 .hero__eyebrow {
   display: inline-block;
   font-size: 0.8rem;
