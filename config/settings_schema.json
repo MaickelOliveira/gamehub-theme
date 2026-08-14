@@ -28,8 +28,8 @@
   {
     "name": "Tipografia",
     "settings": [
-      { "type": "font_picker", "id": "type_header_font", "label": "Fonte dos títulos", "default": "assistant_n4" },
-      { "type": "font_picker", "id": "type_body_font", "label": "Fonte do corpo", "default": "assistant_n4" }
+      { "type": "font_picker", "id": "type_header_font", "label": "Fonte dos títulos", "default": "helvetica_n4" },
+      { "type": "font_picker", "id": "type_body_font", "label": "Fonte do corpo", "default": "helvetica_n4" }
     ]
   },
   {

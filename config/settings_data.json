@@ -7,8 +7,8 @@
     "color_border": "#E4E4EA",
     "color_accent": "#5B4CFF",
     "color_accent_contrast": "#FFFFFF",
-    "type_header_font": "assistant_n4",
-    "type_body_font": "assistant_n4",
+    "type_header_font": "helvetica_n4",
+    "type_body_font": "helvetica_n4",
     "page_width": 1280
   },
   "presets": {
