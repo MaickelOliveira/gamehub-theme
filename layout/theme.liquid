@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_background }}">
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  {%- unless settings.type_header_font.system? -%}
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {%- endunless -%}
+
+  <style>
+    :root {
+      --color-background: {{ settings.color_background }};
+      --color-surface: {{ settings.color_surface }};
+      --color-text: {{ settings.color_text }};
+      --color-text-muted: {{ settings.color_text_muted }};
+      --color-accent: {{ settings.color_accent }};
+      --color-accent-contrast: {{ settings.color_accent_contrast }};
+      --color-border: {{ settings.color_border }};
+      --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --page-width: {{ settings.page_width }}px;
+    }
+  </style>
+
+  {{ settings.type_header_font | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <div id="CartDrawer" class="cart-drawer" hidden>
+    <div class="cart-drawer__overlay" data-cart-drawer-close></div>
+    <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'cart.general.title' | t }}">
+      <div class="cart-drawer__header">
+        <h2>{{ 'cart.general.title' | t }}</h2>
+        <button type="button" class="cart-drawer__close" data-cart-drawer-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+      </div>
+      <div id="CartDrawerContent" class="cart-drawer__content"></div>
+    </div>
+  </div>
+
+  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

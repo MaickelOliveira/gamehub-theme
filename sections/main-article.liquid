@@ -1,0 +1,33 @@
+<section class="article-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="article-page__title">{{ article.title }}</h1>
+  <p class="article-page__meta">{{ article.published_at | date: '%d/%m/%Y' }} &middot; {{ article.author }}</p>
+  {%- if article.image -%}
+    <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" class="article-page__image">
+  {%- endif -%}
+  <div class="article-page__content rte">{{ article.content }}</div>
+
+  {%- if blog.comments_enabled? -%}
+    <div class="article-page__comments">
+      <h2>{{ 'blogs.comments.title' | t: count: article.comments_count }}</h2>
+      {%- for comment in article.comments -%}
+        <div class="article-page__comment">
+          <p class="article-page__comment-author">{{ comment.author }}</p>
+          <div class="rte">{{ comment.content }}</div>
+        </div>
+      {%- endfor -%}
+      {%- form 'new_comment', article -%}
+        {%- if form.posted_successfully? -%}
+          <p>{{ 'blogs.comments.success' | t }}</p>
+        {%- endif -%}
+        <input type="text" name="comment[author]" placeholder="{{ 'blogs.comments.name' | t }}" required>
+        <input type="email" name="comment[email]" placeholder="{{ 'blogs.comments.email' | t }}" required>
+        <textarea name="comment[body]" placeholder="{{ 'blogs.comments.message' | t }}" required></textarea>
+        <button type="submit">{{ 'blogs.comments.post' | t }}</button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Página do artigo", "settings": [] }
+{% endschema %}

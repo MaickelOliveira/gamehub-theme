@@ -1,0 +1,35 @@
+<section class="search-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="search-page__title">
+    {%- if search.performed -%}
+      {{ 'general.search.results_for' | t: terms: search.terms }}
+    {%- else -%}
+      {{ 'general.search.title' | t }}
+    {%- endif -%}
+  </h1>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+    <button type="submit">{{ 'general.search.submit' | t }}</button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results.size > 0 -%}
+      <ul class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            <li>{% render 'product-card', product: item %}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="carousel-section__empty">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Página de busca",
+  "settings": []
+}
+{% endschema %}

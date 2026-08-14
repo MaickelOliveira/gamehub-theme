@@ -1,0 +1,93 @@
+<section class="product-page page-width" {{ section.shopify_attributes }}>
+  <div class="product-page__grid">
+    <div class="product-page__gallery">
+      {%- if product.media.size > 0 -%}
+        <div class="product-page__featured-media">
+          <img
+            id="ProductFeaturedImage"
+            src="{{ product.selected_or_first_available_variant.featured_image | default: product.featured_media | image_url: width: 900 }}"
+            alt="{{ product.featured_media.alt | default: product.title | escape }}"
+            width="900"
+          >
+        </div>
+        {%- if product.media.size > 1 -%}
+          <ul class="product-page__thumbnails">
+            {%- for media in product.media -%}
+              <li>
+                <button type="button" data-thumbnail data-image-url="{{ media | image_url: width: 900 }}">
+                  <img src="{{ media | image_url: width: 150 }}" alt="{{ media.alt | escape }}" width="70" height="70" loading="lazy">
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-page__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <div class="product-page__info">
+      <h1 class="product-page__title">{{ product.title }}</h1>
+
+      {%- if product.tags contains 'ps4' or product.tags contains 'ps5' or product.tags contains 'xbox' or product.tags contains 'pc' -%}
+        <div class="product-card__platforms">
+          {%- for tag in product.tags -%}
+            {%- if tag == 'ps4' or tag == 'ps5' or tag == 'xbox' or tag == 'pc' -%}
+              <span class="product-card__platform">{{ tag | upcase }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="product-page__price">
+        {%- if product.compare_at_price > product.price -%}
+          <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
+        {%- endif -%}
+        <span class="product-page__price-current">{{ product.price | money }}</span>
+      </div>
+
+      {%- form 'product', product, id: 'ProductForm' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-select>
+
+        {%- for option in product.options_with_values -%}
+          <div class="product-page__option">
+            <label>{{ option.name }}</label>
+            <div class="product-page__option-values">
+              {%- for value in option.values -%}
+                <button type="button" class="product-page__option-value" data-option-value="{{ value | escape }}">{{ value }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div class="product-page__quantity">
+          <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1">
+        </div>
+
+        <button
+          type="submit"
+          class="button button--primary product-page__add-to-cart"
+          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+        >
+          {%- if product.selected_or_first_available_variant.available -%}
+            {{ 'products.product.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+
+      <div class="product-page__description rte">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página do produto",
+  "settings": []
+}
+{% endschema %}

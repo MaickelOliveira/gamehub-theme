@@ -1,0 +1,28 @@
+<section class="blog-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="blog-page__title">{{ blog.title }}</h1>
+  {%- paginate blog.articles by 12 -%}
+    <ul class="blog-page__grid">
+      {%- for article in blog.articles -%}
+        <li class="blog-page__item">
+          <a href="{{ article.url }}">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 500 }}" alt="{{ article.title | escape }}" loading="lazy">
+            {%- endif -%}
+            <h2>{{ article.title }}</h2>
+          </a>
+          <p class="blog-page__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">&larr;</a>{%- endif -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}">&rarr;</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{ "name": "Página do blog", "settings": [] }
+{% endschema %}

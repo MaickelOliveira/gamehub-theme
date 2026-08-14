@@ -1,0 +1,60 @@
+<section class="cart-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="cart-page__title">{{ 'cart.general.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart, id: 'CartForm' -%}
+      <table class="cart-page__table">
+        <thead>
+          <tr>
+            <th>{{ 'cart.label.product' | t }}</th>
+            <th>{{ 'cart.label.price' | t }}</th>
+            <th>{{ 'cart.label.quantity' | t }}</th>
+            <th>{{ 'cart.label.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr class="cart-page__row">
+              <td class="cart-page__product">
+                <a href="{{ item.url }}">
+                  {%- if item.image -%}
+                    <img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.image.alt | escape }}" width="80" height="80" loading="lazy">
+                  {%- endif -%}
+                </a>
+                <div>
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.variant.title contains 'Default' -%}
+                    <p class="cart-page__variant">{{ item.variant.title }}</p>
+                  {%- endunless -%}
+                </div>
+              </td>
+              <td>{{ item.original_price | money }}</td>
+              <td>
+                <input type="number" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" data-cart-quantity>
+              </td>
+              <td>{{ item.original_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="cart-page__footer">
+        <p class="cart-page__subtotal">{{ 'cart.general.subtotal' | t }}: <strong>{{ cart.total_price | money }}</strong></p>
+        <div class="cart-page__actions">
+          <button type="submit" name="update" class="button button--secondary">{{ 'cart.general.update' | t }}</button>
+          <button type="submit" name="checkout" class="button button--primary">{{ 'cart.general.checkout' | t }}</button>
+        </div>
+      </div>
+    {%- endform -%}
+  {%- else -%}
+    <p class="cart-page__empty">{{ 'cart.general.empty' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ 'cart.general.continue_shopping' | t }}</a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Página do carrinho",
+  "settings": []
+}
+{% endschema %}

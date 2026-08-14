@@ -1,0 +1,157 @@
+{
+  "general": {
+    "meta": {
+      "page": "página {{ page }}"
+    },
+    "search": {
+      "title": "Buscar",
+      "placeholder": "Buscar jogos, plataformas...",
+      "submit": "Buscar",
+      "results_for": "Resultados para \"{{ terms }}\"",
+      "no_results": "Nenhum resultado para \"{{ terms }}\""
+    },
+    "pagination": {
+      "label": "Paginação",
+      "previous": "Anterior",
+      "next": "Próxima"
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "link": "Voltar para a loja"
+    },
+    "view_all": "Ver tudo"
+  },
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo",
+    "menu": "Menu",
+    "main_navigation": "Navegação principal",
+    "close": "Fechar",
+    "previous": "Anterior",
+    "next": "Próximo"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao carrinho",
+      "sold_out": "Esgotado",
+      "quantity": "Quantidade"
+    },
+    "badges": {
+      "preorder": "Pré-venda"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Coleções",
+      "no_matches": "Nenhum produto encontrado",
+      "items_with_count": {
+        "one": "{{ count }} produto",
+        "other": "{{ count }} produtos"
+      }
+    },
+    "sorting": {
+      "title": "Ordenar por"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Carrinho",
+      "subtotal": "Subtotal",
+      "update": "Atualizar carrinho",
+      "checkout": "Finalizar compra",
+      "empty": "Seu carrinho está vazio.",
+      "continue_shopping": "Continuar comprando"
+    },
+    "label": {
+      "product": "Produto",
+      "price": "Preço",
+      "quantity": "Quantidade",
+      "total": "Total"
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "heading": "Fique por dentro",
+      "placeholder": "Seu e-mail",
+      "submit": "Assinar",
+      "success": "Inscrição confirmada!"
+    },
+    "rights": "Todos os direitos reservados."
+  },
+  "blogs": {
+    "comments": {
+      "title": {
+        "one": "{{ count }} comentário",
+        "other": "{{ count }} comentários"
+      },
+      "success": "Comentário enviado com sucesso!",
+      "name": "Nome",
+      "email": "E-mail",
+      "message": "Comentário",
+      "post": "Publicar comentário"
+    }
+  },
+  "customer": {
+    "log_out": "Sair",
+    "login": {
+      "title": "Entrar",
+      "email": "E-mail",
+      "password": "Senha",
+      "sign_in": "Entrar",
+      "forgot_password": "Esqueceu a senha?",
+      "create_account": "Não tem uma conta?"
+    },
+    "register": {
+      "title": "Criar conta",
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Criar conta"
+    },
+    "account": {
+      "title": "Minha conta",
+      "return": "Voltar para minha conta"
+    },
+    "orders": {
+      "title": "Histórico de pedidos",
+      "order_number": "Pedido",
+      "date": "Data",
+      "payment_status": "Pagamento",
+      "total": "Total",
+      "none": "Você ainda não fez nenhum pedido."
+    },
+    "order": {
+      "title": "Pedido {{ name }}",
+      "product": "Produto",
+      "sku": "SKU",
+      "price": "Preço",
+      "quantity": "Quantidade",
+      "total": "Total"
+    },
+    "addresses": {
+      "title": "Endereços",
+      "manage": "Gerenciar endereços",
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "address1": "Endereço",
+      "city": "Cidade",
+      "zip": "CEP",
+      "phone": "Telefone",
+      "add": "Adicionar endereço",
+      "delete": "Excluir"
+    },
+    "reset_password": {
+      "title": "Redefinir senha",
+      "password": "Nova senha",
+      "password_confirm": "Confirmar senha",
+      "submit": "Redefinir senha"
+    },
+    "activate_account": {
+      "title": "Ativar conta",
+      "password": "Senha",
+      "password_confirm": "Confirmar senha",
+      "submit": "Ativar conta",
+      "decline": "Recusar convite"
+    }
+  }
+}

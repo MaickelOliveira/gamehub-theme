@@ -1,0 +1,57 @@
+<section class="collection-page page-width" {{ section.shopify_attributes }}>
+  <div class="collection-page__header">
+    <h1 class="collection-page__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection-page__description rte">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="collection-page__toolbar">
+    <p class="collection-page__count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</p>
+    {%- form 'sort_by' -%}
+      <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
+      <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    {%- endform -%}
+  </div>
+
+  {%- paginate collection.products by 24 -%}
+    {%- if collection.products.size > 0 -%}
+      <ul class="product-grid">
+        {%- for product in collection.products -%}
+          <li>{% render 'product-card', product: product %}</li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="carousel-section__empty">{{ 'collections.general.no_matches' | t }}</p>
+    {%- endif -%}
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}">&larr; {{ 'general.pagination.previous' | t }}</a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {%- else -%}
+            <span class="pagination__current">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }} &rarr;</a>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{
+  "name": "Página da coleção",
+  "settings": []
+}
+{% endschema %}

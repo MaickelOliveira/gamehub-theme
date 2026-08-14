@@ -1,0 +1,32 @@
+<section class="account-page page-width">
+  <h1 class="account-page__title">{{ 'customer.addresses.title' | t }}</h1>
+
+  {%- form 'customer_address', customer.new_address -%}
+    <label for="AddressFirstName">{{ 'customer.addresses.first_name' | t }}</label>
+    <input type="text" id="AddressFirstName" name="address[first_name]">
+    <label for="AddressLastName">{{ 'customer.addresses.last_name' | t }}</label>
+    <input type="text" id="AddressLastName" name="address[last_name]">
+    <label for="AddressStreet">{{ 'customer.addresses.address1' | t }}</label>
+    <input type="text" id="AddressStreet" name="address[address1]">
+    <label for="AddressCity">{{ 'customer.addresses.city' | t }}</label>
+    <input type="text" id="AddressCity" name="address[city]">
+    <label for="AddressZip">{{ 'customer.addresses.zip' | t }}</label>
+    <input type="text" id="AddressZip" name="address[zip]">
+    <label for="AddressPhone">{{ 'customer.addresses.phone' | t }}</label>
+    <input type="tel" id="AddressPhone" name="address[phone]">
+    <button type="submit" class="button button--primary">{{ 'customer.addresses.add' | t }}</button>
+  {%- endform -%}
+
+  <ul class="account-page__addresses">
+    {%- for address in customer.addresses -%}
+      <li>
+        {{ address | format_address }}
+        {%- form 'customer_address', address -%}
+          <button type="submit" data-confirm-class="account-page__delete" name="_method" value="delete">{{ 'customer.addresses.delete' | t }}</button>
+        {%- endform -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
+</section>

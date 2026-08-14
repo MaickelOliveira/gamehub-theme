@@ -1,0 +1,21 @@
+<section class="account-page page-width">
+  <h1 class="account-page__title">{{ 'customer.login.title' | t }}</h1>
+
+  {%- form 'customer_login' -%}
+    {%- if form.errors -%}
+      <div class="form-errors">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+    <input type="email" id="CustomerEmail" name="customer[email]" required autocomplete="email">
+
+    {%- unless form.password_needed == false -%}
+      <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+      <input type="password" id="CustomerPassword" name="customer[password]" required autocomplete="current-password">
+    {%- endunless -%}
+
+    <button type="submit" class="button button--primary">{{ 'customer.login.sign_in' | t }}</button>
+    <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot_password' | t }}</a>
+  {%- endform -%}
+
+  <p>{{ 'customer.login.create_account' | t }} <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t }}</a></p>
+</section>

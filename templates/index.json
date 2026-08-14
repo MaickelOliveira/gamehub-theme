@@ -1,0 +1,56 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "video_id": "o_yIvRZC0vQ",
+        "video_start": 136,
+        "video_end": 180,
+        "eyebrow": "Novo lançamento",
+        "heading": "Aeon Vanguard chegou com tudo",
+        "subheading": "Jogue no dia do lançamento, com entrega digital imediata.",
+        "button_label": "Comprar agora",
+        "button_url": "",
+        "button_label_2": "Ver lançamentos",
+        "button_url_2": ""
+      }
+    },
+    "lancamentos": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Lançamentos",
+        "products_to_show": 8
+      }
+    },
+    "pre-vendas": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Pré-vendas",
+        "products_to_show": 8
+      }
+    },
+    "combo": {
+      "type": "combo-promo",
+      "settings": {
+        "eyebrow": "Oferta especial",
+        "heading": "Combo de 6 jogos",
+        "text": "Monte seu combo e adicione todos os jogos ao carrinho com um clique.",
+        "button_label": "Montar combo"
+      }
+    },
+    "pronta-entrega": {
+      "type": "collection-grid",
+      "settings": {
+        "heading": "Pronta entrega",
+        "products_to_show": 12
+      }
+    },
+    "plataformas": {
+      "type": "platform-selector",
+      "settings": {
+        "heading": "Compre por plataforma"
+      }
+    }
+  },
+  "order": ["hero", "lancamentos", "pre-vendas", "combo", "pronta-entrega", "plataformas"]
+}

@@ -1,0 +1,48 @@
+<section class="platform-selector page-width" {{ section.shopify_attributes }}>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  <ul class="platform-selector__grid">
+    {%- for block in section.blocks -%}
+      <li {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.url }}" class="platform-selector__item">
+          {%- if block.settings.icon != blank -%}
+            <img src="{{ block.settings.icon | image_url: width: 120 }}" alt="{{ block.settings.name }}" loading="lazy" width="60" height="60">
+          {%- endif -%}
+          <span>{{ block.settings.name }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Seletor de plataforma",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Compre por plataforma" }
+  ],
+  "blocks": [
+    {
+      "type": "platform",
+      "name": "Plataforma",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "PS5" },
+        { "type": "image_picker", "id": "icon", "label": "Ícone" },
+        { "type": "url", "id": "url", "label": "Link (coleção)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "platform", "settings": { "name": "PS5" } },
+      { "type": "platform", "settings": { "name": "PS4" } },
+      { "type": "platform", "settings": { "name": "Xbox" } },
+      { "type": "platform", "settings": { "name": "PC" } }
+    ]
+  },
+  "presets": [
+    { "name": "Seletor de plataforma" }
+  ]
+}
+{% endschema %}

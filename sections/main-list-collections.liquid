@@ -1,0 +1,24 @@
+<section class="collections-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="collections-page__title">{{ 'collections.general.title' | t }}</h1>
+  <ul class="collections-page__grid">
+    {%- for collection in collections -%}
+      <li class="collections-page__item">
+        <a href="{{ collection.url }}">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 500 }}" alt="{{ collection.title | escape }}" loading="lazy">
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'collections-page__placeholder' }}
+          {%- endif -%}
+          <span>{{ collection.title }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Lista de coleções",
+  "settings": []
+}
+{% endschema %}

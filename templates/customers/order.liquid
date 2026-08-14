@@ -1,0 +1,30 @@
+<section class="account-page page-width">
+  <h1 class="account-page__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p>{{ order.created_at | date: '%d/%m/%Y' }}</p>
+
+  <table class="account-page__orders">
+    <thead>
+      <tr>
+        <th>{{ 'customer.order.product' | t }}</th>
+        <th>{{ 'customer.order.sku' | t }}</th>
+        <th>{{ 'customer.order.price' | t }}</th>
+        <th>{{ 'customer.order.quantity' | t }}</th>
+        <th>{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr>
+          <td>{{ line_item.title }}</td>
+          <td>{{ line_item.sku }}</td>
+          <td>{{ line_item.original_price | money }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.original_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+
+  <p class="account-page__orders-total">{{ 'customer.order.total' | t }}: <strong>{{ order.total_price | money }}</strong></p>
+  <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
+</section>

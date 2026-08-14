@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "relacionados": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Você também pode gostar",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": ["main", "relacionados"]
+}

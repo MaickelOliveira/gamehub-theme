@@ -1,0 +1,92 @@
+<footer class="site-footer">
+  <div class="page-width site-footer__grid">
+    <div class="site-footer__block site-footer__block--brand">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="130" loading="lazy">
+      {%- else -%}
+        <span class="site-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+      {%- if section.settings.about_text != blank -%}
+        <div class="site-footer__about">{{ section.settings.about_text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'link_list' -%}
+        <div class="site-footer__block" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.heading }}</h3>
+          <ul>
+            {%- for link in block.settings.menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div class="site-footer__block">
+      <h3>{{ 'footer.newsletter.heading' | t }}</h3>
+      {% form 'customer', id: 'FooterNewsletterForm' %}
+        {%- if form.posted_successfully? -%}
+          <p class="site-footer__newsletter-success">{{ 'footer.newsletter.success' | t }}</p>
+        {%- endif -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="site-footer__newsletter-form">
+          <input type="email" name="contact[email]" placeholder="{{ 'footer.newsletter.placeholder' | t }}" required>
+          <button type="submit">{{ 'footer.newsletter.submit' | t }}</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="page-width site-footer__bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'footer.rights' | t }}</p>
+    <p class="site-footer__payment-note">{{ section.settings.legal_text }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "about_text",
+      "label": "Texto institucional",
+      "default": "<p>Sua loja de jogos digitais com entrega imediata.</p>"
+    },
+    {
+      "type": "text",
+      "id": "legal_text",
+      "label": "Texto legal / registro",
+      "default": "CNPJ 00.000.000/0001-00"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Lista de links",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Institucional"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link_list", "settings": { "heading": "Institucional" } },
+      { "type": "link_list", "settings": { "heading": "Ajuda" } }
+    ]
+  }
+}
+{% endschema %}

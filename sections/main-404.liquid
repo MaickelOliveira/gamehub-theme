@@ -1,0 +1,12 @@
+<section class="error-page page-width" {{ section.shopify_attributes }}>
+  <h1 class="error-page__title">404</h1>
+  <p class="error-page__text">{{ 'general.404.title' | t }}</p>
+  <a href="{{ routes.root_url }}" class="button button--primary">{{ 'general.404.link' | t }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "Página 404",
+  "settings": []
+}
+{% endschema %}

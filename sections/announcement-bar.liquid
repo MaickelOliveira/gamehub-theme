@@ -1,0 +1,19 @@
+{% if section.settings.message != blank %}
+  <div class="announcement-bar">
+    <p>{{ section.settings.message }}</p>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Barra de anúncio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Mensagem",
+      "default": "Frete grátis acima de R$ 150"
+    }
+  ]
+}
+{% endschema %}

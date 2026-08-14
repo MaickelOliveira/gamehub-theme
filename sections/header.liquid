@@ -1,0 +1,82 @@
+<header class="site-header">
+  <div class="site-header__inner page-width">
+    <button type="button" class="site-header__menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="MobileNav" aria-label="{{ 'accessibility.menu' | t }}">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" width="150" height="{{ 150 | divided_by: settings.logo.aspect_ratio }}" loading="eager">
+      {%- else -%}
+        <span class="site-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-header__nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
+      <ul class="site-header__nav-list">
+        {%- for link in section.settings.main_menu.links -%}
+          <li class="site-header__nav-item{% if link.links != blank %} has-dropdown{% endif %}">
+            <a href="{{ link.url }}" class="site-header__nav-link">
+              {{ link.title }}
+              {%- if link.links != blank %} {% render 'icon', name: 'chevron-down' %}{% endif -%}
+            </a>
+            {%- if link.links != blank -%}
+              <ul class="site-header__dropdown">
+                {%- for childlink in link.links -%}
+                  <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="site-header__search">
+        <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}">
+        <button type="submit" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon', name: 'search' %}</button>
+      </form>
+
+      <a href="{{ routes.account_url }}" class="site-header__icon-link" aria-label="{{ 'customer.account.title' | t }}">
+        {% render 'icon', name: 'account' %}
+      </a>
+
+      <button type="button" class="site-header__icon-link site-header__cart" data-cart-drawer-open aria-label="{{ 'cart.general.title' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="site-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="MobileNav" class="site-header__mobile-nav" data-mobile-nav hidden aria-label="{{ 'accessibility.main_navigation' | t }}">
+    <ul>
+      {%- for link in section.settings.main_menu.links -%}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- if link.links != blank -%}
+            <ul>
+              {%- for childlink in link.links -%}
+                <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Cabeçalho",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Menu principal",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+<section class="account-page page-width">
+  <h1 class="account-page__title">{{ 'customer.activate_account.title' | t }}</h1>
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}
+      <div class="form-errors">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="ActivatePassword">{{ 'customer.activate_account.password' | t }}</label>
+    <input type="password" id="ActivatePassword" name="customer[password]" required>
+    <label for="ActivatePasswordConfirm">{{ 'customer.activate_account.password_confirm' | t }}</label>
+    <input type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]" required>
+    <button type="submit" class="button button--primary">{{ 'customer.activate_account.submit' | t }}</button>
+    <button type="submit" name="decline" class="button button--secondary">{{ 'customer.activate_account.decline' | t }}</button>
+  {%- endform -%}
+</section>
