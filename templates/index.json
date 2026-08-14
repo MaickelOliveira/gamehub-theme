@@ -49,7 +49,14 @@
       "type": "platform-selector",
       "settings": {
         "heading": "Compre por plataforma"
-      }
+      },
+      "blocks": {
+        "ps5": { "type": "platform", "settings": { "name": "PS5" } },
+        "ps4": { "type": "platform", "settings": { "name": "PS4" } },
+        "xbox": { "type": "platform", "settings": { "name": "Xbox" } },
+        "pc": { "type": "platform", "settings": { "name": "PC" } }
+      },
+      "block_order": ["ps5", "ps4", "xbox", "pc"]
     }
   },
   "order": ["hero", "lancamentos", "pre-vendas", "combo", "pronta-entrega", "plataformas"]
