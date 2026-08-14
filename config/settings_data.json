@@ -10,12 +10,12 @@
 {
   "current": {
     "color_background": "#FFFFFF",
-    "color_surface": "#F7F7FA",
-    "color_text": "#16161D",
-    "color_text_muted": "#6B6B76",
-    "color_border": "#E4E4EA",
-    "color_accent": "#5B4CFF",
-    "color_accent_contrast": "#FFFFFF",
+    "color_surface": "#F2FBF4",
+    "color_text": "#0A130D",
+    "color_text_muted": "#5B6B60",
+    "color_border": "#DBEBE0",
+    "color_accent": "#A6FF00",
+    "color_accent_contrast": "#0A130D",
     "type_header_font": "helvetica_n4",
     "type_body_font": "helvetica_n4",
     "page_width": 1280
@@ -23,12 +23,12 @@
   "presets": {
     "Default": {
       "color_background": "#FFFFFF",
-      "color_surface": "#F7F7FA",
-      "color_text": "#16161D",
-      "color_text_muted": "#6B6B76",
-      "color_border": "#E4E4EA",
-      "color_accent": "#5B4CFF",
-      "color_accent_contrast": "#FFFFFF",
+      "color_surface": "#F2FBF4",
+      "color_text": "#0A130D",
+      "color_text_muted": "#5B6B60",
+      "color_border": "#DBEBE0",
+      "color_accent": "#A6FF00",
+      "color_accent_contrast": "#0A130D",
       "type_header_font": "helvetica_n4",
       "type_body_font": "helvetica_n4",
       "page_width": 1280

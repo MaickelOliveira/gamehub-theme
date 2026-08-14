@@ -17,12 +17,12 @@
     "name": "Cores",
     "settings": [
       { "type": "color", "id": "color_background", "label": "Fundo", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_surface", "label": "Superfície (cards)", "default": "#F7F7FA" },
-      { "type": "color", "id": "color_text", "label": "Texto", "default": "#16161D" },
-      { "type": "color", "id": "color_text_muted", "label": "Texto secundário", "default": "#6B6B76" },
-      { "type": "color", "id": "color_border", "label": "Bordas", "default": "#E4E4EA" },
-      { "type": "color", "id": "color_accent", "label": "Cor de destaque (accent)", "default": "#5B4CFF" },
-      { "type": "color", "id": "color_accent_contrast", "label": "Texto sobre o destaque", "default": "#FFFFFF" }
+      { "type": "color", "id": "color_surface", "label": "Superfície (cards)", "default": "#F2FBF4" },
+      { "type": "color", "id": "color_text", "label": "Texto", "default": "#0A130D" },
+      { "type": "color", "id": "color_text_muted", "label": "Texto secundário", "default": "#5B6B60" },
+      { "type": "color", "id": "color_border", "label": "Bordas", "default": "#DBEBE0" },
+      { "type": "color", "id": "color_accent", "label": "Cor de destaque (accent)", "default": "#A6FF00" },
+      { "type": "color", "id": "color_accent_contrast", "label": "Texto sobre o destaque", "default": "#0A130D" }
     ]
   },
   {
