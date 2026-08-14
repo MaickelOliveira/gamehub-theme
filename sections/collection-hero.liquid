@@ -1,0 +1,46 @@
+{%- liquid
+  assign has_video = false
+  if section.settings.video_id != blank
+    assign has_video = true
+  endif
+-%}
+
+<section class="collection-hero">
+  <div class="collection-hero__media">
+    {%- if has_video -%}
+      <div
+        class="hero__yt-wrap"
+        data-youtube-hero
+        data-video-id="{{ section.settings.video_id }}"
+        data-start="{{ section.settings.video_start }}"
+        data-end="{{ section.settings.video_end }}"
+      ></div>
+    {%- else -%}
+      <div class="collection-hero__image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}');"></div>
+    {%- endif -%}
+    <div class="collection-hero__scrim"></div>
+    <div class="collection-hero__fade"></div>
+  </div>
+
+  <div class="page-width collection-hero__inner">
+    <span class="eyebrow">Categoria</span>
+    <h1 class="collection-hero__title">{{ collection.title }}</h1>
+    {%- if collection.products_count > 0 -%}
+      <p class="collection-hero__count">{{ collection.products_count }} {% if collection.products_count == 1 %}jogo encontrado{% else %}jogos encontrados{% endif %}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner da coleção",
+  "settings": [
+    { "type": "header", "content": "Vídeo de fundo (opcional)" },
+    { "type": "text", "id": "video_id", "label": "ID do vídeo do YouTube", "info": "Da URL https://www.youtube.com/watch?v=o_yIvRZC0vQ, o ID é o_yIvRZC0vQ." },
+    { "type": "number", "id": "video_start", "label": "Início do trecho (segundos)", "default": 0 },
+    { "type": "number", "id": "video_end", "label": "Fim do trecho (segundos)", "default": 0, "info": "O trecho fica em loop automático entre início e fim." },
+    { "type": "header", "content": "Imagem de fundo (se não usar vídeo)" },
+    { "type": "image_picker", "id": "image", "label": "Imagem de fundo" }
+  ]
+}
+{% endschema %}

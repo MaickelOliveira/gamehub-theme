@@ -1,6 +1,10 @@
 {% if section.settings.message != blank %}
   <div class="announcement-bar">
-    <p>{{ section.settings.message }}</p>
+    <div class="announcement-bar__track">
+      <p>{{ section.settings.message }} &middot;</p>
+      <p aria-hidden="true">{{ section.settings.message }} &middot;</p>
+      <p aria-hidden="true">{{ section.settings.message }} &middot;</p>
+    </div>
   </div>
 {% endif %}
 
