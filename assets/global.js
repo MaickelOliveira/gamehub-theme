@@ -152,7 +152,7 @@
     headerSpacerEl.style.display = 'none';
     siteHeaderEl.parentNode.insertBefore(headerSpacerEl, siteHeaderEl.nextSibling);
 
-    var isHomeFloatingHeader = document.body.classList.contains('template-index');
+    var isHomeFloatingHeader = heroMediaEls.length > 0;
     var announcementEl = document.querySelector('.announcement-bar');
 
     var pinThreshold = 0;
