@@ -1242,6 +1242,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .site-header.site-header--over-video .site-header__logo-text,
 .site-header.site-header--over-video .site-header__nav-link,
 .site-header.site-header--over-video .site-header__icon-link,
+.site-header.site-header--over-video .site-header__menu-toggle,
 .site-header.site-header--over-video .site-header__search,
 .site-header.site-header--over-video .site-header__search input::placeholder {
   color: #F4F2FA;
