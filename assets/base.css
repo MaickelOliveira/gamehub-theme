@@ -45,6 +45,22 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
 }
 
+/* ---------- Reveal "flip" (teste, seletor de plataforma) ---------- */
+[data-reveal-flip] {
+  opacity: 0;
+  transform: perspective(900px) rotateY(-35deg) translateY(20px) scale(0.82);
+  transition: opacity 0.65s cubic-bezier(0.22, 0.9, 0.3, 1.2), transform 0.75s cubic-bezier(0.22, 0.9, 0.3, 1.2);
+}
+[data-reveal-flip].is-visible { opacity: 1; transform: none; }
+.platform-selector__grid li:nth-child(1)[data-reveal-flip] { transition-delay: 0s; }
+.platform-selector__grid li:nth-child(2)[data-reveal-flip] { transition-delay: 0.1s; }
+.platform-selector__grid li:nth-child(3)[data-reveal-flip] { transition-delay: 0.2s; }
+.platform-selector__grid li:nth-child(4)[data-reveal-flip] { transition-delay: 0.3s; }
+.platform-selector__grid li:nth-child(5)[data-reveal-flip] { transition-delay: 0.4s; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal-flip] { opacity: 1; transform: none; transition: none; }
+}
+
 .rte p { margin: 0 0 1em; }
 .rte a { text-decoration: underline; }
 

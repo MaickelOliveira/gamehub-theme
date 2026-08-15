@@ -1,4 +1,4 @@
-<section class="platform-selector page-width page-width--wide" data-reveal {{ section.shopify_attributes }}>
+<section class="platform-selector page-width page-width--wide" {{ section.shopify_attributes }}>
   {%- if section.settings.heading != blank -%}
     <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
   {%- endif -%}
@@ -12,7 +12,7 @@
         assign col = collections[handle]
         assign name_down = block.settings.name | downcase
       -%}
-      <li {{ block.shopify_attributes }}>
+      <li {{ block.shopify_attributes }} data-reveal-flip>
         <a href="{{ block.settings.url }}" class="platform-selector__item">
           {%- if block.settings.icon != blank -%}
             <img class="platform-selector__photo" src="{{ block.settings.icon | image_url: width: 700 }}" alt="" loading="lazy">

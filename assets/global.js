@@ -2,7 +2,7 @@
   'use strict';
 
   /* ---------- Reveal ao rolar a página ---------- */
-  var revealEls = document.querySelectorAll('[data-reveal]');
+  var revealEls = document.querySelectorAll('[data-reveal], [data-reveal-flip]');
   if (revealEls.length) {
     if ('IntersectionObserver' in window) {
       var revealObserver = new IntersectionObserver(function (entries, observer) {
