@@ -806,9 +806,10 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .combo-promo__price-now { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; }
 .combo-promo__price-was { color: var(--color-text-muted); }
 .combo-promo__save {
-  font-size: 0.76rem; font-weight: 800; color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  font-size: 0.76rem; font-weight: 800; color: #C4B5FD;
+  background: color-mix(in srgb, #A78BFA 18%, transparent);
   padding: 0.18rem 0.5rem; border-radius: 999px;
+  box-shadow: 0 0 8px 1px color-mix(in srgb, #A78BFA 50%, transparent), 0 0 16px 3px color-mix(in srgb, #A78BFA 28%, transparent);
 }
 
 /* ---------- Platform selector ---------- */
