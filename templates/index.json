@@ -32,6 +32,7 @@
       "type": "product-carousel",
       "settings": {
         "heading": "Lançamentos",
+        "subheading": "Os jogos mais recentes do catálogo",
         "collection": "lancamentos",
         "products_to_show": 8
       }
@@ -40,6 +41,7 @@
       "type": "product-carousel",
       "settings": {
         "heading": "Pré-vendas",
+        "subheading": "Garanta o seu antes do lançamento oficial",
         "collection": "pre-vendas",
         "products_to_show": 8
       }
@@ -57,6 +59,7 @@
       "type": "collection-grid",
       "settings": {
         "heading": "Pronta entrega",
+        "subheading": "Chave enviada por e-mail em minutos após a compra",
         "collection": "all",
         "products_to_show": 10
       }
@@ -64,7 +67,8 @@
     "plataformas": {
       "type": "platform-selector",
       "settings": {
-        "heading": "Compre por plataforma"
+        "heading": "Compre por plataforma",
+        "subheading": "Todo o catálogo, filtrado do jeito que você joga"
       },
       "blocks": {
         "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },

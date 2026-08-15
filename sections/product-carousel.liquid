@@ -7,9 +7,14 @@
 
 <section class="carousel-section page-width page-width--wide" {{ section.shopify_attributes }}>
   <div class="carousel-section__header">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
+    <div>
+      {%- if section.settings.heading != blank -%}
+        <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="carousel-section__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
     {%- if collection != blank -%}
       <a href="{{ collection.url }}" class="carousel-section__view-all">{{ 'general.view_all' | t }}</a>
     {%- endif -%}
@@ -45,6 +50,7 @@
   "name": "Carrossel de produtos",
   "settings": [
     { "type": "text", "id": "heading", "label": "Título", "default": "Lançamentos" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo" },
     { "type": "collection", "id": "collection", "label": "Coleção" },
     { "type": "range", "id": "products_to_show", "label": "Produtos exibidos", "min": 4, "max": 16, "step": 1, "default": 8 }
   ],
