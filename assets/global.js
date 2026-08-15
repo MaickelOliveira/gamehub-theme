@@ -150,14 +150,19 @@
     headerSpacerEl.style.display = 'none';
     siteHeaderEl.parentNode.insertBefore(headerSpacerEl, siteHeaderEl.nextSibling);
 
-    var pinThreshold = siteHeaderEl.offsetTop;
+    var pinThreshold = 0;
     var headerH = siteHeaderEl.offsetHeight || 72;
     var tickingHeaderCheck = false;
+    var isFirstCheck = true;
 
     function updateHeaderOnScroll() {
       tickingHeaderCheck = false;
 
-      var shouldPin = window.scrollY >= pinThreshold;
+      if (!siteHeaderEl.classList.contains('site-header--pinned')) {
+        pinThreshold = siteHeaderEl.offsetTop;
+      }
+      var shouldPin = !isFirstCheck && window.scrollY >= pinThreshold && pinThreshold > 0;
+      isFirstCheck = false;
       if (shouldPin !== siteHeaderEl.classList.contains('site-header--pinned')) {
         if (shouldPin) {
           headerSpacerEl.style.height = siteHeaderEl.offsetHeight + 'px';
