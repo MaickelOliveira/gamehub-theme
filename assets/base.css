@@ -130,6 +130,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-weight: 800;
   font-size: 1.4rem;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 .site-header__logo-mark {
   width: 30px;
