@@ -1,6 +1,24 @@
 (function () {
   'use strict';
 
+  /* ---------- Reveal ao rolar a página ---------- */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+  }
+
   /* ---------- Mobile menu ---------- */
   var menuToggle = document.querySelector('[data-menu-toggle]');
   var mobileNav = document.getElementById('MobileNav');

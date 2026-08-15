@@ -34,6 +34,17 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .page-width--wide { max-width: 1420px; }
 
+/* ---------- Reveal ao rolar a página ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
 .rte p { margin: 0 0 1em; }
 .rte a { text-decoration: underline; }
 
@@ -62,12 +73,12 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   box-shadow: 0 0 14px 2px color-mix(in srgb, var(--color-accent) 75%, transparent), 0 0 32px 6px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 @keyframes buy-button-attention {
-  0%, 90% { transform: scale(1); }
-  92% { transform: scale(1.18); }
-  94% { transform: scale(0.94); }
-  96% { transform: scale(1.1); }
-  98% { transform: scale(0.98); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  2% { transform: scale(1.18); }
+  4% { transform: scale(0.94); }
+  6% { transform: scale(1.1); }
+  8% { transform: scale(0.98); }
+  10%, 100% { transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
   .button--primary { animation: none; }
