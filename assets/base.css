@@ -63,8 +63,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 /* ---------- Announcement bar ---------- */
 .announcement-bar {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: #E5484D;
+  color: #fff;
   overflow: hidden;
 }
 .announcement-bar__track {
@@ -470,6 +470,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   border-radius: 999px;
 }
 .product-card__badge--preorder { background: var(--color-text); }
+.product-card__badge--discount { background: #E5484D; color: #fff; }
 .product-card__platforms { display: flex; gap: 0.35rem; }
 .product-card__platform {
   font-size: 0.65rem;
@@ -480,18 +481,33 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   padding: 0.1rem 0.35rem;
 }
 .product-card__title { font-size: 0.95rem; font-weight: 700; }
-.product-card__price { display: flex; align-items: baseline; gap: 0.5rem; }
-.product-card__price-compare { color: var(--color-text-muted); font-size: 0.85rem; }
+.product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.product-card__price { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
+.product-card__price-compare { color: var(--color-text-muted); font-size: 0.8rem; }
 .product-card__price-current { font-weight: 700; }
 .product-card__add {
-  width: 100%;
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-color: var(--color-border);
-  padding: 0.6rem;
-  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
-.product-card__add:hover { background: var(--color-accent); color: var(--color-accent-contrast); }
+.product-card__add:hover { opacity: 0.88; }
+.product-card__add:active { transform: scale(0.97); }
+.product-card__add[disabled] { background: var(--color-surface); color: var(--color-text-muted); }
 
 .product-grid {
   display: grid;

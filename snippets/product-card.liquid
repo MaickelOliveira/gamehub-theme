@@ -17,7 +17,7 @@
     {%- endif -%}
 
     {%- if product.compare_at_price > product.price -%}
-      <span class="product-card__badge">-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+      <span class="product-card__badge product-card__badge--discount">-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
     {%- elsif product.tags contains 'pre-venda' -%}
       <span class="product-card__badge product-card__badge--preorder">{{ 'products.badges.preorder' | t }}</span>
     {%- endif -%}
@@ -37,24 +37,27 @@
     <a href="{{ product.url }}">{{ product.title }}</a>
   </h3>
 
-  <div class="product-card__price">
-    {%- if product.compare_at_price > product.price -%}
-      <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
-    {%- endif -%}
-    <span class="product-card__price-current">{{ product.price | money }}</span>
-  </div>
+  <div class="product-card__footer">
+    <div class="product-card__price">
+      {%- if product.compare_at_price > product.price -%}
+        <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+      <span class="product-card__price-current">{{ product.price | money }}</span>
+    </div>
 
-  <button
-    type="button"
-    class="product-card__add button"
-    data-add-to-cart
-    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-    {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
-  >
-    {%- if product.selected_or_first_available_variant.available -%}
-      {{ 'products.product.add_to_cart' | t }}
-    {%- else -%}
-      {{ 'products.product.sold_out' | t }}
-    {%- endif -%}
-  </button>
+    <button
+      type="button"
+      class="product-card__add"
+      data-add-to-cart
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+      aria-label="{{ 'products.product.add_to_cart' | t }}"
+    >
+      {%- if product.selected_or_first_available_variant.available -%}
+        {{ 'products.product.add_to_cart' | t }} <span aria-hidden="true">+</span>
+      {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- endif -%}
+    </button>
+  </div>
 </div>
