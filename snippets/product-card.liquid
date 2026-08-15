@@ -37,13 +37,15 @@
     <a href="{{ product.url }}">{{ product.title }}</a>
   </h3>
 
-  <div class="product-card__footer">
-    <div class="product-card__price">
-      {%- if product.compare_at_price > product.price -%}
-        <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
-      {%- endif -%}
-      <span class="product-card__price-current">{{ product.price | money }}</span>
-    </div>
+  <div class="product-card__price">
+    {%- if product.compare_at_price > product.price -%}
+      <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
+    {%- endif -%}
+    <span class="product-card__price-current">{{ product.price | money }}</span>
+  </div>
+
+  <div class="product-card__actions">
+    <a href="{{ product.url }}" class="product-card__buy">Comprar</a>
 
     <button
       type="button"
