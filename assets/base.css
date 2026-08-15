@@ -435,6 +435,10 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-size: 1.05rem;
   margin: 0 0 1.5rem;
 }
+@media (max-width: 640px) {
+  .hero__subheading br,
+  .hero__heading br { display: none; }
+}
 .hero__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .hero__meta { display: flex; gap: 1.6rem; margin-top: 2.2rem; flex-wrap: wrap; }
 .hero__meta div { font-size: 0.76rem; color: #9C93B8; }
