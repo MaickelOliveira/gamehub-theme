@@ -318,13 +318,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
-  .site-header__inner { gap: 0.6rem; }
-  .site-header__logo-text { font-size: 1.1rem; }
-  .site-header__actions { gap: 0.5rem; }
-  .site-header__search { padding: 0.35rem 0.5rem 0.35rem 0.7rem; }
-  .site-header__search input { width: 72px; }
-  .site-header__icon-link { width: 34px; height: 34px; }
-  .site-header__icon-link svg { width: 16px; height: 16px; }
+  .site-header__inner { gap: 0.5rem; }
+  .site-header__logo-text { font-size: 1rem; }
+  .site-header__actions { gap: 0.35rem; }
+  .site-header__search { padding: 0.35rem; }
+  .site-header__search input { display: none; }
+  .site-header__search button { width: 20px; height: 20px; color: var(--color-text); }
+  .site-header__icon-link { width: 32px; height: 32px; }
+  .site-header__icon-link svg { width: 15px; height: 15px; }
 }
 
 /* ---------- Hero ---------- */
