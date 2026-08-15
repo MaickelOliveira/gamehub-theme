@@ -32,7 +32,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   margin: 0 auto;
   padding: 0 1.25rem;
 }
-.page-width--wide { max-width: 1480px; }
+.page-width--wide { max-width: 1420px; }
 
 .rte p { margin: 0 0 1em; }
 .rte a { text-decoration: underline; }
