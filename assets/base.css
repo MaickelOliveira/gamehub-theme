@@ -62,9 +62,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   box-shadow: 0 0 14px 2px color-mix(in srgb, var(--color-accent) 75%, transparent), 0 0 32px 6px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 @keyframes buy-button-attention {
-  0%, 94% { transform: scale(1); }
-  96% { transform: scale(1.08); }
-  98% { transform: scale(0.97); }
+  0%, 90% { transform: scale(1); }
+  92% { transform: scale(1.18); }
+  94% { transform: scale(0.94); }
+  96% { transform: scale(1.1); }
+  98% { transform: scale(0.98); }
   100% { transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
