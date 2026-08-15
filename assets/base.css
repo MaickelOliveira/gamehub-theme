@@ -657,9 +657,9 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   .product-card__buy { animation: none; }
 }
 .product-card__add {
-  background: #C4B5FD;
-  color: #2E1065;
-  border: 1px solid #C4B5FD;
+  background: color-mix(in srgb, #A78BFA 18%, transparent);
+  color: #C4B5FD;
+  border: 1px solid color-mix(in srgb, #A78BFA 45%, transparent);
 }
 .product-card__buy:hover,
 .product-card__add:hover { opacity: 0.88; }
@@ -972,9 +972,9 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .product-page__buy-now,
 .product-page__add-to-cart {
   width: 100%;
-  background: #C4B5FD;
-  color: #2E1065;
-  border-color: #C4B5FD;
+  background: color-mix(in srgb, #A78BFA 18%, transparent);
+  color: #C4B5FD;
+  border-color: color-mix(in srgb, #A78BFA 45%, transparent);
 }
 .product-page__trust { margin: 0; text-align: center; font-size: 0.78rem; color: var(--color-text-muted); }
 .product-page__payment-methods { margin: 0.3rem 0 0; text-align: center; font-size: 0.76rem; color: var(--color-text-muted); }
