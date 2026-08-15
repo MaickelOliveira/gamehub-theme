@@ -70,8 +70,9 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .announcement-bar__track {
   display: flex;
   width: max-content;
-  animation: announcement-marquee 22s linear infinite;
+  animation: announcement-marquee 176s linear infinite;
 }
+.announcement-bar__group { display: flex; flex-shrink: 0; }
 .announcement-bar p {
   margin: 0;
   white-space: nowrap;
@@ -83,7 +84,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 @keyframes announcement-marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-33.333%); }
+  to { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .announcement-bar__track { animation: none; }
@@ -742,24 +743,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .cart-drawer__empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; flex: 1; text-align: center; padding: 2rem 0; }
 .cart-drawer__empty .button { width: auto; }
 
-/* ---------- Theme toggle (claro/escuro) ---------- */
-.theme-toggle {
-  position: fixed;
-  right: clamp(1rem, 3vw, 1.75rem);
-  bottom: calc(clamp(1rem, 3vw, 1.75rem) + 64px);
-  z-index: 80;
-  width: 48px; height: 48px;
-  border-radius: 999px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 10px 24px -8px rgba(0,0,0,0.25);
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-.theme-toggle:hover { transform: scale(1.06); border-color: var(--color-accent); }
-.theme-toggle:active { transform: scale(0.94); }
-.theme-toggle svg { width: 20px; height: 20px; }
+/* ---------- Theme toggle (claro/escuro, no cabeçalho) ---------- */
+.site-header__theme-toggle svg { width: 20px; height: 20px; }
 .theme-toggle__sun { display: none; }
 :root[data-theme="dark"] .theme-toggle__moon { display: none; }
 :root[data-theme="dark"] .theme-toggle__sun { display: block; }
@@ -789,7 +774,6 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 @media (max-width: 640px) {
   .sound-toggle { width: 50px; height: 50px; }
   .sound-toggle svg { width: 21px; height: 21px; }
-  .theme-toggle { bottom: calc(clamp(1rem, 3vw, 1.75rem) + 58px); }
 }
 
 /* ---------- Header transparente sobre vídeo ---------- */

@@ -1,9 +1,16 @@
 {% if section.settings.message != blank %}
   <div class="announcement-bar">
     <div class="announcement-bar__track">
-      <p>{{ section.settings.message }} &middot;</p>
-      <p aria-hidden="true">{{ section.settings.message }} &middot;</p>
-      <p aria-hidden="true">{{ section.settings.message }} &middot;</p>
+      <div class="announcement-bar__group">
+        {%- for i in (1..8) -%}
+          <p{% unless forloop.first %} aria-hidden="true"{% endunless %}>{{ section.settings.message }} &middot;</p>
+        {%- endfor -%}
+      </div>
+      <div class="announcement-bar__group" aria-hidden="true">
+        {%- for i in (1..8) -%}
+          <p aria-hidden="true">{{ section.settings.message }} &middot;</p>
+        {%- endfor -%}
+      </div>
     </div>
   </div>
 {% endif %}
