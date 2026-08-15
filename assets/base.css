@@ -166,12 +166,18 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .site-header__menu-toggle {
   display: none;
-  background: none;
+  background: var(--color-surface);
   border: none;
-  width: 24px;
-  height: 24px;
+  border-radius: 999px;
+  width: 38px;
+  height: 38px;
   padding: 0;
   color: var(--color-text);
+  transition: background-color 0.15s ease;
+}
+.site-header__menu-toggle svg { width: 18px; height: 18px; }
+.site-header.site-header--over-video .site-header__menu-toggle {
+  background: rgba(255,255,255,0.14);
 }
 .site-header__logo {
   display: flex;
@@ -1258,17 +1264,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   height: clamp(60px, 12vw, 140px);
   background: linear-gradient(to bottom, transparent, var(--color-background));
   pointer-events: none;
-  opacity: 0;
-}
-:root[data-theme="dark"] .hero__fade,
-:root[data-theme="dark"] .collection-hero__fade {
   opacity: 1;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hero__fade,
-  :root:not([data-theme="light"]) .collection-hero__fade {
-    opacity: 1;
-  }
 }
 
 /* ---------- Placeholder de produto sem foto ---------- */
