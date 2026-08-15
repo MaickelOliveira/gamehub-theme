@@ -481,7 +481,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   overflow: hidden;
   background: var(--color-surface);
 }
-.product-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+.product-card__media:hover img { transform: scale(1.06); }
 .product-card__badge {
   position: absolute;
   top: 0.6rem;
@@ -630,12 +631,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .platform-selector__item:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -12px rgba(0,0,0,0.35); }
+.platform-selector__item:hover .platform-selector__photo { transform: scale(1.08); }
 .platform-selector__photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.35s ease;
   filter: saturate(1.2) contrast(1.05);
 }
 .platform-selector__scrim {
@@ -730,7 +733,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   overflow: hidden;
   background: var(--color-surface);
 }
-.product-page__art-fill { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-page__art-fill { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.product-page__art:hover .product-page__art-fill { transform: scale(1.05); }
 .product-page__art-badge {
   position: absolute; top: 1rem; left: 1rem;
   background: #E5484D; color: #fff;
@@ -1005,7 +1009,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   border: 2px solid transparent;
   transition: border-color 0.15s ease;
 }
-.combo-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.combo-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+.combo-card:not([disabled]):hover .combo-card__media img { transform: scale(1.06); }
 .combo-card__check {
   position: absolute; top: 0.5rem; right: 0.5rem;
   width: 24px; height: 24px; border-radius: 999px;
