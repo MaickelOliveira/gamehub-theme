@@ -17,7 +17,7 @@
       <ul class="site-header__nav-list">
         {%- for link in section.settings.main_menu.links -%}
           <li class="site-header__nav-item{% if link.links != blank %} has-dropdown{% endif %}">
-            <a href="{{ link.url }}" class="site-header__nav-link">
+            <a href="{{ link.url }}" class="site-header__nav-link{% if link.active %} site-header__nav-link--active{% endif %}">
               {{ link.title }}
               {%- if link.links != blank %} {% render 'icon', name: 'chevron-down' %}{% endif -%}
             </a>
