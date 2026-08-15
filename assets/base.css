@@ -591,7 +591,44 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .product-card__price { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
 .product-card__price-compare { color: var(--color-text-muted); font-size: 0.8rem; }
 .product-card__price-current { font-weight: 700; }
-.product-card__actions { display: flex; flex-direction: column; gap: 0.4rem; }
+.product-card__actions { display: flex; flex-direction: column; gap: 0.4rem; position: relative; }
+.product-card__platform-picker {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  z-index: 3;
+}
+.product-card__platform-picker-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.product-card__platform-picker-options { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.product-card__platform-option {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  background: none;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.product-card__platform-option:hover { background: var(--color-accent); color: var(--color-accent-contrast); border-color: var(--color-accent); }
+.product-card__platform-picker-close {
+  position: absolute;
+  top: 0.5rem; right: 0.5rem;
+  width: 22px; height: 22px;
+  border: none; background: none;
+  color: var(--color-text-muted);
+  font-size: 1rem; line-height: 1;
+}
 .product-card__buy,
 .product-card__add {
   display: inline-flex;
@@ -894,6 +931,21 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-size: 0.85rem;
 }
 .product-page__option-value[aria-pressed="true"] { border-color: var(--color-accent); color: var(--color-accent); }
+.product-page__platform-warning {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #E5484D;
+}
+.product-page__option[data-platform-group].has-error .product-page__option-value {
+  border-color: #E5484D;
+  animation: platform-shake 0.35s ease;
+}
+@keyframes platform-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
 .product-page__option-qty-row {
   display: flex;
   align-items: flex-end;

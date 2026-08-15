@@ -246,6 +246,21 @@
   if (productForm) {
     productForm.addEventListener('submit', function (event) {
       event.preventDefault();
+
+      var platformGroup = productForm.querySelector('[data-platform-group]');
+      if (platformGroup) {
+        var chosenPlatform = platformGroup.querySelector('[data-option-value][aria-pressed="true"]');
+        if (!chosenPlatform) {
+          var warning = platformGroup.querySelector('[data-platform-warning]');
+          if (warning) warning.hidden = false;
+          platformGroup.classList.remove('has-error');
+          void platformGroup.offsetWidth;
+          platformGroup.classList.add('has-error');
+          platformGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+      }
+
       var submitter = event.submitter;
       var isBuyNow = submitter && submitter.hasAttribute('data-buy-now');
       var variantId = productForm.querySelector('[data-variant-select]').value;
@@ -254,10 +269,16 @@
 
       if (submitter) submitter.disabled = true;
 
+      var payload = { id: variantId, quantity: quantity };
+      if (platformGroup) {
+        var selected = platformGroup.querySelector('[data-option-value][aria-pressed="true"]');
+        if (selected) payload.properties = { 'Plataforma': selected.getAttribute('data-option-value') };
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: quantity })
+        body: JSON.stringify(payload)
       })
         .then(function (res) { return res.json(); })
         .then(function () {
@@ -279,12 +300,18 @@
 
   /* ---------- Product page: option selection (visual only) ---------- */
   document.querySelectorAll('.product-page__option').forEach(function (optionGroup) {
+    var isPlatformGroup = optionGroup.hasAttribute('data-platform-group');
     var buttons = optionGroup.querySelectorAll('[data-option-value]');
     buttons.forEach(function (button, index) {
-      if (index === 0) button.setAttribute('aria-pressed', 'true');
+      if (index === 0 && !isPlatformGroup) button.setAttribute('aria-pressed', 'true');
       button.addEventListener('click', function () {
         buttons.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
         button.setAttribute('aria-pressed', 'true');
+        if (isPlatformGroup) {
+          optionGroup.classList.remove('has-error');
+          var warning = optionGroup.querySelector('[data-platform-warning]');
+          if (warning) warning.hidden = true;
+        }
       });
     });
   });
@@ -393,20 +420,67 @@
     cartCountEls.forEach(function (el) { el.textContent = count; });
   }
 
+  /* ---------- Product card: seletor rapido de plataforma ---------- */
+  var pendingPlatformButton = null;
+
+  function openPlatformPicker(button) {
+    var actions = button.closest('.product-card__actions');
+    var picker = actions && actions.querySelector('[data-platform-picker]');
+    if (!picker) return false;
+    pendingPlatformButton = button;
+    picker.hidden = false;
+    return true;
+  }
+
+  function closePlatformPicker(picker) {
+    if (picker) picker.hidden = true;
+    pendingPlatformButton = null;
+  }
+
+  document.addEventListener('click', function (event) {
+    var option = event.target.closest('[data-platform-option]');
+    if (option) {
+      var picker = option.closest('[data-platform-picker]');
+      var actions = picker.closest('.product-card__actions');
+      var platform = option.getAttribute('data-platform-option');
+      var toResume = pendingPlatformButton;
+      actions.querySelectorAll('[data-needs-platform]').forEach(function (btn) {
+        btn.dataset.chosenPlatform = platform;
+      });
+      closePlatformPicker(picker);
+      if (toResume) toResume.click();
+      return;
+    }
+    var closeBtn = event.target.closest('[data-platform-picker-close]');
+    if (closeBtn) {
+      closePlatformPicker(closeBtn.closest('[data-platform-picker]'));
+    }
+  });
+
   /* ---------- Add to cart (product card + product page) ---------- */
   document.addEventListener('click', function (event) {
     var button = event.target.closest('[data-add-to-cart]');
     if (!button || button.disabled) return;
+
+    if (button.hasAttribute('data-needs-platform') && !button.dataset.chosenPlatform) {
+      openPlatformPicker(button);
+      return;
+    }
 
     var variantId = button.getAttribute('data-variant-id');
     if (!variantId) return;
 
     button.disabled = true;
 
+    var payload = { id: variantId, quantity: 1 };
+    if (button.dataset.chosenPlatform) {
+      payload.properties = { 'Plataforma': button.dataset.chosenPlatform };
+    }
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
+      body: JSON.stringify(payload)
     })
       .then(function (res) { return res.json(); })
       .then(function () { return fetch('/cart.js'); })
@@ -424,15 +498,25 @@
     var button = event.target.closest('[data-buy-now]');
     if (!button || button.disabled || button.closest('#ProductForm')) return;
 
+    if (button.hasAttribute('data-needs-platform') && !button.dataset.chosenPlatform) {
+      openPlatformPicker(button);
+      return;
+    }
+
     var variantId = button.getAttribute('data-variant-id');
     if (!variantId) return;
 
     button.disabled = true;
 
+    var payload = { id: variantId, quantity: 1 };
+    if (button.dataset.chosenPlatform) {
+      payload.properties = { 'Plataforma': button.dataset.chosenPlatform };
+    }
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
+      body: JSON.stringify(payload)
     })
       .then(function () { window.location.href = '/checkout'; })
       .catch(function (err) {
