@@ -173,6 +173,7 @@
         siteHeaderEl.style.top = (announcementEl ? announcementEl.offsetHeight : 0) + 'px';
         siteHeaderEl.style.left = '0';
         siteHeaderEl.style.right = '0';
+        console.log('[debug] set cssText now =', siteHeaderEl.style.cssText, 'announcementEl=', !!announcementEl);
       }
     }
 
