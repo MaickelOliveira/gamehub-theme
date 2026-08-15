@@ -33,7 +33,7 @@
   /* ---------- Hero: YouTube background loop + som + players ---------- */
   var ytHeroEls = document.querySelectorAll('[data-youtube-hero]');
   var ytPlayers = [];
-  var soundMuted = false;
+  var soundMuted = true;
 
   function applyCurrentSound(player) {
     if (soundMuted) { player.mute(); } else { player.unMute(); }
