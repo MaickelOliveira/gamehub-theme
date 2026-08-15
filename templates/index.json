@@ -11,22 +11,51 @@
   "sections": {
     "hero": {
       "type": "hero-banner",
-      "settings": {
-        "video_id": "o_yIvRZC0vQ",
-        "video_start": 136,
-        "video_end": 180,
-        "eyebrow": "Lançamento da semana",
-        "heading": "Aeon Vanguard<br>chegou com tudo",
-        "subheading": "RPG de ação em mundo aberto. Jogue no dia do lançamento<br>com entrega digital imediata, em qualquer plataforma.",
-        "button_label": "Comprar agora · R$ 249,90",
-        "button_url": "/products/aeon-vanguard",
-        "button_label_2": "Ver lançamentos",
-        "button_url_2": "/collections/lancamentos",
-        "meta_platforms": "PS5 · Xbox · PC",
-        "meta_rating": "4,8 / 5",
-        "meta_reviews": "2.311 avaliações",
-        "meta_delivery": "Imediata"
-      }
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "video_id": "o_yIvRZC0vQ",
+            "video_start": 136,
+            "video_end": 180,
+            "eyebrow": "Lançamento da semana",
+            "heading": "Homem-Aranha<br>chegou com tudo",
+            "subheading": "Ação e aventura no universo Marvel. Jogue no dia do lançamento<br>com entrega digital imediata, em qualquer plataforma.",
+            "button_label": "Comprar agora · R$ 249,90",
+            "button_url": "/products/aeon-vanguard",
+            "button_label_2": "Ver lançamentos",
+            "button_url_2": "/collections/lancamentos",
+            "meta_platforms": "PS5 · Xbox · PC",
+            "meta_rating": "4,8 / 5",
+            "meta_reviews": "2.311 avaliações",
+            "meta_delivery": "Imediata"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "video_id": "nq1M_Wc4FIc",
+            "video_start": 0,
+            "video_end": 41,
+            "eyebrow": "Oferta da semana",
+            "heading": "Avatar<br>chegou com tudo",
+            "subheading": "Explore o mundo de Pandora numa aventura visual inesquecível<br>com entrega digital imediata, em qualquer plataforma.",
+            "button_label": "Ver catálogo completo",
+            "button_url": "/collections/all",
+            "button_label_2": "Ver pré-vendas",
+            "button_url_2": "/collections/pre-vendas",
+            "meta_platforms": "PS5 · Xbox · PC",
+            "meta_rating": "4,9 / 5",
+            "meta_reviews": "1.870 avaliações",
+            "meta_delivery": "Imediata"
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2"
+      ],
+      "settings": {}
     },
     "lancamentos": {
       "type": "product-carousel",
