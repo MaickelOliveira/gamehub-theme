@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "platforms": {
+      "type": "platform-selector",
+      "settings": {
+        "heading": "Escolha sua plataforma"
+      },
+      "blocks": {
+        "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },
+        "ps4": { "type": "platform", "settings": { "name": "PS4", "url": "/collections/ps4" } },
+        "xbox": { "type": "platform", "settings": { "name": "Xbox", "url": "/collections/xbox" } },
+        "pc": { "type": "platform", "settings": { "name": "PC", "url": "/collections/pc" } }
+      },
+      "block_order": ["ps5", "ps4", "xbox", "pc"]
+    }
+  },
+  "order": ["platforms"]
+}
