@@ -32,6 +32,7 @@
       "type": "product-carousel",
       "settings": {
         "heading": "Lançamentos",
+        "collection": "lancamentos",
         "products_to_show": 8
       }
     },
@@ -39,6 +40,7 @@
       "type": "product-carousel",
       "settings": {
         "heading": "Pré-vendas",
+        "collection": "pre-vendas",
         "products_to_show": 8
       }
     },
@@ -55,6 +57,7 @@
       "type": "collection-grid",
       "settings": {
         "heading": "Pronta entrega",
+        "collection": "all",
         "products_to_show": 12
       }
     },
@@ -64,10 +67,10 @@
         "heading": "Compre por plataforma"
       },
       "blocks": {
-        "ps5": { "type": "platform", "settings": { "name": "PS5" } },
-        "ps4": { "type": "platform", "settings": { "name": "PS4" } },
-        "xbox": { "type": "platform", "settings": { "name": "Xbox" } },
-        "pc": { "type": "platform", "settings": { "name": "PC" } }
+        "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },
+        "ps4": { "type": "platform", "settings": { "name": "PS4", "url": "/collections/ps4" } },
+        "xbox": { "type": "platform", "settings": { "name": "Xbox", "url": "/collections/xbox" } },
+        "pc": { "type": "platform", "settings": { "name": "PC", "url": "/collections/pc" } }
       },
       "block_order": ["ps5", "ps4", "xbox", "pc"]
     }
