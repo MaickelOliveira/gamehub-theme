@@ -19,7 +19,6 @@
         "heading": "Aeon Vanguard<br>chegou com tudo",
         "subheading": "RPG de ação em mundo aberto. Jogue no dia do lançamento<br>com entrega digital imediata, em qualquer plataforma.",
         "button_label": "Comprar agora · R$ 249,90",
-        "product": "aeon-vanguard",
         "button_url": "/products/aeon-vanguard",
         "button_label_2": "Ver lançamentos",
         "button_url_2": "/collections/lancamentos",
@@ -67,18 +66,54 @@
     },
     "plataformas": {
       "type": "platform-selector",
+      "blocks": {
+        "ps5": {
+          "type": "platform",
+          "settings": {
+            "name": "PS5",
+            "url": "/collections/ps5"
+          }
+        },
+        "ps4": {
+          "type": "platform",
+          "settings": {
+            "name": "PS4",
+            "url": "/collections/ps4"
+          }
+        },
+        "xbox": {
+          "type": "platform",
+          "settings": {
+            "name": "Xbox",
+            "url": "/collections/xbox"
+          }
+        },
+        "pc": {
+          "type": "platform",
+          "settings": {
+            "name": "PC",
+            "url": "/collections/pc"
+          }
+        }
+      },
+      "block_order": [
+        "ps5",
+        "ps4",
+        "xbox",
+        "pc"
+      ],
       "settings": {
         "heading": "Compre por plataforma",
         "subheading": "Todo o catálogo, filtrado do jeito que você joga"
-      },
-      "blocks": {
-        "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },
-        "ps4": { "type": "platform", "settings": { "name": "PS4", "url": "/collections/ps4" } },
-        "xbox": { "type": "platform", "settings": { "name": "Xbox", "url": "/collections/xbox" } },
-        "pc": { "type": "platform", "settings": { "name": "PC", "url": "/collections/pc" } }
-      },
-      "block_order": ["ps5", "ps4", "xbox", "pc"]
+      }
     }
   },
-  "order": ["hero", "lancamentos", "pre-vendas", "combo", "pronta-entrega", "plataformas"]
+  "order": [
+    "hero",
+    "lancamentos",
+    "pre-vendas",
+    "combo",
+    "pronta-entrega",
+    "plataformas"
+  ]
 }
