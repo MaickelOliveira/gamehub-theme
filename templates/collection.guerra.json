@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "collection-hero": {
+      "type": "collection-hero",
+      "settings": {
+        "video_id": "2-2aqLlFsrc",
+        "video_start": 3,
+        "video_end": 62
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {}
+    }
+  },
+  "order": ["collection-hero", "main"]
+}
