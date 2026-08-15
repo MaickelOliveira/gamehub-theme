@@ -576,7 +576,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
 }
-.product-card__badge--preorder { background: var(--color-text); }
+.product-card__badge--preorder { background: #F2C300; color: #111; }
 .product-card__badge--discount { background: #E5484D; color: #fff; }
 .product-card__platforms { display: flex; gap: 0.35rem; }
 .product-card__platform {
