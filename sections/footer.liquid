@@ -11,22 +11,52 @@
         <div class="site-footer__about">{{ section.settings.about_text }}</div>
       {%- endif -%}
       <div class="site-footer__pay-badges">
-        <span>PIX</span><span>VISA</span><span>MASTER</span><span>BOLETO</span>
+        <span class="pay-badge pay-badge--pix">Pix</span>
+        <span class="pay-badge pay-badge--visa">VISA</span>
+        <span class="pay-badge pay-badge--mastercard"><span class="pay-badge__circles"><span></span><span></span></span></span>
+        <span class="pay-badge pay-badge--elo">elo</span>
+        <span class="pay-badge pay-badge--amex">AMEX</span>
+        <span class="pay-badge pay-badge--boleto"><span class="pay-badge__bars"></span>Boleto</span>
+        <span class="pay-badge pay-badge--cielo">cielo</span>
       </div>
     </div>
 
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'link_list' -%}
-        <div class="site-footer__block" {{ block.shopify_attributes }}>
-          <h3>{{ block.settings.heading }}</h3>
-          <ul>
-            {%- for link in block.settings.menu.links -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+    {%- liquid
+      assign footer_blocks = section.blocks
+    -%}
+    {%- if footer_blocks.size > 0 -%}
+      {%- for block in footer_blocks -%}
+        {%- if block.type == 'link_list' -%}
+          <div class="site-footer__block" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.heading }}</h3>
+            <ul>
+              {%- for link in block.settings.menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="site-footer__block">
+        <h3>Institucional</h3>
+        <ul>
+          <li><a href="/pages/sobre">Sobre a GameHub</a></li>
+          <li><a href="/pages/trabalhe-conosco">Trabalhe conosco</a></li>
+          <li><a href="/policies/terms-of-service">Termos de uso</a></li>
+          <li><a href="/policies/privacy-policy">Privacidade</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__block">
+        <h3>Ajuda</h3>
+        <ul>
+          <li><a href="/pages/central-de-ajuda">Central de ajuda</a></li>
+          <li><a href="/policies/refund-policy">Trocas e reembolso</a></li>
+          <li><a href="/pages/status-do-pedido">Status do pedido</a></li>
+          <li><a href="/pages/fale-conosco">Fale conosco</a></li>
+        </ul>
+      </div>
+    {%- endif -%}
 
     <div class="site-footer__block">
       <h3>{{ 'footer.newsletter.heading' | t }}</h3>

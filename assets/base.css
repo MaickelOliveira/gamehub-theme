@@ -756,11 +756,28 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .site-footer__block--brand .site-header__logo-text { display: inline-flex; }
 .site-footer__block--brand .site-header__logo-text { display: inline; }
 .site-footer__about { color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.75rem; }
-.site-footer__pay-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-.site-footer__pay-badges span {
-  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em;
-  color: var(--color-text-muted); border: 1px solid var(--color-border);
-  border-radius: 4px; padding: 0.2rem 0.45rem;
+.site-footer__pay-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1rem; align-items: center; }
+.pay-badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  height: 24px; padding: 0 0.5rem; border-radius: 5px;
+  font-size: 0.62rem; font-weight: 800; letter-spacing: 0.02em;
+  text-transform: uppercase; color: #fff; white-space: nowrap;
+  line-height: 1;
+}
+.pay-badge--pix { background: #2bb6a3; }
+.pay-badge--visa { background: #1a1f71; font-style: italic; }
+.pay-badge--elo { background: #111; color: #ffcb05; }
+.pay-badge--amex { background: #2e77bb; }
+.pay-badge--cielo { background: #3c4858; }
+.pay-badge--mastercard { background: var(--color-surface); border: 1px solid var(--color-border); padding: 0 0.55rem; }
+.pay-badge__circles { display: inline-flex; }
+.pay-badge__circles span { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.pay-badge__circles span:first-child { background: #eb001b; }
+.pay-badge__circles span:last-child { background: #f79e1b; margin-left: -5px; mix-blend-mode: multiply; }
+.pay-badge--boleto { background: none; border: 1px solid var(--color-border); color: var(--color-text-muted); }
+.pay-badge__bars {
+  width: 14px; height: 12px;
+  background: repeating-linear-gradient(90deg, currentColor 0 1.5px, transparent 1.5px 3px);
 }
 .site-footer__newsletter-form { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
 .site-footer__newsletter-form input {
