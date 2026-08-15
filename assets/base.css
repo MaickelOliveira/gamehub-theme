@@ -54,6 +54,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .button--primary {
   background: var(--color-accent);
   color: var(--color-accent-contrast);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--color-accent) 55%, transparent), 0 0 22px 4px color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.button--primary:hover {
+  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--color-accent) 75%, transparent), 0 0 32px 6px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 .button--secondary {
   background: transparent;
@@ -522,6 +527,10 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .product-card__buy {
   background: var(--color-accent);
   color: var(--color-accent-contrast);
+  box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-accent) 50%, transparent), 0 0 18px 3px color-mix(in srgb, var(--color-accent) 28%, transparent);
+}
+.product-card__buy:hover {
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--color-accent) 70%, transparent), 0 0 26px 5px color-mix(in srgb, var(--color-accent) 42%, transparent);
 }
 .product-card__add {
   background: var(--color-surface);
@@ -1096,8 +1105,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   border: none;
   color: var(--color-accent-contrast);
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 10px 24px -6px rgba(0,0,0,0.3);
-  transition: transform 0.15s ease;
+  box-shadow: 0 10px 24px -6px rgba(0,0,0,0.3), 0 0 16px 2px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 .sound-toggle[hidden] { display: none; }
 .sound-toggle:hover { transform: scale(1.06); }
