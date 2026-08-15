@@ -66,9 +66,7 @@
       (function () {
         try {
           var saved = localStorage.getItem('gamehub_theme');
-          if (saved === 'dark' || saved === 'light') {
-            document.documentElement.setAttribute('data-theme', saved);
-          }
+          document.documentElement.setAttribute('data-theme', (saved === 'light') ? 'light' : 'dark');
         } catch (e) {}
       })();
     </script>
@@ -100,7 +98,7 @@
 
   {% render 'combo-builder' %}
 
-  <button type="button" class="sound-toggle" id="SoundToggle" data-muted="true" aria-label="Ativar som do vídeo" hidden>
+  <button type="button" class="sound-toggle" id="SoundToggle" data-muted="false" aria-label="Silenciar vídeo" hidden>
     <svg class="sound-toggle__muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><line x1="16" y1="9" x2="21" y2="14"/><line x1="21" y1="9" x2="16" y2="14"/></svg>
     <svg class="sound-toggle__unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><path d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>
   </button>

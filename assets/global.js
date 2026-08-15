@@ -33,7 +33,7 @@
   /* ---------- Hero: YouTube background loop + som + players ---------- */
   var ytHeroEls = document.querySelectorAll('[data-youtube-hero]');
   var ytPlayers = [];
-  var soundMuted = true;
+  var soundMuted = false;
 
   function applyCurrentSound(player) {
     if (soundMuted) { player.mute(); } else { player.unMute(); }
@@ -94,6 +94,7 @@
       ytPlayers.forEach(function (player) {
         if (!player || typeof player.playVideo !== 'function') return;
         try {
+          if (!soundMuted && typeof player.unMute === 'function') player.unMute();
           if (typeof player.getPlayerState === 'function' && player.getPlayerState() === 1) return;
           player.playVideo();
         } catch (e) {}
