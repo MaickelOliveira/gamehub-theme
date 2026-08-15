@@ -1,0 +1,29 @@
+{%- comment -%}
+  Uso: {% render 'combo-builder' %} (uma única vez, em layout/theme.liquid)
+{%- endcomment -%}
+
+<div id="ComboBuilder" class="combo-builder" hidden>
+  <div class="combo-builder__overlay" data-combo-builder-close></div>
+  <div class="combo-builder__panel" role="dialog" aria-modal="true" aria-label="Monte seu combo">
+    <div class="combo-builder__header">
+      <div>
+        <h2>Monte seu combo de 6 jogos</h2>
+        <p class="combo-builder__hint">Escolha 6 jogos do catálogo para adicionar todos ao carrinho de uma vez.</p>
+      </div>
+      <button type="button" class="combo-builder__close" data-combo-builder-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+    </div>
+
+    <div class="combo-builder__grid-wrap">
+      <ul class="combo-builder__grid" id="ComboBuilderGrid">
+        {%- for product in collections['all'].products limit: 48 -%}
+          <li>{% render 'combo-builder-card', product: product %}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="combo-builder__footer">
+      <span class="combo-builder__count"><span id="ComboBuilderCount">0</span>/6 selecionados</span>
+      <button type="button" class="button button--primary" id="ComboBuilderAdd" disabled>Adicionar 6 ao carrinho</button>
+    </div>
+  </div>
+</div>

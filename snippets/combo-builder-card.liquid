@@ -1,0 +1,29 @@
+{%- comment -%}
+  Uso: {% render 'combo-builder-card', product: product %}
+{%- endcomment -%}
+
+<button
+  type="button"
+  class="combo-card"
+  data-combo-card
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  {% unless product.selected_or_first_available_variant.available %}disabled data-unavailable{% endunless %}
+  aria-pressed="false"
+>
+  <span class="combo-card__media">
+    {%- if product.featured_media -%}
+      <img
+        src="{{ product.featured_media | image_url: width: 300 }}"
+        alt="{{ product.featured_media.alt | default: product.title | escape }}"
+        width="{{ product.featured_media.width }}"
+        height="{{ product.featured_media.height }}"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'combo-card__placeholder' }}
+    {%- endif -%}
+    <span class="combo-card__check" aria-hidden="true">&#10003;</span>
+  </span>
+  <span class="combo-card__title">{{ product.title }}</span>
+  <span class="combo-card__price">{{ product.price | money }}</span>
+</button>
