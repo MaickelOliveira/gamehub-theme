@@ -37,7 +37,42 @@
       --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
       --page-width: {{ settings.page_width }}px;
     }
+    {%- if settings.dark_mode_enabled %}
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-background: {{ settings.dark_color_background }};
+        --color-surface: {{ settings.dark_color_surface }};
+        --color-text: {{ settings.dark_color_text }};
+        --color-text-muted: {{ settings.dark_color_text_muted }};
+        --color-accent: {{ settings.dark_color_accent }};
+        --color-accent-contrast: {{ settings.dark_color_accent_contrast }};
+        --color-border: {{ settings.dark_color_border }};
+      }
+    }
+    :root[data-theme="dark"] {
+      --color-background: {{ settings.dark_color_background }};
+      --color-surface: {{ settings.dark_color_surface }};
+      --color-text: {{ settings.dark_color_text }};
+      --color-text-muted: {{ settings.dark_color_text_muted }};
+      --color-accent: {{ settings.dark_color_accent }};
+      --color-accent-contrast: {{ settings.dark_color_accent_contrast }};
+      --color-border: {{ settings.dark_color_border }};
+    }
+    {%- endif %}
   </style>
+
+  {%- if settings.dark_mode_enabled %}
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('gamehub_theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  {%- endif %}
 
   {%- unless settings.type_header_font.system? -%}
     {{ settings.type_header_font | font_face: font_display: 'swap' }}
@@ -69,6 +104,18 @@
       <div id="CartDrawerContent" class="cart-drawer__content"></div>
     </div>
   </div>
+
+  {%- if settings.dark_mode_enabled %}
+    <button type="button" id="ThemeToggle" class="theme-toggle" aria-label="Alternar modo claro/escuro">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  {%- endif %}
+
+  <button type="button" class="sound-toggle" id="SoundToggle" data-muted="true" aria-label="Ativar som do vídeo" hidden>
+    <svg class="sound-toggle__muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><line x1="16" y1="9" x2="21" y2="14"/><line x1="21" y1="9" x2="16" y2="14"/></svg>
+    <svg class="sound-toggle__unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><path d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>
+  </button>
 
   <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 </body>

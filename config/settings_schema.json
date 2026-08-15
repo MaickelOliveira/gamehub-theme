@@ -26,6 +26,19 @@
     ]
   },
   {
+    "name": "Modo escuro",
+    "settings": [
+      { "type": "checkbox", "id": "dark_mode_enabled", "label": "Ativar alternância de modo claro/escuro", "default": true },
+      { "type": "color", "id": "dark_color_background", "label": "Fundo (escuro)", "default": "#0A0F0B" },
+      { "type": "color", "id": "dark_color_surface", "label": "Superfície (escuro)", "default": "#131C15" },
+      { "type": "color", "id": "dark_color_text", "label": "Texto (escuro)", "default": "#F2FBF4" },
+      { "type": "color", "id": "dark_color_text_muted", "label": "Texto secundário (escuro)", "default": "#92A398" },
+      { "type": "color", "id": "dark_color_border", "label": "Bordas (escuro)", "default": "#263029" },
+      { "type": "color", "id": "dark_color_accent", "label": "Destaque (escuro)", "default": "#C6FF4D" },
+      { "type": "color", "id": "dark_color_accent_contrast", "label": "Texto sobre o destaque (escuro)", "default": "#0A0F0B" }
+    ]
+  },
+  {
     "name": "Tipografia",
     "settings": [
       { "type": "font_picker", "id": "type_header_font", "label": "Fonte dos títulos", "default": "helvetica_n4" },
