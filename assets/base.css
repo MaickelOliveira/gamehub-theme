@@ -94,9 +94,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .site-header {
   border-bottom: 1px solid var(--color-border);
   background: var(--color-background);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 40;
+}
+.site-header.site-header--pinned {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .site-header__inner {
   display: flex;
