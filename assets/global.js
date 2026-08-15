@@ -45,6 +45,7 @@
 
   /* ---------- Hero: banners múltiplos com setas/pontos ---------- */
   var mountHeroPlayer;
+  var armHeroInteractionNudge;
   function activateHeroSlide(heroEl, newIndex) {
     var slides = heroEl.querySelectorAll('[data-hero-slide]');
     var dots = heroEl.querySelectorAll('[data-hero-dot]');
@@ -73,6 +74,7 @@
       } catch (e) {}
     });
     dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === newIndex); });
+    if (typeof armHeroInteractionNudge === 'function') armHeroInteractionNudge();
   }
 
   document.querySelectorAll('[data-hero-slider]').forEach(function (heroEl) {
@@ -150,18 +152,7 @@
         events: {
           onReady: function (e) {
             var stillActive = slideEl ? slideEl.classList.contains('is-active') : true;
-            if (!stillActive) return;
-            e.target.playVideo();
-            [150, 500, 1200].forEach(function (delay) {
-              setTimeout(function () {
-                try {
-                  var active = slideEl ? slideEl.classList.contains('is-active') : true;
-                  if (active && e.target.getPlayerState() !== window.YT.PlayerState.PLAYING) {
-                    e.target.playVideo();
-                  }
-                } catch (err) {}
-              }, delay);
-            });
+            if (stillActive) e.target.playVideo();
           },
           onStateChange: function (e) {
             if (e.data === window.YT.PlayerState.PLAYING) {
@@ -210,9 +201,12 @@
         } catch (e) {}
       });
     };
-    ['touchstart', 'click', 'scroll'].forEach(function (evt) {
-      document.addEventListener(evt, startHeroVideosOnInteraction, { once: true, passive: true });
-    });
+    armHeroInteractionNudge = function () {
+      ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+        document.addEventListener(evt, startHeroVideosOnInteraction, { once: true, passive: true });
+      });
+    };
+    armHeroInteractionNudge();
   }
 
   /* ---------- Botão de som (global, estilo WhatsApp) ---------- */
