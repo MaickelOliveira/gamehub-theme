@@ -32,7 +32,7 @@
   "presets": {
     "Default": {
       "logo_text": "GameHub",
-    "color_background": "#FFFFFF",
+      "color_background": "#FFFFFF",
       "color_surface": "#F2FBF4",
       "color_text": "#0A130D",
       "color_text_muted": "#5B6B60",
