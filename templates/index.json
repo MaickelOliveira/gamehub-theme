@@ -70,7 +70,8 @@
           }
         }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3"]
+      "block_order": ["slide-1", "slide-2", "slide-3"],
+      "settings": {}
     },
     "lancamentos": {
       "type": "product-carousel",
