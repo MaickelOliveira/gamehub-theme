@@ -161,6 +161,7 @@
     var isFirstCheck = true;
 
     function applyHomeFloatPosition() {
+      console.log('[debug] applyHomeFloatPosition called, isHomeFloatingHeader=', isHomeFloatingHeader, 'pinned=', siteHeaderEl.classList.contains('site-header--pinned'));
       if (!isHomeFloatingHeader) return;
       if (siteHeaderEl.classList.contains('site-header--pinned')) {
         siteHeaderEl.style.position = '';
