@@ -150,7 +150,18 @@
         events: {
           onReady: function (e) {
             var stillActive = slideEl ? slideEl.classList.contains('is-active') : true;
-            if (stillActive) e.target.playVideo();
+            if (!stillActive) return;
+            e.target.playVideo();
+            [150, 500, 1200].forEach(function (delay) {
+              setTimeout(function () {
+                try {
+                  var active = slideEl ? slideEl.classList.contains('is-active') : true;
+                  if (active && e.target.getPlayerState() !== window.YT.PlayerState.PLAYING) {
+                    e.target.playVideo();
+                  }
+                } catch (err) {}
+              }, delay);
+            });
           },
           onStateChange: function (e) {
             if (e.data === window.YT.PlayerState.PLAYING) {
