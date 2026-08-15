@@ -41,6 +41,20 @@
           <a href="{{ section.settings.button_url_2 }}" class="button button--secondary">{{ section.settings.button_label_2 }}</a>
         {%- endif -%}
       </div>
+
+      {%- if section.settings.meta_platforms != blank or section.settings.meta_rating != blank or section.settings.meta_delivery != blank -%}
+        <div class="hero__meta">
+          {%- if section.settings.meta_platforms != blank -%}
+            <div><strong>{{ section.settings.meta_platforms }}</strong>Disponível em</div>
+          {%- endif -%}
+          {%- if section.settings.meta_rating != blank -%}
+            <div><strong>{{ section.settings.meta_rating }}</strong>{{ section.settings.meta_reviews }}</div>
+          {%- endif -%}
+          {%- if section.settings.meta_delivery != blank -%}
+            <div><strong>{{ section.settings.meta_delivery }}</strong>Entrega digital</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -63,7 +77,12 @@
     { "type": "text", "id": "button_label", "label": "Botão 1 - texto", "default": "Comprar agora" },
     { "type": "url", "id": "button_url", "label": "Botão 1 - link" },
     { "type": "text", "id": "button_label_2", "label": "Botão 2 - texto", "default": "Ver lançamentos" },
-    { "type": "url", "id": "button_url_2", "label": "Botão 2 - link" }
+    { "type": "url", "id": "button_url_2", "label": "Botão 2 - link" },
+    { "type": "header", "content": "Métricas (opcional)" },
+    { "type": "text", "id": "meta_platforms", "label": "Plataformas", "default": "PS5 · Xbox · PC" },
+    { "type": "text", "id": "meta_rating", "label": "Nota", "default": "4,8 / 5" },
+    { "type": "text", "id": "meta_reviews", "label": "Texto da nota", "default": "2.311 avaliações" },
+    { "type": "text", "id": "meta_delivery", "label": "Entrega", "default": "Imediata" }
   ],
   "presets": [
     { "name": "Banner principal" }

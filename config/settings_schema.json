@@ -10,7 +10,8 @@
   {
     "name": "Logo",
     "settings": [
-      { "type": "image_picker", "id": "logo", "label": "Logo" }
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "text", "id": "logo_text", "label": "Nome da marca (se não usar imagem)", "default": "GameHub" }
     ]
   },
   {
