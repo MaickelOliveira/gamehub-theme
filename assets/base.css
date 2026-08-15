@@ -830,10 +830,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .site-footer__block ul li { margin-bottom: 0.4rem; }
 .site-footer__block ul li a { color: var(--color-text-muted); font-size: 0.88rem; }
 .site-footer__block--brand { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
-.site-footer__block--brand .site-header__logo-mark,
-.site-footer__block--brand .site-header__logo-text { display: inline-flex; }
-.site-footer__block--brand .site-header__logo-text { display: inline; }
-.site-footer__about { color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.75rem; }
+.site-footer__logo-row { display: flex; align-items: center; gap: 0.65rem; }
+.site-footer__about { color: var(--color-text); font-size: 0.98rem; line-height: 1.5; margin-top: 1rem; max-width: 34ch; }
 .site-footer__pay-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1rem; align-items: center; }
 .pay-badge {
   display: inline-flex; align-items: center; gap: 0.3rem;
