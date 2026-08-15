@@ -2,6 +2,21 @@
   Uso: {% render 'product-card', product: product %}
 {%- endcomment -%}
 
+{%- liquid
+  assign is_preorder = false
+  assign platform_tags = ''
+  for tag in product.tags
+    assign tag_down = tag | downcase
+    if tag_down == 'pré-venda' or tag_down == 'pre-venda'
+      assign is_preorder = true
+    endif
+    if tag_down == 'ps4' or tag_down == 'ps5' or tag_down == 'xbox' or tag_down == 'pc'
+      assign platform_tags = platform_tags | append: tag_down | append: ','
+    endif
+  endfor
+  assign platform_list = platform_tags | split: ','
+-%}
+
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__media">
     {%- if product.featured_media -%}
@@ -18,15 +33,15 @@
 
     {%- if product.compare_at_price > product.price -%}
       <span class="product-card__badge product-card__badge--discount">-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
-    {%- elsif product.tags contains 'pre-venda' -%}
+    {%- elsif is_preorder -%}
       <span class="product-card__badge product-card__badge--preorder">{{ 'products.badges.preorder' | t }}</span>
     {%- endif -%}
   </a>
 
-  {%- if product.tags contains 'ps4' or product.tags contains 'ps5' or product.tags contains 'xbox' or product.tags contains 'pc' -%}
+  {%- if platform_list.size > 0 -%}
     <div class="product-card__platforms">
-      {%- for tag in product.tags -%}
-        {%- if tag == 'ps4' or tag == 'ps5' or tag == 'xbox' or tag == 'pc' -%}
+      {%- for tag in platform_list -%}
+        {%- if tag != blank -%}
           <span class="product-card__platform">{{ tag | upcase }}</span>
         {%- endif -%}
       {%- endfor -%}
