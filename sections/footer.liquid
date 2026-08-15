@@ -4,8 +4,10 @@
       {%- if settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="130" loading="lazy">
       {%- else -%}
-        <span class="site-header__logo-mark" aria-hidden="true"></span>
-        <span class="site-header__logo-text">{{ settings.logo_text | default: shop.name }}</span>
+        <div class="site-footer__logo-row">
+          <span class="site-header__logo-mark" aria-hidden="true"></span>
+          <span class="site-header__logo-text">{{ settings.logo_text | default: shop.name }}</span>
+        </div>
       {%- endif -%}
       {%- if section.settings.about_text != blank -%}
         <div class="site-footer__about">{{ section.settings.about_text }}</div>
@@ -87,7 +89,7 @@
       "type": "richtext",
       "id": "about_text",
       "label": "Texto institucional",
-      "default": "<p>Sua loja de jogos digitais com entrega imediata.</p>"
+      "default": "<p>Sua loja de jogos digitais, com entrega imediata e pré-vendas em todas as plataformas.</p>"
     },
     {
       "type": "text",
