@@ -67,18 +67,18 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   color: var(--color-accent-contrast);
   box-shadow: 0 0 10px 1px color-mix(in srgb, var(--color-accent) 55%, transparent), 0 0 22px 4px color-mix(in srgb, var(--color-accent) 30%, transparent);
   transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  animation: buy-button-attention 10s ease-in-out infinite;
+  animation: buy-button-attention 300s ease-in-out infinite;
 }
 .button--primary:hover {
   box-shadow: 0 0 14px 2px color-mix(in srgb, var(--color-accent) 75%, transparent), 0 0 32px 6px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 @keyframes buy-button-attention {
   0% { transform: scale(1); }
-  2% { transform: scale(1.18); }
-  4% { transform: scale(0.94); }
-  6% { transform: scale(1.1); }
-  8% { transform: scale(0.98); }
-  10%, 100% { transform: scale(1); }
+  0.5% { transform: scale(1.18); }
+  1% { transform: scale(0.94); }
+  1.5% { transform: scale(1.1); }
+  2% { transform: scale(0.98); }
+  2.5%, 100% { transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
   .button--primary { animation: none; }
@@ -552,7 +552,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   background: var(--color-accent);
   color: var(--color-accent-contrast);
   box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-accent) 50%, transparent), 0 0 18px 3px color-mix(in srgb, var(--color-accent) 28%, transparent);
-  animation: buy-button-attention 10s ease-in-out infinite;
+  animation: buy-button-attention 300s ease-in-out infinite;
 }
 .product-card__buy:hover {
   box-shadow: 0 0 12px 2px color-mix(in srgb, var(--color-accent) 70%, transparent), 0 0 26px 5px color-mix(in srgb, var(--color-accent) 42%, transparent);
