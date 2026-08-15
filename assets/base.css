@@ -479,6 +479,13 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   .hero__subheading br { display: none; }
 }
 .hero__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.hero__actions .button--secondary {
+  color: #F4F2FA;
+  border-color: rgba(255,255,255,0.28);
+}
+.hero__actions .button--secondary:hover {
+  border-color: #fff;
+}
 .hero__meta { display: flex; gap: 1.6rem; margin-top: 2.2rem; flex-wrap: wrap; }
 .hero__meta div { font-size: 0.76rem; color: #9C93B8; }
 .hero__meta strong { display: block; font-family: var(--font-heading); font-size: 1.05rem; color: #F4F2FA; }
