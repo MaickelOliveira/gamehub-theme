@@ -7,7 +7,7 @@
     "relacionados": {
       "type": "product-carousel",
       "settings": {
-        "heading": "Você também pode gostar",
+        "heading": "Outros jogos",
         "products_to_show": 8
       }
     }

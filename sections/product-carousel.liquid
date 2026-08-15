@@ -1,5 +1,8 @@
 {%- liquid
   assign collection = collections[section.settings.collection]
+  if collection == blank and product != blank
+    assign collection = product.collections.first
+  endif
 -%}
 
 <section class="carousel-section page-width" {{ section.shopify_attributes }}>
@@ -16,10 +19,18 @@
     <div class="carousel" data-carousel>
       <button type="button" class="carousel__control carousel__control--prev" data-carousel-prev aria-label="{{ 'accessibility.previous' | t }}">&larr;</button>
       <ul class="carousel__track" data-carousel-track>
-        {%- for product in collection.products limit: section.settings.products_to_show -%}
+        {%- assign shown = 0 -%}
+        {%- for card_product in collection.products -%}
+          {%- if product != blank and card_product.id == product.id -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- if shown >= section.settings.products_to_show -%}
+            {%- break -%}
+          {%- endif -%}
           <li class="carousel__slide">
-            {% render 'product-card', product: product %}
+            {% render 'product-card', product: card_product %}
           </li>
+          {%- assign shown = shown | plus: 1 -%}
         {%- endfor -%}
       </ul>
       <button type="button" class="carousel__control carousel__control--next" data-carousel-next aria-label="{{ 'accessibility.next' | t }}">&rarr;</button>

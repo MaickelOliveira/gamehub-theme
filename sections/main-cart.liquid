@@ -3,43 +3,34 @@
 
   {%- if cart.item_count > 0 -%}
     {%- form 'cart', cart, id: 'CartForm' -%}
-      <table class="cart-page__table">
-        <thead>
-          <tr>
-            <th>{{ 'cart.label.product' | t }}</th>
-            <th>{{ 'cart.label.price' | t }}</th>
-            <th>{{ 'cart.label.quantity' | t }}</th>
-            <th>{{ 'cart.label.total' | t }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%- for item in cart.items -%}
-            <tr class="cart-page__row">
-              <td class="cart-page__product">
-                <a href="{{ item.url }}">
-                  {%- if item.image -%}
-                    <img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.image.alt | escape }}" width="80" height="80" loading="lazy">
-                  {%- endif -%}
-                </a>
-                <div>
-                  <a href="{{ item.url }}">{{ item.product.title }}</a>
-                  {%- unless item.variant.title contains 'Default' -%}
-                    <p class="cart-page__variant">{{ item.variant.title }}</p>
-                  {%- endunless -%}
-                </div>
-              </td>
-              <td>{{ item.original_price | money }}</td>
-              <td>
-                <input type="number" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" data-cart-quantity>
-              </td>
-              <td>{{ item.original_line_price | money }}</td>
-            </tr>
-          {%- endfor -%}
-        </tbody>
-      </table>
+      <ul class="cart-page__items">
+        {%- for item in cart.items -%}
+          <li class="cart-page__item">
+            <a href="{{ item.url }}" class="cart-page__item-media">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.image.alt | escape }}" width="96" height="96" loading="lazy">
+              {%- endif -%}
+            </a>
+            <div class="cart-page__item-info">
+              <a href="{{ item.url }}" class="cart-page__item-title">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <p class="cart-page__variant">{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <p class="cart-page__item-price">{{ item.original_price | money }}</p>
+            </div>
+            <div class="cart-page__qty">
+              <button type="button" data-cart-page-qty-minus aria-label="Diminuir quantidade">&minus;</button>
+              <input type="number" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" data-cart-quantity>
+              <button type="button" data-cart-page-qty-plus aria-label="Aumentar quantidade">+</button>
+            </div>
+            <div class="cart-page__item-total">{{ item.original_line_price | money }}</div>
+            <button type="submit" name="updates[{{ item.key }}]" value="0" class="cart-page__item-remove" aria-label="Remover item">&times;</button>
+          </li>
+        {%- endfor -%}
+      </ul>
 
       <div class="cart-page__footer">
-        <p class="cart-page__subtotal">{{ 'cart.general.subtotal' | t }}: <strong>{{ cart.total_price | money }}</strong></p>
+        <p class="cart-page__subtotal">{{ 'cart.general.subtotal' | t }} <strong>{{ cart.total_price | money }}</strong></p>
         <div class="cart-page__actions">
           <button type="submit" name="update" class="button button--secondary">{{ 'cart.general.update' | t }}</button>
           <button type="submit" name="checkout" class="button button--primary">{{ 'cart.general.checkout' | t }}</button>
@@ -47,8 +38,10 @@
       </div>
     {%- endform -%}
   {%- else -%}
-    <p class="cart-page__empty">{{ 'cart.general.empty' | t }}</p>
-    <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ 'cart.general.continue_shopping' | t }}</a>
+    <div class="cart-page__empty-state">
+      <p class="cart-page__empty">{{ 'cart.general.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ 'cart.general.continue_shopping' | t }}</a>
+    </div>
   {%- endif -%}
 </section>
 
