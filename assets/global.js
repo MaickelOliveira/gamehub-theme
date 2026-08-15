@@ -44,6 +44,7 @@
   }
 
   /* ---------- Hero: banners múltiplos com setas/pontos ---------- */
+  var mountHeroPlayer;
   function activateHeroSlide(heroEl, newIndex) {
     var slides = heroEl.querySelectorAll('[data-hero-slide]');
     var dots = heroEl.querySelectorAll('[data-hero-dot]');
@@ -54,7 +55,12 @@
       var isActive = i === newIndex;
       slide.classList.toggle('is-active', isActive);
       var wrap = slide.querySelector('[data-youtube-hero]');
-      var player = wrap && wrap._ytPlayer;
+      if (!wrap) return;
+      var player = wrap._ytPlayer;
+      if (isActive && !player && typeof mountHeroPlayer === 'function' && window.YT && window.YT.Player) {
+        mountHeroPlayer(wrap);
+        return;
+      }
       if (!player || typeof player.playVideo !== 'function') return;
       try {
         if (isActive) {
@@ -90,59 +96,69 @@
     ytApiTag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(ytApiTag);
 
-    window.onYouTubeIframeAPIReady = function () {
-      ytHeroEls.forEach(function (el, index) {
-        var videoId = el.getAttribute('data-video-id');
-        var start = parseInt(el.getAttribute('data-start'), 10) || 0;
-        var end = parseInt(el.getAttribute('data-end'), 10) || 0;
-        var slideEl = el.closest('[data-hero-slide]');
-        var isActiveSlide = slideEl ? slideEl.classList.contains('is-active') : true;
+    var ytMountCounter = 0;
 
-        var mount = document.createElement('div');
-        mount.id = 'youtube-hero-' + index;
-        el.appendChild(mount);
+    mountHeroPlayer = function (el) {
+      if (el._ytPlayer) return;
+      var videoId = el.getAttribute('data-video-id');
+      var start = parseInt(el.getAttribute('data-start'), 10) || 0;
+      var end = parseInt(el.getAttribute('data-end'), 10) || 0;
+      var slideEl = el.closest('[data-hero-slide]');
+      var isActiveSlide = slideEl ? slideEl.classList.contains('is-active') : true;
 
-        var playerVars = {
-          autoplay: isActiveSlide ? 1 : 0,
-          mute: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
-          rel: 0,
-          playsinline: 1,
-          start: start
-        };
-        if (end > start) playerVars.end = end;
+      var mount = document.createElement('div');
+      mount.id = 'youtube-hero-' + (ytMountCounter++);
+      el.appendChild(mount);
 
-        var player = new window.YT.Player(mount.id, {
-          videoId: videoId,
-          playerVars: playerVars,
-          events: {
-            onReady: function (e) {
-              if (isActiveSlide) e.target.playVideo();
-            },
-            onStateChange: function (e) {
-              if (e.data === window.YT.PlayerState.PLAYING) {
-                applyCurrentSound(e.target);
-              }
-              if (e.data === window.YT.PlayerState.ENDED) {
-                var heroEl = el.closest('[data-hero-slider]');
-                var currentSlideEl = el.closest('[data-hero-slide]');
-                if (heroEl && currentSlideEl && currentSlideEl.classList.contains('is-active')) {
-                  var slides = heroEl.querySelectorAll('[data-hero-slide]');
-                  var idx = Array.prototype.indexOf.call(slides, currentSlideEl);
-                  activateHeroSlide(heroEl, idx + 1);
-                } else {
-                  e.target.seekTo(start, true);
-                  e.target.playVideo();
-                }
+      var playerVars = {
+        autoplay: isActiveSlide ? 1 : 0,
+        mute: 1,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: 1,
+        rel: 0,
+        playsinline: 1,
+        start: start
+      };
+      if (end > start) playerVars.end = end;
+
+      var player = new window.YT.Player(mount.id, {
+        videoId: videoId,
+        playerVars: playerVars,
+        events: {
+          onReady: function (e) {
+            var stillActive = slideEl ? slideEl.classList.contains('is-active') : true;
+            if (stillActive) e.target.playVideo();
+          },
+          onStateChange: function (e) {
+            if (e.data === window.YT.PlayerState.PLAYING) {
+              applyCurrentSound(e.target);
+            }
+            if (e.data === window.YT.PlayerState.ENDED) {
+              var heroEl = el.closest('[data-hero-slider]');
+              var currentSlideEl = el.closest('[data-hero-slide]');
+              if (heroEl && currentSlideEl && currentSlideEl.classList.contains('is-active')) {
+                var slides = heroEl.querySelectorAll('[data-hero-slide]');
+                var idx = Array.prototype.indexOf.call(slides, currentSlideEl);
+                activateHeroSlide(heroEl, idx + 1);
+              } else {
+                e.target.seekTo(start, true);
+                e.target.playVideo();
               }
             }
           }
-        });
-        el._ytPlayer = player;
-        ytPlayers.push(player);
+        }
+      });
+      el._ytPlayer = player;
+      ytPlayers.push(player);
+    };
+
+    window.onYouTubeIframeAPIReady = function () {
+      ytHeroEls.forEach(function (el) {
+        var slideEl = el.closest('[data-hero-slide]');
+        var isActiveSlide = slideEl ? slideEl.classList.contains('is-active') : true;
+        if (isActiveSlide) mountHeroPlayer(el);
       });
 
       var soundToggle = document.getElementById('SoundToggle');
