@@ -4,7 +4,7 @@
       {%- if settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="130" loading="lazy">
       {%- else -%}
-        <span class="site-header__logo-text">{{ shop.name }}</span>
+        <span class="site-header__logo-text">{{ settings.logo_text | default: shop.name }}</span>
       {%- endif -%}
       {%- if section.settings.about_text != blank -%}
         <div class="site-footer__about">{{ section.settings.about_text }}</div>
