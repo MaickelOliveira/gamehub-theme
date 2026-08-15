@@ -169,11 +169,41 @@
   });
 
   /* ---------- Product page: thumbnails ---------- */
-  document.querySelectorAll('[data-thumbnail]').forEach(function (button) {
+  var thumbnailButtons = document.querySelectorAll('[data-thumbnail]');
+  thumbnailButtons.forEach(function (button) {
     button.addEventListener('click', function () {
       var featured = document.getElementById('ProductFeaturedImage');
       var url = button.getAttribute('data-image-url');
       if (featured && url) featured.src = url;
+      thumbnailButtons.forEach(function (b) { b.classList.remove('is-active'); });
+      button.classList.add('is-active');
+    });
+  });
+
+  /* ---------- Product page: quantidade ---------- */
+  document.querySelectorAll('.product-page__qty').forEach(function (qty) {
+    var input = qty.querySelector('[data-qty-input]');
+    var minus = qty.querySelector('[data-qty-minus]');
+    var plus = qty.querySelector('[data-qty-plus]');
+    if (!input) return;
+    if (minus) minus.addEventListener('click', function () {
+      var value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+      input.value = value;
+    });
+    if (plus) plus.addEventListener('click', function () {
+      var value = (parseInt(input.value, 10) || 1) + 1;
+      input.value = value;
+    });
+  });
+
+  /* ---------- Product page: método de pagamento (visual) ---------- */
+  document.querySelectorAll('.product-page__payments').forEach(function (group) {
+    var buttons = group.querySelectorAll('button');
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        buttons.forEach(function (b) { b.classList.remove('is-active'); });
+        button.classList.add('is-active');
+      });
     });
   });
 
