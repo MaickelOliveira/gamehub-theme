@@ -246,6 +246,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-left: auto;
 }
 .site-header__search {
   display: flex;
@@ -314,6 +315,16 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   }
   .site-header__mobile-nav li { padding: 0.5rem 0; font-weight: 600; }
   .site-header__mobile-nav ul ul { padding-left: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .site-header__inner { gap: 0.6rem; }
+  .site-header__logo-text { font-size: 1.1rem; }
+  .site-header__actions { gap: 0.5rem; }
+  .site-header__search { padding: 0.35rem 0.5rem 0.35rem 0.7rem; }
+  .site-header__search input { width: 72px; }
+  .site-header__icon-link { width: 34px; height: 34px; }
+  .site-header__icon-link svg { width: 16px; height: 16px; }
 }
 
 /* ---------- Hero ---------- */
