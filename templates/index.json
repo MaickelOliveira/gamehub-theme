@@ -19,8 +19,8 @@
             "video_start": 136,
             "video_end": 180,
             "eyebrow": "Lançamento da semana",
-            "heading": "Homem-Aranha<br>chegou com tudo",
-            "subheading": "Ação e aventura no universo Marvel. Jogue no dia do lançamento<br>com entrega digital imediata, em qualquer plataforma.",
+            "heading": "Call of Duty<br>chegou com tudo",
+            "subheading": "Ação militar intensa em multiplayer 4K. Jogue no dia do lançamento<br>com entrega digital imediata, em qualquer plataforma.",
             "button_label": "Comprar agora · R$ 249,90",
             "button_url": "/products/aeon-vanguard",
             "button_label_2": "Ver lançamentos",
@@ -38,6 +38,25 @@
             "video_start": 0,
             "video_end": 41,
             "eyebrow": "Oferta da semana",
+            "heading": "Homem-Aranha<br>chegou com tudo",
+            "subheading": "Balance pelos arranha-céus de Nova York numa aventura de tirar o fôlego<br>com entrega digital imediata, em qualquer plataforma.",
+            "button_label": "Ver catálogo completo",
+            "button_url": "/collections/all",
+            "button_label_2": "Ver pré-vendas",
+            "button_url_2": "/collections/pre-vendas",
+            "meta_platforms": "PS5 · Xbox · PC",
+            "meta_rating": "4,9 / 5",
+            "meta_reviews": "1.870 avaliações",
+            "meta_delivery": "Imediata"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "video_id": "OmTRcjxxedo",
+            "video_start": 0,
+            "video_end": 45,
+            "eyebrow": "Pré-venda aberta",
             "heading": "Avatar<br>chegou com tudo",
             "subheading": "Explore o mundo de Pandora numa aventura visual inesquecível<br>com entrega digital imediata, em qualquer plataforma.",
             "button_label": "Ver catálogo completo",
@@ -53,7 +72,8 @@
       },
       "block_order": [
         "slide-1",
-        "slide-2"
+        "slide-2",
+        "slide-3"
       ],
       "settings": {}
     },
