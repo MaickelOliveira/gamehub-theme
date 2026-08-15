@@ -108,6 +108,18 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 /* ---------- Announcement bar ---------- */
 .announcement-bar {
+  position: relative;
+  background: #232323;
+  color: #111;
+  overflow: hidden;
+}
+.announcement-bar::before,
+.announcement-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
   background: repeating-linear-gradient(
     45deg,
     #F2C300,
@@ -115,11 +127,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
     #111 22px,
     #111 44px
   );
-  color: #111;
-  overflow: hidden;
+  z-index: 2;
 }
+.announcement-bar::before { top: 0; }
+.announcement-bar::after { bottom: 0; }
 .announcement-bar__highlight { color: #E5484D; }
 .announcement-bar__track {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: max-content;
   animation: announcement-marquee 176s linear infinite;
