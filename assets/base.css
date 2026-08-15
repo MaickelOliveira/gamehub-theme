@@ -1371,7 +1371,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .hero__fade, .collection-hero__fade {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
   height: clamp(80px, 16vw, 180px);
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.87) 100%);
+  background: linear-gradient(180deg, rgba(10,15,11,0) 0%, rgba(10,15,11,1) 100%);
   pointer-events: none;
   opacity: 1;
 }
