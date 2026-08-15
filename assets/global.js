@@ -89,6 +89,19 @@
       var soundToggle = document.getElementById('SoundToggle');
       if (soundToggle) soundToggle.hidden = false;
     };
+
+    var startHeroVideosOnInteraction = function () {
+      ytPlayers.forEach(function (player) {
+        if (!player || typeof player.playVideo !== 'function') return;
+        try {
+          if (typeof player.getPlayerState === 'function' && player.getPlayerState() === 1) return;
+          player.playVideo();
+        } catch (e) {}
+      });
+    };
+    ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+      document.addEventListener(evt, startHeroVideosOnInteraction, { once: true, passive: true });
+    });
   }
 
   /* ---------- Botão de som (global, estilo WhatsApp) ---------- */
