@@ -91,7 +91,7 @@
         </div>
 
         {%- if platform_list.size > 0 -%}
-          <div class="product-page__option">
+          <div class="product-page__option" data-platform-group>
             <label>Plataforma</label>
             <div class="product-page__option-values">
               {%- for tag in platform_list -%}
@@ -100,6 +100,7 @@
                 {%- endif -%}
               {%- endfor -%}
             </div>
+            <p class="product-page__platform-warning" data-platform-warning hidden>Escolha uma plataforma antes de continuar.</p>
           </div>
         {%- endif -%}
 

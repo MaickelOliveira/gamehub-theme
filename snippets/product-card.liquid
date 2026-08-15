@@ -65,6 +65,7 @@
       class="product-card__buy"
       data-buy-now
       data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      {% if platform_list.size > 1 %}data-needs-platform data-platform-list="{{ platform_list | join: ',' | upcase }}"{% endif %}
       {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
     >
       {%- if product.selected_or_first_available_variant.available -%}
@@ -79,6 +80,7 @@
       class="product-card__add"
       data-add-to-cart
       data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      {% if platform_list.size > 1 %}data-needs-platform data-platform-list="{{ platform_list | join: ',' | upcase }}"{% endif %}
       {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
       aria-label="{{ 'products.product.add_to_cart' | t }}"
     >
@@ -88,5 +90,17 @@
         {{ 'products.product.sold_out' | t }}
       {%- endif -%}
     </button>
+
+    {%- if platform_list.size > 1 -%}
+      <div class="product-card__platform-picker" data-platform-picker hidden>
+        <p class="product-card__platform-picker-label">Escolha a plataforma</p>
+        <div class="product-card__platform-picker-options">
+          {%- for tag in platform_list -%}
+            <button type="button" class="product-card__platform-option" data-platform-option="{{ tag | upcase }}">{{ tag | upcase }}</button>
+          {%- endfor -%}
+        </div>
+        <button type="button" class="product-card__platform-picker-close" data-platform-picker-close aria-label="Cancelar">&times;</button>
+      </div>
+    {%- endif -%}
   </div>
 </div>
