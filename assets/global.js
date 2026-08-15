@@ -34,6 +34,10 @@
   var ytHeroEls = document.querySelectorAll('[data-youtube-hero]');
   var ytPlayers = [];
   var soundMuted = true;
+  try {
+    var savedSound = localStorage.getItem('gamehub_sound_muted');
+    if (savedSound === 'false') soundMuted = false;
+  } catch (e) {}
 
   function applyCurrentSound(player) {
     if (soundMuted) { player.mute(); } else { player.unMute(); }
@@ -108,9 +112,11 @@
   /* ---------- Botão de som (global, estilo WhatsApp) ---------- */
   var soundToggleBtn = document.getElementById('SoundToggle');
   if (soundToggleBtn) {
+    soundToggleBtn.setAttribute('data-muted', String(soundMuted));
+    soundToggleBtn.setAttribute('aria-label', soundMuted ? 'Ativar som do vídeo' : 'Silenciar vídeo');
     soundToggleBtn.addEventListener('click', function () {
-      soundMuted = soundToggleBtn.getAttribute('data-muted') !== 'false';
       soundMuted = !soundMuted;
+      try { localStorage.setItem('gamehub_sound_muted', String(soundMuted)); } catch (e) {}
       soundToggleBtn.setAttribute('data-muted', String(soundMuted));
       soundToggleBtn.setAttribute('aria-label', soundMuted ? 'Ativar som do vídeo' : 'Silenciar vídeo');
       ytPlayers.forEach(function (player) {
