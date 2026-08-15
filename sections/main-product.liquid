@@ -105,17 +105,29 @@
           </div>
         </div>
 
-        <button
-          type="submit"
-          class="button button--primary product-page__add-to-cart"
-          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
-        >
-          {%- if product.selected_or_first_available_variant.available -%}
-            {{ 'products.product.add_to_cart' | t }}
-          {%- else -%}
-            {{ 'products.product.sold_out' | t }}
-          {%- endif -%}
-        </button>
+        <div class="product-page__buy-actions">
+          <button
+            type="submit"
+            name="buy_now"
+            class="button button--primary product-page__buy-now"
+            data-buy-now
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+          >
+            Comprar agora
+          </button>
+
+          <button
+            type="submit"
+            class="button button--secondary product-page__add-to-cart"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+          >
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        </div>
       {%- endform -%}
 
       <p class="product-page__trust">🔒 Compra segura &middot; ⚡ Entrega imediata por e-mail</p>

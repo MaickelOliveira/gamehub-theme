@@ -772,6 +772,8 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);
 }
 .product-page__payments button.is-active { background: var(--color-text); border-color: var(--color-text); color: var(--color-background); }
+.product-page__buy-actions { display: flex; flex-direction: column; gap: 0.6rem; }
+.product-page__buy-now,
 .product-page__add-to-cart { width: 100%; }
 .product-page__trust { margin: 0; text-align: center; font-size: 0.78rem; color: var(--color-text-muted); }
 

@@ -196,6 +196,42 @@
     });
   });
 
+  /* ---------- Product page: adicionar ao carrinho / comprar agora ---------- */
+  var productForm = document.getElementById('ProductForm');
+  if (productForm) {
+    productForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var submitter = event.submitter;
+      var isBuyNow = submitter && submitter.hasAttribute('data-buy-now');
+      var variantId = productForm.querySelector('[data-variant-select]').value;
+      var quantityInput = productForm.querySelector('[data-qty-input], #Quantity');
+      var quantity = quantityInput ? parseInt(quantityInput.value, 10) || 1 : 1;
+
+      if (submitter) submitter.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: quantity })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function () {
+          if (isBuyNow) {
+            window.location.href = '/checkout';
+            return;
+          }
+          return fetch('/cart.js')
+            .then(function (res) { return res.json(); })
+            .then(function (cart) {
+              updateCartCount(cart.item_count);
+              openCartDrawer();
+            });
+        })
+        .catch(function (err) { console.error('Erro ao adicionar ao carrinho', err); })
+        .finally(function () { if (submitter) submitter.disabled = false; });
+    });
+  }
+
   /* ---------- Product page: método de pagamento (visual) ---------- */
   document.querySelectorAll('.product-page__payments').forEach(function (group) {
     var buttons = group.querySelectorAll('button');
@@ -354,6 +390,21 @@
     input.addEventListener('change', function () {
       var form = input.closest('form');
       if (form) form.submit();
+    });
+  });
+
+  document.querySelectorAll('.cart-page__qty').forEach(function (qty) {
+    var input = qty.querySelector('[data-cart-quantity]');
+    var minus = qty.querySelector('[data-cart-page-qty-minus]');
+    var plus = qty.querySelector('[data-cart-page-qty-plus]');
+    if (!input) return;
+    if (minus) minus.addEventListener('click', function () {
+      input.value = Math.max(0, (parseInt(input.value, 10) || 0) - 1);
+      input.dispatchEvent(new Event('change'));
+    });
+    if (plus) plus.addEventListener('click', function () {
+      input.value = (parseInt(input.value, 10) || 0) + 1;
+      input.dispatchEvent(new Event('change'));
     });
   });
 })();
