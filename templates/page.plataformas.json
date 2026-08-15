@@ -3,7 +3,8 @@
     "platforms": {
       "type": "platform-selector",
       "settings": {
-        "heading": "Escolha sua plataforma"
+        "heading": "Escolha sua plataforma",
+        "subheading": "Escolha seu console e veja o catálogo completo"
       },
       "blocks": {
         "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },

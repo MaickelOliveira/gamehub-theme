@@ -394,19 +394,28 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .carousel-section__header {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 .carousel-section__heading {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.01em;
+  margin: 0;
+}
+.carousel-section__subheading {
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  margin: 0.3rem 0 0;
 }
 .carousel-section__view-all {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-accent);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .carousel-section__empty { color: var(--color-text-muted); }
 

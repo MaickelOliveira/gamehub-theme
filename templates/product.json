@@ -17,6 +17,7 @@
       "type": "product-carousel",
       "settings": {
         "heading": "Outros jogos",
+        "subheading": "Baseado no que você está vendo",
         "products_to_show": 8
       }
     }

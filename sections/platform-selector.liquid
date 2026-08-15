@@ -2,6 +2,9 @@
   {%- if section.settings.heading != blank -%}
     <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
   {%- endif -%}
+  {%- if section.settings.subheading != blank -%}
+    <p class="carousel-section__subheading">{{ section.settings.subheading }}</p>
+  {%- endif -%}
   <ul class="platform-selector__grid">
     {%- for block in section.blocks -%}
       {%- liquid
@@ -37,7 +40,8 @@
 {
   "name": "Seletor de plataforma",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Título", "default": "Compre por plataforma" }
+    { "type": "text", "id": "heading", "label": "Título", "default": "Compre por plataforma" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo" }
   ],
   "blocks": [
     {
