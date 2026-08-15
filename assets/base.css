@@ -403,7 +403,12 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .hero__nav--prev { left: 1rem; }
 .hero__nav--next { right: 1rem; }
 @media (max-width: 640px) {
-  .hero__nav { width: 34px; height: 34px; }
+  .hero__nav {
+    top: 0.75rem;
+    transform: none;
+    width: 34px;
+    height: 34px;
+  }
   .hero__nav svg { width: 16px; height: 16px; }
   .hero__nav--prev { left: 0.5rem; }
   .hero__nav--next { right: 0.5rem; }
