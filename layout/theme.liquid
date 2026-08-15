@@ -20,9 +20,9 @@
 
   {{ 'base.css' | asset_url | stylesheet_tag }}
 
-  {%- unless settings.type_header_font.system? -%}
-    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-  {%- endunless -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -33,8 +33,8 @@
       --color-accent: {{ settings.color_accent }};
       --color-accent-contrast: {{ settings.color_accent_contrast }};
       --color-border: {{ settings.color_border }};
-      --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-      --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+      --font-heading: 'Chakra Petch', system-ui, sans-serif;
       --page-width: {{ settings.page_width }}px;
     }
     {%- if settings.dark_mode_enabled %}
@@ -73,13 +73,6 @@
       })();
     </script>
   {%- endif %}
-
-  {%- unless settings.type_header_font.system? -%}
-    {{ settings.type_header_font | font_face: font_display: 'swap' }}
-  {%- endunless -%}
-  {%- unless settings.type_body_font.system? -%}
-    {{ settings.type_body_font | font_face: font_display: 'swap' }}
-  {%- endunless -%}
 
   {{ content_for_header }}
 </head>
