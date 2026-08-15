@@ -583,7 +583,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
 }
-.product-card__badge--preorder { background: #7C3AED; color: #fff; }
+.product-card__badge--preorder {
+  background: #7C3AED;
+  color: #fff;
+  box-shadow: 0 0 8px 1px color-mix(in srgb, #7C3AED 60%, transparent), 0 0 16px 3px color-mix(in srgb, #7C3AED 40%, transparent);
+}
 .product-card__badge--discount { background: #E5484D; color: #fff; }
 .product-card__platforms { display: flex; gap: 0.35rem; }
 .product-card__platform {
@@ -981,7 +985,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .product-page__qty input::-webkit-outer-spin-button,
 .product-page__qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .product-page__buy-actions { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.6rem; }
-.product-page__buy-now,
+.product-page__buy-now { width: 100%; }
 .product-page__add-to-cart {
   width: 100%;
   background: color-mix(in srgb, #A78BFA 18%, transparent);
