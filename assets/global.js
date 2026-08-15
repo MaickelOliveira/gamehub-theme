@@ -33,10 +33,10 @@
   /* ---------- Hero: YouTube background loop + som + players ---------- */
   var ytHeroEls = document.querySelectorAll('[data-youtube-hero]');
   var ytPlayers = [];
-  var soundMuted = true;
+  var soundMuted = false;
   try {
     var savedSound = localStorage.getItem('gamehub_sound_muted');
-    if (savedSound === 'false') soundMuted = false;
+    if (savedSound === 'true') soundMuted = true;
   } catch (e) {}
 
   function applyCurrentSound(player) {
@@ -60,7 +60,7 @@
 
         var playerVars = {
           autoplay: 1,
-          mute: 1,
+          mute: soundMuted ? 1 : 0,
           controls: 0,
           disablekb: 1,
           fs: 0,
