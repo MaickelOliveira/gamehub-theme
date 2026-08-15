@@ -850,10 +850,16 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-size: 0.85rem;
 }
 .product-page__option-value[aria-pressed="true"] { border-color: var(--color-accent); color: var(--color-accent); }
-.product-page__qty-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.product-page__option-qty-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
 .product-page__qty {
   display: flex; align-items: center; gap: 0;
   border: 1px solid var(--color-border); border-radius: 999px; overflow: hidden;
+  height: fit-content;
 }
 .product-page__qty button {
   width: 38px; height: 38px; background: var(--color-surface); border: none;
@@ -866,17 +872,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .product-page__qty input::-webkit-outer-spin-button,
 .product-page__qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.product-page__payments { display: flex; gap: 0.5rem; }
-.product-page__payments button {
-  padding: 0.5rem 0.9rem; border-radius: 999px;
-  border: 1px solid var(--color-border); background: var(--color-background);
-  font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);
-}
-.product-page__payments button.is-active { background: var(--color-text); border-color: var(--color-text); color: var(--color-background); }
 .product-page__buy-actions { display: flex; flex-direction: column; gap: 0.6rem; }
 .product-page__buy-now,
 .product-page__add-to-cart { width: 100%; }
 .product-page__trust { margin: 0; text-align: center; font-size: 0.78rem; color: var(--color-text-muted); }
+.product-page__payment-methods { margin: 0.3rem 0 0; text-align: center; font-size: 0.76rem; color: var(--color-text-muted); }
 
 .product-page__body {
   margin-top: 3rem;

@@ -56,16 +56,6 @@
       {%- endif -%}
       <h1 class="product-page__title">{{ product.title }}</h1>
 
-      {%- if platform_list.size > 0 -%}
-        <div class="product-card__platforms">
-          {%- for tag in platform_list -%}
-            {%- if tag != blank -%}
-              <span class="product-card__platform">{{ tag | upcase }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
       <div class="product-page__price-block">
         <div class="product-page__price">
           <span class="product-page__price-current">{{ product.price | money }}</span>
@@ -81,29 +71,37 @@
       {%- form 'product', product, id: 'ProductForm' -%}
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-select>
 
-        {%- for option in product.options_with_values -%}
-          <div class="product-page__option">
-            <label>{{ option.name }}</label>
-            <div class="product-page__option-values">
-              {%- for value in option.values -%}
-                <button type="button" class="product-page__option-value" data-option-value="{{ value | escape }}">{{ value }}</button>
-              {%- endfor -%}
+        <div class="product-page__option-qty-row">
+          {%- for option in product.options_with_values -%}
+            <div class="product-page__option">
+              <label>{{ option.name }}</label>
+              <div class="product-page__option-values">
+                {%- for value in option.values -%}
+                  <button type="button" class="product-page__option-value" data-option-value="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
             </div>
-          </div>
-        {%- endfor -%}
+          {%- endfor -%}
 
-        <div class="product-page__qty-row">
           <div class="product-page__qty" role="group" aria-label="{{ 'products.product.quantity' | t }}">
             <button type="button" data-qty-minus aria-label="Diminuir quantidade">&minus;</button>
             <input type="number" id="Quantity" name="quantity" value="1" min="1" data-qty-input>
             <button type="button" data-qty-plus aria-label="Aumentar quantidade">+</button>
           </div>
-          <div class="product-page__payments" aria-hidden="true">
-            <button type="button" class="is-active">Cartão</button>
-            <button type="button">Pix</button>
-            <button type="button">Boleto</button>
-          </div>
         </div>
+
+        {%- if platform_list.size > 0 -%}
+          <div class="product-page__option">
+            <label>Plataforma</label>
+            <div class="product-page__option-values">
+              {%- for tag in platform_list -%}
+                {%- if tag != blank -%}
+                  <button type="button" class="product-page__option-value" data-option-value="{{ tag | upcase }}">{{ tag | upcase }}</button>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
 
         <div class="product-page__buy-actions">
           <button
@@ -131,6 +129,7 @@
       {%- endform -%}
 
       <p class="product-page__trust">🔒 Compra segura &middot; ⚡ Entrega imediata por e-mail</p>
+      <p class="product-page__payment-methods">Aceita Cartão de crédito &middot; Pix &middot; Boleto</p>
     </div>
   </div>
 

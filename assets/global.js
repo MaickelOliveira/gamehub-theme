@@ -275,17 +275,6 @@
     });
   }
 
-  /* ---------- Product page: método de pagamento (visual) ---------- */
-  document.querySelectorAll('.product-page__payments').forEach(function (group) {
-    var buttons = group.querySelectorAll('button');
-    buttons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        buttons.forEach(function (b) { b.classList.remove('is-active'); });
-        button.classList.add('is-active');
-      });
-    });
-  });
-
   /* ---------- Product page: option selection (visual only) ---------- */
   document.querySelectorAll('.product-page__option').forEach(function (optionGroup) {
     var buttons = optionGroup.querySelectorAll('[data-option-value]');
