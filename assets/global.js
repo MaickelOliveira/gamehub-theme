@@ -152,18 +152,39 @@
     headerSpacerEl.style.display = 'none';
     siteHeaderEl.parentNode.insertBefore(headerSpacerEl, siteHeaderEl.nextSibling);
 
+    var isHomeFloatingHeader = document.body.classList.contains('template-index');
+    var announcementEl = document.querySelector('.announcement-bar');
+
     var pinThreshold = 0;
     var headerH = siteHeaderEl.offsetHeight || 72;
     var tickingHeaderCheck = false;
     var isFirstCheck = true;
 
+    function applyHomeFloatPosition() {
+      if (!isHomeFloatingHeader) return;
+      if (siteHeaderEl.classList.contains('site-header--pinned')) {
+        siteHeaderEl.style.position = '';
+        siteHeaderEl.style.top = '';
+        siteHeaderEl.style.left = '';
+        siteHeaderEl.style.right = '';
+      } else {
+        siteHeaderEl.style.position = 'absolute';
+        siteHeaderEl.style.top = (announcementEl ? announcementEl.offsetHeight : 0) + 'px';
+        siteHeaderEl.style.left = '0';
+        siteHeaderEl.style.right = '0';
+      }
+    }
+
     function updateHeaderOnScroll() {
       tickingHeaderCheck = false;
 
       if (!siteHeaderEl.classList.contains('site-header--pinned')) {
-        pinThreshold = siteHeaderEl.offsetTop;
+        pinThreshold = isHomeFloatingHeader
+          ? (announcementEl ? announcementEl.offsetHeight : 0)
+          : siteHeaderEl.offsetTop;
       }
-      var shouldPin = !isFirstCheck && window.scrollY >= pinThreshold && pinThreshold > 0;
+      var shouldPin = !isFirstCheck && window.scrollY >= pinThreshold &&
+        (isHomeFloatingHeader ? pinThreshold >= 0 : pinThreshold > 0);
       isFirstCheck = false;
       if (shouldPin !== siteHeaderEl.classList.contains('site-header--pinned')) {
         if (shouldPin) {
@@ -174,6 +195,7 @@
           siteHeaderEl.classList.remove('site-header--pinned');
           headerSpacerEl.style.display = 'none';
         }
+        applyHomeFloatPosition();
       }
 
       var overVideo = false;
@@ -184,6 +206,8 @@
       });
       siteHeaderEl.classList.toggle('site-header--over-video', overVideo);
     }
+
+    applyHomeFloatPosition();
 
     function requestHeaderCheck() {
       if (tickingHeaderCheck) return;
