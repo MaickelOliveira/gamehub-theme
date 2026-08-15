@@ -161,7 +161,6 @@
     var isFirstCheck = true;
 
     function applyHomeFloatPosition() {
-      console.log('[debug] applyHomeFloatPosition called, isHomeFloatingHeader=', isHomeFloatingHeader, 'pinned=', siteHeaderEl.classList.contains('site-header--pinned'));
       if (!isHomeFloatingHeader) return;
       if (siteHeaderEl.classList.contains('site-header--pinned')) {
         siteHeaderEl.style.position = '';
@@ -173,7 +172,6 @@
         siteHeaderEl.style.top = (announcementEl ? announcementEl.offsetHeight : 0) + 'px';
         siteHeaderEl.style.left = '0';
         siteHeaderEl.style.right = '0';
-        console.log('[debug] set cssText now =', siteHeaderEl.style.cssText, 'announcementEl=', !!announcementEl);
       }
     }
 
