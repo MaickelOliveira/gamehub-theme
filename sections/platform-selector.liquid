@@ -4,12 +4,29 @@
   {%- endif -%}
   <ul class="platform-selector__grid">
     {%- for block in section.blocks -%}
+      {%- liquid
+        assign handle = block.settings.url | split: '/' | last
+        assign col = collections[handle]
+        assign name_down = block.settings.name | downcase
+      -%}
       <li {{ block.shopify_attributes }}>
         <a href="{{ block.settings.url }}" class="platform-selector__item">
           {%- if block.settings.icon != blank -%}
-            <img src="{{ block.settings.icon | image_url: width: 120 }}" alt="{{ block.settings.name }}" loading="lazy" width="60" height="60">
+            <img class="platform-selector__photo" src="{{ block.settings.icon | image_url: width: 700 }}" alt="" loading="lazy">
+          {%- elsif name_down == 'ps5' -%}
+            <img class="platform-selector__photo" src="{{ 'platform-ps5.jpg' | asset_url }}" alt="" loading="lazy">
+          {%- elsif name_down == 'ps4' -%}
+            <img class="platform-selector__photo" src="{{ 'platform-ps4.jpg' | asset_url }}" alt="" loading="lazy">
+          {%- elsif name_down == 'xbox' -%}
+            <img class="platform-selector__photo" src="{{ 'platform-xbox.jpg' | asset_url }}" alt="" loading="lazy">
+          {%- elsif name_down == 'pc' -%}
+            <img class="platform-selector__photo" src="{{ 'platform-pc.jpg' | asset_url }}" alt="" loading="lazy">
           {%- endif -%}
-          <span>{{ block.settings.name }}</span>
+          <div class="platform-selector__scrim"></div>
+          {%- if col != blank -%}
+            <span class="platform-selector__count">{{ col.products_count }} {% if col.products_count == 1 %}jogo{% else %}jogos{% endif %}</span>
+          {%- endif -%}
+          <span class="platform-selector__name">{{ block.settings.name }}</span>
         </a>
       </li>
     {%- endfor -%}
