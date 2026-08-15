@@ -29,7 +29,11 @@
       {%- endif -%}
 
       {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_url }}" class="button button--primary">{{ section.settings.button_label }}</a>
+        {%- if section.settings.button_url != blank -%}
+          <a href="{{ section.settings.button_url }}" class="button button--primary">{{ section.settings.button_label }}</a>
+        {%- else -%}
+          <button type="button" class="button button--primary" data-combo-builder-open>{{ section.settings.button_label }}</button>
+        {%- endif -%}
       {%- endif -%}
     </div>
   </div>
@@ -49,7 +53,7 @@
     { "type": "text", "id": "save_label", "label": "Selo de economia", "default": "Economize 25%" },
     { "type": "header", "content": "Botão" },
     { "type": "text", "id": "button_label", "label": "Botão - texto", "default": "Montar combo" },
-    { "type": "url", "id": "button_url", "label": "Botão - link" }
+    { "type": "url", "id": "button_url", "label": "Botão - link (opcional; se vazio, abre o montador de combo)" }
   ],
   "presets": [
     { "name": "Combo promocional" }

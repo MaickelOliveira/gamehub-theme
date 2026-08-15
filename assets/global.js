@@ -385,6 +385,105 @@
       .finally(function () { button.disabled = false; });
   });
 
+  /* ---------- Combo builder ---------- */
+  var comboBuilder = document.getElementById('ComboBuilder');
+  var comboGrid = document.getElementById('ComboBuilderGrid');
+  var comboCountEl = document.getElementById('ComboBuilderCount');
+  var comboAddBtn = document.getElementById('ComboBuilderAdd');
+  var COMBO_TARGET = 6;
+  var comboSelected = [];
+
+  function openComboBuilder() {
+    if (!comboBuilder) return;
+    comboBuilder.hidden = false;
+  }
+
+  function closeComboBuilder() {
+    if (!comboBuilder) return;
+    comboBuilder.hidden = true;
+  }
+
+  function updateComboFooter() {
+    if (comboCountEl) comboCountEl.textContent = String(comboSelected.length);
+    if (comboAddBtn) comboAddBtn.disabled = comboSelected.length !== COMBO_TARGET;
+    if (comboGrid) {
+      var atLimit = comboSelected.length >= COMBO_TARGET;
+      comboGrid.querySelectorAll('[data-combo-card]').forEach(function (card) {
+        if (card.hasAttribute('data-unavailable')) return;
+        var id = card.getAttribute('data-variant-id');
+        var isSelected = comboSelected.indexOf(id) !== -1;
+        card.disabled = !isSelected && atLimit;
+      });
+    }
+  }
+
+  function resetComboSelection() {
+    comboSelected = [];
+    if (comboGrid) {
+      comboGrid.querySelectorAll('[data-combo-card]').forEach(function (card) {
+        card.classList.remove('is-selected');
+        card.setAttribute('aria-pressed', 'false');
+        if (!card.hasAttribute('data-unavailable')) card.disabled = false;
+      });
+    }
+    updateComboFooter();
+  }
+
+  document.querySelectorAll('[data-combo-builder-open]').forEach(function (el) {
+    el.addEventListener('click', openComboBuilder);
+  });
+  document.querySelectorAll('[data-combo-builder-close]').forEach(function (el) {
+    el.addEventListener('click', closeComboBuilder);
+  });
+
+  if (comboGrid) {
+    comboGrid.addEventListener('click', function (event) {
+      var card = event.target.closest('[data-combo-card]');
+      if (!card || card.disabled) return;
+      var id = card.getAttribute('data-variant-id');
+      if (!id) return;
+      var idx = comboSelected.indexOf(id);
+      if (idx === -1) {
+        comboSelected.push(id);
+        card.classList.add('is-selected');
+        card.setAttribute('aria-pressed', 'true');
+      } else {
+        comboSelected.splice(idx, 1);
+        card.classList.remove('is-selected');
+        card.setAttribute('aria-pressed', 'false');
+      }
+      updateComboFooter();
+    });
+  }
+
+  if (comboAddBtn) {
+    comboAddBtn.addEventListener('click', function () {
+      if (comboSelected.length !== COMBO_TARGET) return;
+      comboAddBtn.disabled = true;
+
+      var items = comboSelected.map(function (id) {
+        return { id: id, quantity: 1 };
+      });
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: items })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function () { return fetch('/cart.js'); })
+        .then(function (res) { return res.json(); })
+        .then(function (cart) {
+          updateCartCount(cart.item_count);
+          closeComboBuilder();
+          resetComboSelection();
+          openCartDrawer();
+        })
+        .catch(function (err) { console.error('Erro ao adicionar combo ao carrinho', err); })
+        .finally(function () { comboAddBtn.disabled = comboSelected.length !== COMBO_TARGET; });
+    });
+  }
+
   /* ---------- Cart page: quantity update ---------- */
   document.querySelectorAll('[data-cart-quantity]').forEach(function (input) {
     input.addEventListener('change', function () {
