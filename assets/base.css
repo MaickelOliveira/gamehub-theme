@@ -756,12 +756,22 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .site-footer__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 1.25rem;
   padding-bottom: 2rem;
 }
+.site-footer__grid > .site-footer__block--brand,
+.site-footer__grid > div:last-child {
+  grid-column: 1 / -1;
+}
 @media (min-width: 700px) {
-  .site-footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1.5fr; }
+  .site-footer__grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  }
+  .site-footer__grid > .site-footer__block--brand,
+  .site-footer__grid > div:last-child {
+    grid-column: auto;
+  }
 }
 .site-footer__block h3 { font-size: 0.9rem; margin-bottom: 0.75rem; }
 .site-footer__block ul li { margin-bottom: 0.4rem; }
