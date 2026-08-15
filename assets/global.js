@@ -60,7 +60,7 @@
 
         var playerVars = {
           autoplay: 1,
-          mute: soundMuted ? 1 : 0,
+          mute: 1,
           controls: 0,
           disablekb: 1,
           fs: 0,
@@ -76,10 +76,12 @@
           playerVars: playerVars,
           events: {
             onReady: function (e) {
-              applyCurrentSound(e.target);
               e.target.playVideo();
             },
             onStateChange: function (e) {
+              if (e.data === window.YT.PlayerState.PLAYING) {
+                applyCurrentSound(e.target);
+              }
               if (e.data === window.YT.PlayerState.ENDED) {
                 e.target.seekTo(start, true);
                 e.target.playVideo();
