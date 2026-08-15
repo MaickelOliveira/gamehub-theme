@@ -60,7 +60,19 @@
   </div>
 
   <div class="product-card__actions">
-    <a href="{{ product.url }}" class="product-card__buy">Comprar</a>
+    <button
+      type="button"
+      class="product-card__buy"
+      data-buy-now
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+    >
+      {%- if product.selected_or_first_available_variant.available -%}
+        Comprar
+      {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- endif -%}
+    </button>
 
     <button
       type="button"

@@ -417,6 +417,28 @@
       .finally(function () { button.disabled = false; });
   });
 
+  /* ---------- Comprar agora (cards de produto: direto pro checkout) ---------- */
+  document.addEventListener('click', function (event) {
+    var button = event.target.closest('[data-buy-now]');
+    if (!button || button.disabled || button.closest('#ProductForm')) return;
+
+    var variantId = button.getAttribute('data-variant-id');
+    if (!variantId) return;
+
+    button.disabled = true;
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 })
+    })
+      .then(function () { window.location.href = '/checkout'; })
+      .catch(function (err) {
+        console.error('Erro ao comprar', err);
+        button.disabled = false;
+      });
+  });
+
   /* ---------- Combo builder ---------- */
   var comboBuilder = document.getElementById('ComboBuilder');
   var comboGrid = document.getElementById('ComboBuilderGrid');
