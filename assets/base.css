@@ -64,8 +64,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 /* ---------- Announcement bar ---------- */
 .announcement-bar {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: repeating-linear-gradient(
+    45deg,
+    #F2C300,
+    #F2C300 22px,
+    #111 22px,
+    #111 44px
+  );
+  color: #111;
   overflow: hidden;
 }
 .announcement-bar__highlight { color: #E5484D; }
@@ -82,7 +88,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  padding: 0.6rem 0.4rem;
+  padding: 0.5rem 0.7rem;
+  background: #111;
+  color: #F2C300;
+  border-radius: 4px;
+  margin: 0.4rem 0.5rem;
 }
 @keyframes announcement-marquee {
   from { transform: translateX(0); }
