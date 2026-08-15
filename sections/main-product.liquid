@@ -1,44 +1,61 @@
+{%- liquid
+  assign platform_tags = ''
+  assign genre_tag = ''
+  for tag in product.tags
+    assign tag_down = tag | downcase
+    if tag_down == 'ps4' or tag_down == 'ps5' or tag_down == 'xbox' or tag_down == 'pc'
+      assign platform_tags = platform_tags | append: tag_down | append: ','
+    elsif tag_down == 'ação' or tag_down == 'corrida' or tag_down == 'guerra' or tag_down == 'esportes' or tag_down == 'rpg' or tag_down == 'terror' or tag_down == 'aventura'
+      if genre_tag == ''
+        assign genre_tag = tag
+      endif
+    endif
+  endfor
+  assign platform_list = platform_tags | split: ','
+  assign pix_price = product.price | times: 0.95
+-%}
+
 <section class="product-page page-width" {{ section.shopify_attributes }}>
   <div class="product-page__grid">
     <div class="product-page__gallery">
-      {%- if product.media.size > 0 -%}
-        <div class="product-page__featured-media">
+      <div class="product-page__art">
+        {%- if product.featured_media -%}
           <img
             id="ProductFeaturedImage"
+            class="product-page__art-fill"
             src="{{ product.selected_or_first_available_variant.featured_image | default: product.featured_media | image_url: width: 900 }}"
             alt="{{ product.featured_media.alt | default: product.title | escape }}"
             width="900"
           >
-        </div>
-        {%- if product.media.size > 1 -%}
-          <ul class="product-page__thumbnails">
-            {%- for media in product.media -%}
-              <li>
-                <button type="button" data-thumbnail data-image-url="{{ media | image_url: width: 900 }}">
-                  <img src="{{ media | image_url: width: 150 }}" alt="{{ media.alt | escape }}" width="70" height="70" loading="lazy">
-                </button>
-              </li>
-            {%- endfor -%}
-          </ul>
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'product-page__placeholder' }}
         {%- endif -%}
-      {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'product-page__placeholder' }}
+
+        {%- if product.compare_at_price > product.price -%}
+          <span class="product-page__art-badge">-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <ul class="product-page__thumbnails">
+          {%- for media in product.media -%}
+            <li>
+              <button type="button" data-thumbnail data-image-url="{{ media | image_url: width: 900 }}" {% if forloop.first %}class="is-active"{% endif %}>
+                <img src="{{ media | image_url: width: 150 }}" alt="{{ media.alt | escape }}" width="70" height="70" loading="lazy">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
       {%- endif -%}
     </div>
 
     <div class="product-page__info">
+      <span class="product-page__format-badge">Chave digital original</span>
+      {%- if genre_tag != blank -%}
+        <p class="product-page__genre">{{ genre_tag }}</p>
+      {%- endif -%}
       <h1 class="product-page__title">{{ product.title }}</h1>
 
-      {%- liquid
-        assign platform_tags = ''
-        for tag in product.tags
-          assign tag_down = tag | downcase
-          if tag_down == 'ps4' or tag_down == 'ps5' or tag_down == 'xbox' or tag_down == 'pc'
-            assign platform_tags = platform_tags | append: tag_down | append: ','
-          endif
-        endfor
-        assign platform_list = platform_tags | split: ','
-      -%}
       {%- if platform_list.size > 0 -%}
         <div class="product-card__platforms">
           {%- for tag in platform_list -%}
@@ -49,12 +66,17 @@
         </div>
       {%- endif -%}
 
-      <div class="product-page__price">
-        {%- if product.compare_at_price > product.price -%}
-          <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
-        {%- endif -%}
-        <span class="product-page__price-current">{{ product.price | money }}</span>
+      <div class="product-page__price-block">
+        <div class="product-page__price">
+          <span class="product-page__price-current">{{ product.price | money }}</span>
+          {%- if product.compare_at_price > product.price -%}
+            <s class="product-card__price-compare">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+        </div>
+        <p class="product-page__pix">{{ pix_price | money }} no Pix (5% de desconto)</p>
       </div>
+
+      <p class="product-page__promo">🎮 Leve 2 jogos e ganhe 10% de desconto no combo</p>
 
       {%- form 'product', product, id: 'ProductForm' -%}
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-select>
@@ -70,9 +92,17 @@
           </div>
         {%- endfor -%}
 
-        <div class="product-page__quantity">
-          <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-          <input type="number" id="Quantity" name="quantity" value="1" min="1">
+        <div class="product-page__qty-row">
+          <div class="product-page__qty" role="group" aria-label="{{ 'products.product.quantity' | t }}">
+            <button type="button" data-qty-minus aria-label="Diminuir quantidade">&minus;</button>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" data-qty-input>
+            <button type="button" data-qty-plus aria-label="Aumentar quantidade">+</button>
+          </div>
+          <div class="product-page__payments" aria-hidden="true">
+            <button type="button" class="is-active">Cartão</button>
+            <button type="button">Pix</button>
+            <button type="button">Boleto</button>
+          </div>
         </div>
 
         <button
@@ -88,9 +118,19 @@
         </button>
       {%- endform -%}
 
-      <div class="product-page__description rte">
-        {{ product.description }}
-      </div>
+      <p class="product-page__trust">🔒 Compra segura &middot; ⚡ Entrega imediata por e-mail</p>
+    </div>
+  </div>
+
+  <div class="product-page__body">
+    <div class="product-page__about">
+      <h2 class="product-page__section-title">Sobre o jogo</h2>
+      <div class="product-page__description rte">{{ product.description }}</div>
+      <ul class="product-page__facts">
+        <li><strong>Formato</strong>Chave digital original, entrega por e-mail</li>
+        <li><strong>Idioma</strong>Legendas e áudio em português</li>
+        <li><strong>Reembolso</strong>Até 7 dias após a compra, se não ativado</li>
+      </ul>
     </div>
   </div>
 </section>
