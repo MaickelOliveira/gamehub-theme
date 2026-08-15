@@ -8,14 +8,14 @@
 
   <div class="collection-page__toolbar">
     <p class="collection-page__count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</p>
-    {%- form 'sort_by' -%}
+    <form method="get" action="{{ collection.url }}">
       <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
       <select name="sort_by" id="SortBy" onchange="this.form.submit()">
         {%- for option in collection.sort_options -%}
           <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
         {%- endfor -%}
       </select>
-    {%- endform -%}
+    </form>
   </div>
 
   {%- paginate collection.products by 24 -%}

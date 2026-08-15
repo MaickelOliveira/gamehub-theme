@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "platforms": {
+      "type": "platform-selector",
+      "settings": {
+        "heading": "Escolha sua plataforma"
+      },
+      "blocks": {
+        "ps5": { "type": "platform", "settings": { "name": "PS5", "url": "/collections/ps5" } },
+        "ps4": { "type": "platform", "settings": { "name": "PS4", "url": "/collections/ps4" } },
+        "xbox": { "type": "platform", "settings": { "name": "Xbox", "url": "/collections/xbox" } },
+        "pc": { "type": "platform", "settings": { "name": "PC", "url": "/collections/pc" } }
+      },
+      "block_order": ["ps5", "ps4", "xbox", "pc"]
+    }
+  },
+  "order": ["platforms"]
+}
