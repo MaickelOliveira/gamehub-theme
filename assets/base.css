@@ -364,6 +364,13 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   z-index: 1;
   background: linear-gradient(100deg, rgba(10,15,11,0.82) 0%, rgba(10,15,11,0.5) 48%, rgba(10,15,11,0.18) 76%);
 }
+@media (max-width: 640px) {
+  .hero__scrim {
+    background:
+      linear-gradient(180deg, rgba(10,15,11,0.55) 0%, rgba(10,15,11,0.45) 40%, rgba(10,15,11,0.75) 100%),
+      linear-gradient(100deg, rgba(10,15,11,0.82) 0%, rgba(10,15,11,0.5) 48%, rgba(10,15,11,0.18) 76%);
+  }
+}
 .hero__inner {
   position: relative;
   z-index: 2;
