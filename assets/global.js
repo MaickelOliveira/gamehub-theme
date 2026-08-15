@@ -43,6 +43,48 @@
     if (soundMuted) { player.mute(); } else { player.unMute(); }
   }
 
+  /* ---------- Hero: banners múltiplos com setas/pontos ---------- */
+  function activateHeroSlide(heroEl, newIndex) {
+    var slides = heroEl.querySelectorAll('[data-hero-slide]');
+    var dots = heroEl.querySelectorAll('[data-hero-dot]');
+    var total = slides.length;
+    if (!total) return;
+    newIndex = ((newIndex % total) + total) % total;
+    slides.forEach(function (slide, i) {
+      var isActive = i === newIndex;
+      slide.classList.toggle('is-active', isActive);
+      var wrap = slide.querySelector('[data-youtube-hero]');
+      var player = wrap && wrap._ytPlayer;
+      if (!player || typeof player.playVideo !== 'function') return;
+      try {
+        if (isActive) {
+          player.seekTo(parseInt(wrap.getAttribute('data-start'), 10) || 0, true);
+          player.playVideo();
+          applyCurrentSound(player);
+        } else {
+          player.pauseVideo();
+        }
+      } catch (e) {}
+    });
+    dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === newIndex); });
+  }
+
+  document.querySelectorAll('[data-hero-slider]').forEach(function (heroEl) {
+    function activeIndex() {
+      var slides = heroEl.querySelectorAll('[data-hero-slide]');
+      var idx = 0;
+      slides.forEach(function (s, i) { if (s.classList.contains('is-active')) idx = i; });
+      return idx;
+    }
+    var prevBtn = heroEl.querySelector('[data-hero-prev]');
+    var nextBtn = heroEl.querySelector('[data-hero-next]');
+    if (prevBtn) prevBtn.addEventListener('click', function () { activateHeroSlide(heroEl, activeIndex() - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { activateHeroSlide(heroEl, activeIndex() + 1); });
+    heroEl.querySelectorAll('[data-hero-dot]').forEach(function (dot, i) {
+      dot.addEventListener('click', function () { activateHeroSlide(heroEl, i); });
+    });
+  });
+
   if (ytHeroEls.length) {
     var ytApiTag = document.createElement('script');
     ytApiTag.src = 'https://www.youtube.com/iframe_api';
@@ -53,13 +95,15 @@
         var videoId = el.getAttribute('data-video-id');
         var start = parseInt(el.getAttribute('data-start'), 10) || 0;
         var end = parseInt(el.getAttribute('data-end'), 10) || 0;
+        var slideEl = el.closest('[data-hero-slide]');
+        var isActiveSlide = slideEl ? slideEl.classList.contains('is-active') : true;
 
         var mount = document.createElement('div');
         mount.id = 'youtube-hero-' + index;
         el.appendChild(mount);
 
         var playerVars = {
-          autoplay: 1,
+          autoplay: isActiveSlide ? 1 : 0,
           mute: 1,
           controls: 0,
           disablekb: 1,
@@ -76,19 +120,28 @@
           playerVars: playerVars,
           events: {
             onReady: function (e) {
-              e.target.playVideo();
+              if (isActiveSlide) e.target.playVideo();
             },
             onStateChange: function (e) {
               if (e.data === window.YT.PlayerState.PLAYING) {
                 applyCurrentSound(e.target);
               }
               if (e.data === window.YT.PlayerState.ENDED) {
-                e.target.seekTo(start, true);
-                e.target.playVideo();
+                var heroEl = el.closest('[data-hero-slider]');
+                var currentSlideEl = el.closest('[data-hero-slide]');
+                if (heroEl && currentSlideEl && currentSlideEl.classList.contains('is-active')) {
+                  var slides = heroEl.querySelectorAll('[data-hero-slide]');
+                  var idx = Array.prototype.indexOf.call(slides, currentSlideEl);
+                  activateHeroSlide(heroEl, idx + 1);
+                } else {
+                  e.target.seekTo(start, true);
+                  e.target.playVideo();
+                }
               }
             }
           }
         });
+        el._ytPlayer = player;
         ytPlayers.push(player);
       });
 
@@ -97,8 +150,11 @@
     };
 
     var startHeroVideosOnInteraction = function () {
-      ytPlayers.forEach(function (player) {
+      ytHeroEls.forEach(function (el) {
+        var player = el._ytPlayer;
         if (!player || typeof player.playVideo !== 'function') return;
+        var slideEl = el.closest('[data-hero-slide]');
+        if (slideEl && !slideEl.classList.contains('is-active')) return;
         try {
           if (!soundMuted && typeof player.unMute === 'function') player.unMute();
           if (typeof player.getPlayerState === 'function' && player.getPlayerState() === 1) return;
