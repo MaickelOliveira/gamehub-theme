@@ -58,10 +58,6 @@
       var wrap = slide.querySelector('[data-youtube-hero]');
       if (!wrap) return;
       var player = wrap._ytPlayer;
-      if (isActive && !player && typeof mountHeroPlayer === 'function' && window.YT && window.YT.Player) {
-        mountHeroPlayer(wrap);
-        return;
-      }
       if (!player || typeof player.playVideo !== 'function') return;
       try {
         if (isActive) {
@@ -179,9 +175,7 @@
 
     window.onYouTubeIframeAPIReady = function () {
       ytHeroEls.forEach(function (el) {
-        var slideEl = el.closest('[data-hero-slide]');
-        var isActiveSlide = slideEl ? slideEl.classList.contains('is-active') : true;
-        if (isActiveSlide) mountHeroPlayer(el);
+        mountHeroPlayer(el);
       });
 
       var soundToggle = document.getElementById('SoundToggle');
