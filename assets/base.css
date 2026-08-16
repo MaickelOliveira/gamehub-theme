@@ -372,12 +372,19 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transform: scale(1.06);
+  transition: opacity 1s ease, transform 1.6s ease, visibility 0s linear 1s;
 }
 .hero__slide.is-active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: scale(1);
+  transition: opacity 1s ease, transform 1.6s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { transition: opacity 0.3s ease, visibility 0s linear 0.3s; transform: none; }
+  .hero__slide.is-active { transition: opacity 0.3s ease; transform: none; }
 }
 .hero__nav {
   position: absolute;
