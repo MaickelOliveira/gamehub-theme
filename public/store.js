@@ -441,12 +441,15 @@
       if (typeof previousReady === 'function') previousReady();
       youtubeMounts.forEach((wrap, index) => {
         if (wrap._ytPlayer) return;
-        const mount = document.createElement('div');
-        mount.id = `youtube-hero-${index}`;
-        wrap.appendChild(mount);
+        let mount = wrap.querySelector('iframe');
+        if (!mount) {
+          mount = document.createElement('div');
+          mount.id = `youtube-hero-${index}`;
+          wrap.appendChild(mount);
+        }
         const start = Number.parseInt(wrap.dataset.start, 10) || 0;
         const end = Number.parseInt(wrap.dataset.end, 10) || 0;
-        const player = new window.YT.Player(mount.id, {
+        const player = new window.YT.Player(mount, {
           videoId: wrap.dataset.videoId,
           playerVars: { autoplay: wrap.closest('[data-hero-slide]')?.classList.contains('is-active') === false ? 0 : 1, mute: 1, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0, playsinline: 1, start },
           events: {

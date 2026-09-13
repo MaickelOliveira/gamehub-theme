@@ -188,36 +188,34 @@ const seedProducts = [
   }
 ];
 
-if (db.prepare('SELECT COUNT(*) AS total FROM products').get().total === 0) {
-  const insertProduct = db.prepare(`
-    INSERT INTO products (
-        id, slug, sku, name, description, category, genre, platforms_json,
-        price_cents, compare_at_price_cents, stock, image_url, featured, active
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-  `);
+const insertProduct = db.prepare(`
+  INSERT OR IGNORE INTO products (
+      id, slug, sku, name, description, category, genre, platforms_json,
+      price_cents, compare_at_price_cents, stock, image_url, featured, active
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+`);
 
-  const seed = db.transaction(() => {
-    for (const product of seedProducts) {
-      insertProduct.run(
-        product.id,
-        product.slug,
-        product.sku,
-        product.name,
-        product.description,
-        product.category,
-        product.genre,
-        JSON.stringify(product.platforms),
-        product.price,
-        product.compare,
-        product.stock,
-        product.image,
-        product.featured
-      );
-    }
-  });
+const seed = db.transaction(() => {
+  for (const product of seedProducts) {
+    insertProduct.run(
+      product.id,
+      product.slug,
+      product.sku,
+      product.name,
+      product.description,
+      product.category,
+      product.genre,
+      JSON.stringify(product.platforms),
+      product.price,
+      product.compare,
+      product.stock,
+      product.image,
+      product.featured
+    );
+  }
+});
 
-  seed();
-}
+seed();
 
 if (addedGenreColumn) {
   const updateGenre = db.prepare('UPDATE products SET genre = ? WHERE id = ?');

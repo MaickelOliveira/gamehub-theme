@@ -40,8 +40,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .site-header__cart-count:empty { display: none; }
 
 .hero__yt-wrap iframe { pointer-events: none; }
+.hero__yt-wrap { background-color: #0a0f0b; background-position: center; background-size: cover; }
 .hero__slide:not(.is-active) iframe { visibility: hidden; }
 .hero__heading { text-shadow: 0 2px 32px rgba(0,0,0,.7); }
+[data-reveal], [data-reveal-flip] { opacity: 1; transform: none; }
 
 .store-promo {
   margin-top: 1rem;
