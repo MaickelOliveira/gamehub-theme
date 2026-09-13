@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: false, limit: '1mb' }));
 app.use(cookieParser());
 app.use('/theme-assets', express.static(path.join(process.cwd(), 'assets'), { maxAge: isProduction ? '7d' : 0 }));
 app.use('/uploads', express.static(uploadDirectory, { maxAge: isProduction ? '7d' : 0 }));
-app.use(express.static(path.join(process.cwd(), 'public'), { maxAge: isProduction ? '1h' : 0 }));
+app.use(express.static(path.join(process.cwd(), 'public'), { maxAge: 0 }));
 
 const checkoutLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,

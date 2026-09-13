@@ -238,6 +238,12 @@
     if (removeButton) removeItem(removeButton.dataset.cartRemove);
     if (event.target.closest('[data-cart-open]')) openDrawer();
     if (event.target.closest('[data-cart-close]')) closeDrawer();
+
+    // Libera a rolagem antes de qualquer navegacao iniciada dentro de um modal.
+    // Isso evita que o estado de overflow seja restaurado pelo cache do navegador
+    // quando o cliente abre o checkout a partir do carrinho lateral.
+    const modalLink = event.target.closest('#CartDrawer a[href], #ComboBuilder a[href]');
+    if (modalLink) setPageScrollLocked(false);
   });
 
   document.querySelectorAll('[data-platform-selector] [data-platform]').forEach((button) => {
@@ -564,6 +570,7 @@
     document.querySelectorAll('[data-platform-picker]').forEach((picker) => { picker.hidden = true; });
   });
 
+  window.addEventListener('beforeunload', () => setPageScrollLocked(false));
   window.addEventListener('pagehide', () => setPageScrollLocked(false));
   window.addEventListener('pageshow', () => {
     const drawer = document.getElementById('CartDrawer');
