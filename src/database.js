@@ -618,14 +618,14 @@ const seedProducts = [
 
 const defaultTrailerVideos = Object.freeze({
   'marvels-wolverine': '3Z42tBfBLJY',
-  'grand-theft-auto-vi': 'QdBZY2fkU-0',
+  'grand-theft-auto-vi': 'cv041_93_0Q',
   'silent-hill-townfall': 'CvN3dP92wxU',
   'control-resonant': 'WhQm-ExRz60',
   'rayman-legends-retold': '2_7BQ9hLGkk',
   'ace-combat-8': 'JQYx_867ua0',
   'star-wars-galactic-racer': '2MtgIoToa7I',
   'castlevania-belmonts-curse': 'wioDhevSSU4',
-  'call-of-duty-modern-warfare-4': 'jLbst85USN8',
+  'call-of-duty-modern-warfare-4': 'Aj1RQW7phc0',
   'phantom-blade-zero': 'hXyPbvj7A7w',
   'battlefield-6': 'pgNCgJG0vnY',
   'ea-sports-fc-26': 'TSi0iJYSQ24',
@@ -710,6 +710,14 @@ const seed = db.transaction(() => {
   for (const [productId, videoId] of Object.entries(defaultTrailerVideos)) {
     setDefaultTrailer.run(videoId, productId);
   }
+
+  const repairBlockedTrailer = db.prepare(`
+    UPDATE products
+    SET trailer_video_id = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ? AND trailer_video_id = ?
+  `);
+  repairBlockedTrailer.run('Aj1RQW7phc0', 'call-of-duty-modern-warfare-4', 'jLbst85USN8');
+  repairBlockedTrailer.run('cv041_93_0Q', 'grand-theft-auto-vi', 'QdBZY2fkU-0');
 });
 
 seed();
