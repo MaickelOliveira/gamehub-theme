@@ -291,7 +291,7 @@ app.get('/', (req, res) => {
   const products = getActiveProducts();
   const launches = products.filter((product) => product.category === 'lancamentos').slice(0, 8);
   const preorders = products.filter((product) => product.category === 'pre-vendas').slice(0, 8);
-  const ready = products.slice(0, 10);
+  const ready = products.filter((product) => product.category === 'pronta-entrega').slice(0, 10);
   const platformCounts = {};
   for (const product of products) {
     for (const platform of product.platforms) platformCounts[platform] = (platformCounts[platform] || 0) + 1;

@@ -185,6 +185,186 @@ const seedProducts = [
     name: 'Galaxy Raiders', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
     price: 17990, compare: 20990, stock: 55, image: '/theme-assets/game-covers/galaxy-raiders.webp', legacyImage: '/theme-assets/vibe-10.jpg', featured: 1,
     description: 'Reuna sua tripulacao e conquiste sistemas inteiros em uma aventura espacial cooperativa.'
+  },
+  {
+    id: 'crimson-siege', slug: 'crimson-siege', sku: 'GH-CRIMSON-011',
+    name: 'Crimson Siege', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 23990, compare: 28990, stock: 46, image: '/theme-assets/game-covers/aeon-vanguard.webp', featured: 1,
+    description: 'Lidere uma unidade de elite em cercos urbanos com combates taticos e cenarios destrutiveis.'
+  },
+  {
+    id: 'phantom-circuit', slug: 'phantom-circuit', sku: 'GH-PHANTOM-012',
+    name: 'Phantom Circuit', category: 'lancamentos', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 19990, compare: 24990, stock: 34, image: '/theme-assets/game-covers/neon-drift.webp', featured: 1,
+    description: 'Dispute corridas clandestinas em metropoles futuristas e construa a maquina mais veloz da cidade.'
+  },
+  {
+    id: 'arcane-eclipse', slug: 'arcane-eclipse', sku: 'GH-ARCANE-013',
+    name: 'Arcane Eclipse', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 26990, compare: null, stock: 72, image: '/theme-assets/game-covers/kingdoms-reborn.webp', featured: 1,
+    description: 'Domine escolas de magia, explore reinos esquecidos e decida o destino de uma dinastia.'
+  },
+  {
+    id: 'street-kings-turbo', slug: 'street-kings-turbo', sku: 'GH-STREET-014',
+    name: 'Street Kings Turbo', category: 'pronta-entrega', genre: 'corrida', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 8990, compare: 13990, stock: 58, image: '/theme-assets/game-covers/velocity-x.webp', featured: 0,
+    description: 'Personalize seu carro e conquiste cada bairro em campeonatos de rua cheios de adrenalina.'
+  },
+  {
+    id: 'silent-asylum', slug: 'silent-asylum', sku: 'GH-SILENT-015',
+    name: 'Silent Asylum', category: 'pre-vendas', genre: 'terror', platforms: ['PS5', 'PC'],
+    price: 21990, compare: null, stock: 64, image: '/theme-assets/game-covers/nightfall.webp', featured: 1,
+    description: 'Investigue um hospital abandonado onde cada corredor revela uma memoria mais sombria.'
+  },
+  {
+    id: 'stellar-odyssey', slug: 'stellar-odyssey', sku: 'GH-STELLAR-016',
+    name: 'Stellar Odyssey', category: 'lancamentos', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 22990, compare: 27990, stock: 41, image: '/theme-assets/game-covers/last-horizon.webp', featured: 1,
+    description: 'Atravesse sistemas desconhecidos, encontre novas civilizacoes e revele um misterio cosmico.'
+  },
+  {
+    id: 'strike-zone-alpha', slug: 'strike-zone-alpha', sku: 'GH-STRIKE-017',
+    name: 'Strike Zone Alpha', category: 'pronta-entrega', genre: 'acao', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 10990, compare: 15990, stock: 53, image: '/theme-assets/game-covers/shadow-protocol.webp', featured: 0,
+    description: 'Execute operacoes especiais com furtividade, tecnologia e escolhas que alteram cada missao.'
+  },
+  {
+    id: 'pro-league-27', slug: 'pro-league-27', sku: 'GH-LEAGUE-018',
+    name: 'Pro League 27', category: 'pre-vendas', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 24990, compare: null, stock: 90, image: '/theme-assets/game-covers/arena-legends-26.webp', featured: 1,
+    description: 'Viva a nova temporada com clubes, torneios online e uma carreira totalmente renovada.'
+  },
+  {
+    id: 'dragon-crownfall', slug: 'dragon-crownfall', sku: 'GH-DRAGON-019',
+    name: 'Dragon Crownfall', category: 'lancamentos', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 25990, compare: 29990, stock: 37, image: '/theme-assets/game-covers/kingdoms-reborn.webp', featured: 1,
+    description: 'Reuna aliados, enfrente dragoes ancestrais e retome a coroa de um reino dividido.'
+  },
+  {
+    id: 'zero-hour-command', slug: 'zero-hour-command', sku: 'GH-ZERO-020',
+    name: 'Zero Hour Command', category: 'pronta-entrega', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 11990, compare: 16990, stock: 49, image: '/theme-assets/game-covers/iron-front.webp', featured: 0,
+    description: 'Coordene esquadroes, blindados e apoio aereo em batalhas modernas de grande escala.'
+  },
+  {
+    id: 'dark-signal', slug: 'dark-signal', sku: 'GH-DARK-021',
+    name: 'Dark Signal', category: 'lancamentos', genre: 'terror', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 18990, compare: 22990, stock: 28, image: '/theme-assets/game-covers/nightfall.webp', featured: 1,
+    description: 'Siga uma transmissao impossivel por uma floresta onde o tempo parece ter parado.'
+  },
+  {
+    id: 'titan-arena', slug: 'titan-arena', sku: 'GH-TITAN-022',
+    name: 'Titan Arena', category: 'pronta-entrega', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 9990, compare: 14990, stock: 61, image: '/theme-assets/game-covers/arena-legends-26.webp', featured: 0,
+    description: 'Monte sua equipe e dispute ligas competitivas em arenas lotadas ao redor do mundo.'
+  },
+  {
+    id: 'rogue-city', slug: 'rogue-city', sku: 'GH-ROGUE-023',
+    name: 'Rogue City', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 20990, compare: 25990, stock: 43, image: '/theme-assets/game-covers/shadow-protocol.webp', featured: 1,
+    description: 'Infiltre-se em uma cidade controlada por corporacoes e descubra quem esta por tras da conspiracao.'
+  },
+  {
+    id: 'rally-storm', slug: 'rally-storm', sku: 'GH-RALLY-024',
+    name: 'Rally Storm', category: 'pronta-entrega', genre: 'corrida', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 12990, compare: 17990, stock: 45, image: '/theme-assets/game-covers/velocity-x.webp', featured: 0,
+    description: 'Enfrente lama, neve e desertos em provas de rally com fisica e clima dinamicos.'
+  },
+  {
+    id: 'mystic-realms', slug: 'mystic-realms', sku: 'GH-MYSTIC-025',
+    name: 'Mystic Realms', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 23990, compare: null, stock: 76, image: '/theme-assets/game-covers/kingdoms-reborn.webp', featured: 1,
+    description: 'Crie seu heroi e atravesse portais para mundos repletos de magia, criaturas e segredos.'
+  },
+  {
+    id: 'deep-space-echoes', slug: 'deep-space-echoes', sku: 'GH-ECHOES-026',
+    name: 'Deep Space Echoes', category: 'pre-vendas', genre: 'terror', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 22990, compare: null, stock: 68, image: '/theme-assets/game-covers/nightfall.webp', featured: 1,
+    description: 'Explore uma estacao espacial silenciosa e sobreviva ao que despertou no vazio.'
+  },
+  {
+    id: 'frontline-republic', slug: 'frontline-republic', sku: 'GH-FRONTLINE-027',
+    name: 'Frontline Republic', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 21990, compare: 26990, stock: 39, image: '/theme-assets/game-covers/aeon-vanguard.webp', featured: 1,
+    description: 'Defenda a ultima cidade livre em uma campanha militar cinematografica e cooperativa.'
+  },
+  {
+    id: 'urban-football-stars', slug: 'urban-football-stars', sku: 'GH-URBAN-028',
+    name: 'Urban Football Stars', category: 'pronta-entrega', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 7990, compare: 11990, stock: 66, image: '/theme-assets/game-covers/arena-legends-26.webp', featured: 0,
+    description: 'Leve seu futebol das quadras de bairro aos maiores estadios em partidas rapidas e criativas.'
+  },
+  {
+    id: 'lost-temple', slug: 'lost-temple', sku: 'GH-TEMPLE-029',
+    name: 'Lost Temple', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 10990, compare: 15990, stock: 51, image: '/theme-assets/game-covers/last-horizon.webp', featured: 0,
+    description: 'Desvende ruinas, armadilhas e lendas em uma expedicao por uma ilha esquecida.'
+  },
+  {
+    id: 'cyber-hunt', slug: 'cyber-hunt', sku: 'GH-CYBER-030',
+    name: 'Cyber Hunt', category: 'pre-vendas', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 24990, compare: null, stock: 84, image: '/theme-assets/game-covers/shadow-protocol.webp', featured: 1,
+    description: 'Rastreie criminosos digitais por uma metropole conectada e transforme cada invasao em vantagem.'
+  },
+  {
+    id: 'apex-motorsport', slug: 'apex-motorsport', sku: 'GH-APEX-031',
+    name: 'Apex Motorsport', category: 'lancamentos', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 19990, compare: 23990, stock: 36, image: '/theme-assets/game-covers/neon-drift.webp', featured: 1,
+    description: 'Corra em circuitos internacionais com equipes, estrategia de boxes e competicao online.'
+  },
+  {
+    id: 'medieval-legacy', slug: 'medieval-legacy', sku: 'GH-MEDIEVAL-032',
+    name: 'Medieval Legacy', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 13990, compare: 18990, stock: 47, image: '/theme-assets/game-covers/kingdoms-reborn.webp', featured: 0,
+    description: 'Construa sua reputacao entre nobres e guerreiros em uma jornada medieval cheia de escolhas.'
+  },
+  {
+    id: 'blackout-division', slug: 'blackout-division', sku: 'GH-BLACKOUT-033',
+    name: 'Blackout Division', category: 'pronta-entrega', genre: 'guerra', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 11990, compare: 16990, stock: 54, image: '/theme-assets/game-covers/iron-front.webp', featured: 0,
+    description: 'Combata sem comunicacao em uma operacao noturna onde estrategia e trabalho em equipe sao vitais.'
+  },
+  {
+    id: 'court-champions-26', slug: 'court-champions-26', sku: 'GH-COURT-034',
+    name: 'Court Champions 26', category: 'lancamentos', genre: 'esportes', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 17990, compare: 21990, stock: 42, image: '/theme-assets/game-covers/arena-legends-26.webp', featured: 1,
+    description: 'Crie seu atleta e dispute temporadas profissionais em partidas intensas dentro e fora das quadras.'
+  },
+  {
+    id: 'forgotten-island', slug: 'forgotten-island', sku: 'GH-ISLAND-035',
+    name: 'Forgotten Island', category: 'pre-vendas', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 21990, compare: null, stock: 73, image: '/theme-assets/game-covers/last-horizon.webp', featured: 1,
+    description: 'Sobreviva a uma ilha misteriosa, construa abrigo e descubra as ruinas de uma civilizacao perdida.'
+  },
+  {
+    id: 'the-hollow', slug: 'the-hollow', sku: 'GH-HOLLOW-036',
+    name: 'The Hollow', category: 'pre-vendas', genre: 'terror', platforms: ['PS5', 'PC'],
+    price: 19990, compare: null, stock: 67, image: '/theme-assets/game-covers/nightfall.webp', featured: 1,
+    description: 'Encontre a saida de uma pequena cidade onde os moradores desapareceram durante a noite.'
+  },
+  {
+    id: 'nova-squadron', slug: 'nova-squadron', sku: 'GH-NOVA-037',
+    name: 'Nova Squadron', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 22990, compare: 27990, stock: 44, image: '/theme-assets/game-covers/galaxy-raiders.webp', featured: 1,
+    description: 'Pilote naves de combate, lidere seu esquadrao e decida o futuro de uma guerra interplanetaria.'
+  },
+  {
+    id: 'desert-assault', slug: 'desert-assault', sku: 'GH-DESERT-038',
+    name: 'Desert Assault', category: 'pre-vendas', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 23990, compare: null, stock: 79, image: '/theme-assets/game-covers/aeon-vanguard.webp', featured: 1,
+    description: 'Atravesse tempestades de areia e controle pontos estrategicos em um conflito de alta tecnologia.'
+  },
+  {
+    id: 'grand-prix-legends', slug: 'grand-prix-legends', sku: 'GH-GRANDPRIX-039',
+    name: 'Grand Prix Legends', category: 'pronta-entrega', genre: 'corrida', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 12990, compare: 17990, stock: 57, image: '/theme-assets/game-covers/velocity-x.webp', featured: 0,
+    description: 'Colecione carros de competicao e reviva grandes desafios em pistas classicas e modernas.'
+  },
+  {
+    id: 'eternal-quest', slug: 'eternal-quest', sku: 'GH-ETERNAL-040',
+    name: 'Eternal Quest', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 25990, compare: null, stock: 88, image: '/theme-assets/game-covers/kingdoms-reborn.webp', featured: 1,
+    description: 'Reuna um grupo de herois e enfrente uma jornada que atravessa seculos e mundos.'
   }
 ];
 
@@ -218,7 +398,7 @@ const seed = db.transaction(() => {
       product.image,
       product.featured
     );
-    upgradeDefaultImage.run(product.image, product.id, product.legacyImage);
+    if (product.legacyImage) upgradeDefaultImage.run(product.image, product.id, product.legacyImage);
   }
 });
 

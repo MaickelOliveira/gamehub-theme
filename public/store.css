@@ -24,6 +24,8 @@
 
 html { scroll-behavior: smooth; }
 body { min-height: 100vh; }
+html.is-scroll-locked,
+body.is-scroll-locked { overflow: hidden; }
 button, input, textarea, select { color: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-accent) 65%, transparent); outline-offset: 2px; }
 .store-main { min-height: 62vh; }

@@ -121,19 +121,34 @@
     saveCart(loadCart().filter((item) => itemKey(item) !== key));
   }
 
+  function setPageScrollLocked(locked) {
+    document.documentElement.classList.toggle('is-scroll-locked', locked);
+    document.body.classList.toggle('is-scroll-locked', locked);
+    if (!locked) {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  }
+
+  function syncPageScrollLock() {
+    const drawerOpen = document.getElementById('CartDrawer')?.hidden === false;
+    const comboOpen = document.getElementById('ComboBuilder')?.hidden === false;
+    setPageScrollLocked(drawerOpen || comboOpen);
+  }
+
   function openDrawer() {
     const drawer = document.getElementById('CartDrawer');
     if (!drawer) return;
     renderDrawer();
     drawer.hidden = false;
-    document.body.style.overflow = 'hidden';
+    syncPageScrollLock();
   }
 
   function closeDrawer() {
     const drawer = document.getElementById('CartDrawer');
     if (!drawer) return;
     drawer.hidden = true;
-    if (document.getElementById('ComboBuilder')?.hidden !== false) document.body.style.overflow = '';
+    syncPageScrollLock();
   }
 
   function renderDrawer() {
@@ -357,6 +372,7 @@
     siteHeader.after(spacer);
     const floatsOverHero = mediaHeroes.length > 0;
     const announcement = document.querySelector('.announcement-bar');
+    const pinThreshold = floatsOverHero ? (announcement?.offsetHeight || 0) : siteHeader.offsetTop;
     const applyPosition = () => {
       if (!floatsOverHero) return;
       if (siteHeader.classList.contains('site-header--pinned')) siteHeader.removeAttribute('style');
@@ -364,8 +380,7 @@
     };
     let firstCheck = true;
     const updateHeader = () => {
-      const threshold = floatsOverHero ? (announcement?.offsetHeight || 0) : siteHeader.offsetTop;
-      const shouldPin = !firstCheck && window.scrollY >= threshold && (floatsOverHero || threshold > 0);
+      const shouldPin = !firstCheck && window.scrollY > pinThreshold;
       firstCheck = false;
       siteHeader.classList.toggle('site-header--pinned', shouldPin);
       spacer.hidden = !shouldPin;
@@ -509,12 +524,12 @@
   function openCombo() {
     if (!comboBuilder) return;
     comboBuilder.hidden = false;
-    document.body.style.overflow = 'hidden';
+    syncPageScrollLock();
   }
   function closeCombo() {
     if (!comboBuilder) return;
     comboBuilder.hidden = true;
-    if (document.getElementById('CartDrawer')?.hidden !== false) document.body.style.overflow = '';
+    syncPageScrollLock();
   }
   document.querySelectorAll('[data-combo-builder-open]').forEach((button) => button.addEventListener('click', openCombo));
   document.querySelectorAll('[data-combo-builder-close]').forEach((button) => button.addEventListener('click', closeCombo));
@@ -549,6 +564,16 @@
     document.querySelectorAll('[data-platform-picker]').forEach((picker) => { picker.hidden = true; });
   });
 
+  window.addEventListener('pagehide', () => setPageScrollLocked(false));
+  window.addEventListener('pageshow', () => {
+    const drawer = document.getElementById('CartDrawer');
+    const combo = document.getElementById('ComboBuilder');
+    if (drawer) drawer.hidden = true;
+    if (combo) combo.hidden = true;
+    setPageScrollLocked(false);
+  });
+
+  setPageScrollLocked(false);
   renderCartCount();
   renderDrawer();
   renderCartPage();

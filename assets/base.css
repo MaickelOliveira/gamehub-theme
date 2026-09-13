@@ -799,7 +799,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
+.combo-promo__grid i:has(img)::before { display: none; }
+.combo-promo__grid i img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.combo-promo__inner:hover .combo-promo__grid i img { transform: scale(1.05); }
 .combo-promo__grid i::before {
   content: "★";
   font-size: 1.5rem;
