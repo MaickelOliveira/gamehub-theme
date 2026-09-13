@@ -28,7 +28,23 @@
     <div class="carousel" data-carousel><button type="button" class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Anterior">&larr;</button><ul class="carousel__track" data-carousel-track><% preorders.forEach(function(product) { %><li class="carousel__slide"><%- include('partials/product-card', { product }) %></li><% }) %></ul><button type="button" class="carousel__control carousel__control--next" data-carousel-next aria-label="Próximo">&rarr;</button></div>
   </section>
 
-  <section class="combo-promo page-width page-width--wide" data-reveal><div class="combo-promo__inner"><div class="combo-promo__media"><div class="combo-promo__grid" aria-hidden="true"><% comboProducts.slice(0, 6).forEach(function(product) { %><i><img src="<%= product.image_url %>" alt="" loading="lazy"></i><% }) %></div></div><div class="combo-promo__content"><span class="combo-promo__eyebrow">Oferta especial</span><h2 class="combo-promo__heading">Combo de 6 jogos</h2><p class="combo-promo__text">Monte seu combo e adicione todos os jogos ao carrinho com um clique.</p><button type="button" class="button button--primary" data-combo-builder-open>Montar combo</button></div></div></section>
+  <section class="combo-promo page-width page-width--wide" data-reveal>
+    <div class="combo-promo__inner">
+      <div class="combo-promo__media">
+        <div class="combo-promo__grid" aria-hidden="true"><% comboProducts.slice(0, 6).forEach(function(product) { %><i><img src="<%= product.image_url %>" alt="" loading="lazy"></i><% }) %></div>
+        <span class="combo-promo__badge"><strong>6</strong> jogos à sua escolha</span>
+      </div>
+      <div class="combo-promo__content">
+        <span class="combo-promo__eyebrow">Oferta especial · Monte do seu jeito</span>
+        <h2 class="combo-promo__heading">Seu combo, suas regras.</h2>
+        <p class="combo-promo__text">Misture ação, aventura, corrida e muito mais. Escolha seis jogos diferentes e leve tudo para o carrinho de uma vez.</p>
+        <ul class="combo-promo__benefits" aria-label="Vantagens do combo">
+          <li>Escolha livre</li><li>PS5 · Xbox · PC</li><li>Adição rápida</li>
+        </ul>
+        <button type="button" class="button button--primary combo-promo__button" data-combo-builder-open>Escolher meus 6 jogos <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
 
   <section class="collection-grid-section page-width page-width--wide" data-reveal>
     <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Pronta entrega</h2><p class="carousel-section__subheading">Chave enviada por e-mail após a confirmação do pagamento</p></div><a href="/collections/all" class="carousel-section__view-all">Ver todos</a></div>
