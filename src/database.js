@@ -129,61 +129,61 @@ const seedProducts = [
   {
     id: 'aeon-vanguard', slug: 'aeon-vanguard', sku: 'GH-AEON-001',
     name: 'Aeon Vanguard', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 24990, compare: 29990, stock: 40, image: '/theme-assets/vibe-1.jpg', featured: 1,
+    price: 24990, compare: 29990, stock: 40, image: '/theme-assets/game-covers/aeon-vanguard.webp', legacyImage: '/theme-assets/vibe-1.jpg', featured: 1,
     description: 'Entre em batalhas cinematograficas, forme seu esquadrao e domine uma campanha futurista com multiplayer competitivo.'
   },
   {
     id: 'neon-drift', slug: 'neon-drift', sku: 'GH-NEON-002',
     name: 'Neon Drift', category: 'lancamentos', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 18990, compare: 22990, stock: 32, image: '/theme-assets/vibe-7.jpg', featured: 1,
+    price: 18990, compare: 22990, stock: 32, image: '/theme-assets/game-covers/neon-drift.webp', legacyImage: '/theme-assets/vibe-7.jpg', featured: 1,
     description: 'Corridas noturnas em alta velocidade, carros personalizaveis e uma cidade neon inteira para explorar.'
   },
   {
     id: 'shadow-protocol', slug: 'shadow-protocol', sku: 'GH-SHADOW-003',
     name: 'Shadow Protocol', category: 'pre-vendas', genre: 'acao', platforms: ['PS5', 'PC'],
-    price: 27990, compare: null, stock: 60, image: '/theme-assets/vibe-2.jpg', featured: 1,
+    price: 27990, compare: null, stock: 60, image: '/theme-assets/game-covers/shadow-protocol.webp', legacyImage: '/theme-assets/vibe-2.jpg', featured: 1,
     description: 'Uma operacao secreta pode mudar o destino do mundo. Planeje, infiltre e escolha em quem confiar.'
   },
   {
     id: 'arena-legends-26', slug: 'arena-legends-26', sku: 'GH-ARENA-004',
     name: 'Arena Legends 26', category: 'pronta-entrega', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
-    price: 15990, compare: 21990, stock: 25, image: '/theme-assets/vibe-3.jpg', featured: 1,
+    price: 15990, compare: 21990, stock: 25, image: '/theme-assets/game-covers/arena-legends-26.webp', legacyImage: '/theme-assets/vibe-3.jpg', featured: 1,
     description: 'Monte seu time, dispute temporadas online e alcance a elite do maior campeonato virtual.'
   },
   {
     id: 'iron-front', slug: 'iron-front', sku: 'GH-IRON-005',
     name: 'Iron Front', category: 'pronta-entrega', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 12990, compare: 17990, stock: 50, image: '/theme-assets/vibe-4.jpg', featured: 0,
+    price: 12990, compare: 17990, stock: 50, image: '/theme-assets/game-covers/iron-front.webp', legacyImage: '/theme-assets/vibe-4.jpg', featured: 0,
     description: 'Combate tatico intenso com mapas amplos, veiculos e cooperacao entre esquadroes.'
   },
   {
     id: 'kingdoms-reborn', slug: 'kingdoms-reborn', sku: 'GH-KING-006',
     name: 'Kingdoms Reborn', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 22990, compare: null, stock: 80, image: '/theme-assets/vibe-5.jpg', featured: 1,
+    price: 22990, compare: null, stock: 80, image: '/theme-assets/game-covers/kingdoms-reborn.webp', legacyImage: '/theme-assets/vibe-5.jpg', featured: 1,
     description: 'Reconstrua um reino perdido, enfrente criaturas lendarias e escreva uma nova historia.'
   },
   {
     id: 'velocity-x', slug: 'velocity-x', sku: 'GH-VELO-007',
     name: 'Velocity X', category: 'pronta-entrega', genre: 'corrida', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
-    price: 9990, compare: 14990, stock: 45, image: '/theme-assets/vibe-6.jpg', featured: 0,
+    price: 9990, compare: 14990, stock: 45, image: '/theme-assets/game-covers/velocity-x.webp', legacyImage: '/theme-assets/vibe-6.jpg', featured: 0,
     description: 'Acelere em circuitos urbanos e desafie pilotos do mundo todo em corridas eletrizantes.'
   },
   {
     id: 'last-horizon', slug: 'last-horizon', sku: 'GH-HORIZON-008',
     name: 'Last Horizon', category: 'lancamentos', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 19990, compare: 24990, stock: 38, image: '/theme-assets/vibe-8.jpg', featured: 1,
+    price: 19990, compare: 24990, stock: 38, image: '/theme-assets/game-covers/last-horizon.webp', legacyImage: '/theme-assets/vibe-8.jpg', featured: 1,
     description: 'Explore planetas desconhecidos, sobreviva ao impossivel e encontre o ultimo refugio da humanidade.'
   },
   {
     id: 'nightfall', slug: 'nightfall', sku: 'GH-NIGHT-009',
     name: 'Nightfall', category: 'pronta-entrega', genre: 'terror', platforms: ['PS5', 'PC'],
-    price: 11990, compare: 15990, stock: 22, image: '/theme-assets/vibe-9.jpg', featured: 0,
+    price: 11990, compare: 15990, stock: 22, image: '/theme-assets/game-covers/nightfall.webp', legacyImage: '/theme-assets/vibe-9.jpg', featured: 0,
     description: 'Terror e sobrevivencia em uma cidade onde cada sombra esconde uma nova ameaca.'
   },
   {
     id: 'galaxy-raiders', slug: 'galaxy-raiders', sku: 'GH-GALAXY-010',
     name: 'Galaxy Raiders', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
-    price: 17990, compare: 20990, stock: 55, image: '/theme-assets/vibe-10.jpg', featured: 1,
+    price: 17990, compare: 20990, stock: 55, image: '/theme-assets/game-covers/galaxy-raiders.webp', legacyImage: '/theme-assets/vibe-10.jpg', featured: 1,
     description: 'Reuna sua tripulacao e conquiste sistemas inteiros em uma aventura espacial cooperativa.'
   }
 ];
@@ -196,6 +196,12 @@ const insertProduct = db.prepare(`
 `);
 
 const seed = db.transaction(() => {
+  const upgradeDefaultImage = db.prepare(`
+    UPDATE products
+    SET image_url = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ? AND (image_url = ? OR image_url = '')
+  `);
+
   for (const product of seedProducts) {
     insertProduct.run(
       product.id,
@@ -212,6 +218,7 @@ const seed = db.transaction(() => {
       product.image,
       product.featured
     );
+    upgradeDefaultImage.run(product.image, product.id, product.legacyImage);
   }
 });
 

@@ -418,7 +418,6 @@
   const youtubeMounts = [...document.querySelectorAll('[data-youtube-hero]')];
   const youtubePlayers = [];
   let soundMuted = true;
-  try { soundMuted = localStorage.getItem('gamehub_sound_muted') !== 'false'; } catch (_error) {}
   const soundToggle = document.getElementById('SoundToggle');
   function updateSoundButton() {
     if (!soundToggle) return;
@@ -465,6 +464,12 @@
               const slider = wrap.closest('[data-hero-slider]');
               if (slider) activateHeroSlide(slider, (slider._activeIndex || 0) + 1);
               else { event.target.seekTo(start, true); event.target.playVideo(); }
+            },
+            onAutoplayBlocked(event) {
+              try {
+                event.target.mute();
+                event.target.playVideo();
+              } catch (_error) {}
             }
           }
         });
