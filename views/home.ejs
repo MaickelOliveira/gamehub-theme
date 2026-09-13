@@ -37,7 +37,7 @@
 
   <section class="platform-selector page-width page-width--wide">
     <h2 class="carousel-section__heading">Compre por plataforma</h2><p class="carousel-section__subheading">Todo o catálogo, filtrado do jeito que você joga</p>
-    <ul class="platform-selector__grid"><% [['PS5','platform-ps5.jpg','ps5'],['PS4','platform-ps4.jpg','ps4'],['Xbox','platform-xbox.jpg','xbox'],['PC','platform-pc.jpg','pc']].forEach(function(item) { %><li data-reveal-flip><a href="/collections/<%= item[2] %>" class="platform-selector__item"><img class="platform-selector__photo" src="/theme-assets/<%= item[1] %>" alt="" loading="lazy"><div class="platform-selector__scrim"></div><span class="platform-selector__count"><%= platformCounts[item[0]] || 0 %> jogos</span><span class="platform-selector__name"><%= item[0] %></span></a></li><% }) %></ul>
+    <ul class="platform-selector__grid"><% [['PS5','platform-ps5-console.webp','ps5'],['PS4','platform-ps4-console.webp','ps4'],['Xbox','platform-xbox-console.webp','xbox'],['PC','platform-pc-console.webp','pc']].forEach(function(item) { %><li data-reveal-flip><a href="/collections/<%= item[2] %>" class="platform-selector__item"><img class="platform-selector__photo" src="/theme-assets/<%= item[1] %>" alt="Console <%= item[0] %>" loading="lazy"><div class="platform-selector__scrim"></div><span class="platform-selector__count"><%= platformCounts[item[0]] || 0 %> jogos</span><span class="platform-selector__name"><%= item[0] %></span></a></li><% }) %></ul>
   </section>
 </main>
 

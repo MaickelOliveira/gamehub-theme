@@ -342,10 +342,10 @@ app.get('/search', (req, res) => {
 app.get('/pages/plataformas', (req, res) => {
   const products = getActiveProducts();
   const platforms = [
-    ['PS5', 'platform-ps5.jpg', 'ps5'],
-    ['PS4', 'platform-ps4.jpg', 'ps4'],
-    ['Xbox', 'platform-xbox.jpg', 'xbox'],
-    ['PC', 'platform-pc.jpg', 'pc']
+    ['PS5', 'platform-ps5-console.webp', 'ps5'],
+    ['PS4', 'platform-ps4-console.webp', 'ps4'],
+    ['Xbox', 'platform-xbox-console.webp', 'xbox'],
+    ['PC', 'platform-pc-console.webp', 'pc']
   ].map(([name, image, handle]) => ({ name, image, handle, count: products.filter((product) => product.platforms.some((platform) => platform.toUpperCase() === name.toUpperCase())).length }));
   res.render('platforms', pageData(req, { title: 'Escolha sua plataforma — GameHub', platforms }));
 });
