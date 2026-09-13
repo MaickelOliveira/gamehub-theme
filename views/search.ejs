@@ -1,0 +1,12 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="MainContent" role="main">
+  <section class="search-page page-width">
+    <h1 class="search-page__title"><%= filters.query ? 'Resultados para “' + filters.query + '”' : 'Buscar' %></h1>
+    <form action="/search" method="get" role="search" class="search-page__form"><input type="search" name="q" value="<%= filters.query %>" placeholder="Buscar jogos" autofocus><button type="submit">Buscar</button></form>
+    <% if (filters.query && products.length) { %><p class="collection-page__count"><%= products.length %> resultado<%= products.length === 1 ? '' : 's' %></p><ul class="product-grid"><% products.forEach(function(product) { %><li><%- include('partials/product-card', { product }) %></li><% }) %></ul><% } %>
+    <% if (filters.query && !products.length) { %><p class="carousel-section__empty">Nenhum resultado encontrado para “<%= filters.query %>”.</p><a class="button button--primary" href="/collections/all">Ver catálogo completo</a><% } %>
+    <% if (!filters.query) { %><p class="carousel-section__empty">Digite o nome de um jogo, plataforma ou código.</p><% } %>
+  </section>
+</main>
+<%- include('partials/footer') %>

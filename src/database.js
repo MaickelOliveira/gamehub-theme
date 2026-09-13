@@ -26,6 +26,7 @@ db.exec(`
     name TEXT NOT NULL,
     description TEXT NOT NULL DEFAULT '',
     category TEXT NOT NULL DEFAULT 'pronta-entrega',
+    genre TEXT NOT NULL DEFAULT 'acao',
     platforms_json TEXT NOT NULL DEFAULT '[]',
     price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
     compare_at_price_cents INTEGER CHECK (compare_at_price_cents IS NULL OR compare_at_price_cents >= price_cents),
@@ -88,7 +89,19 @@ db.exec(`
   );
 
   CREATE INDEX IF NOT EXISTS order_items_order_idx ON order_items (order_id);
+
+  CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+    email TEXT PRIMARY KEY COLLATE NOCASE,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
 `);
+
+const productColumns = db.prepare('PRAGMA table_info(products)').all();
+const addedGenreColumn = !productColumns.some((column) => column.name === 'genre');
+if (addedGenreColumn) {
+  db.exec("ALTER TABLE products ADD COLUMN genre TEXT NOT NULL DEFAULT 'acao'");
+}
+db.exec('CREATE INDEX IF NOT EXISTS products_active_genre_idx ON products (active, genre, created_at DESC)');
 
 const defaultSettings = {
   store_name: 'GameHub',
@@ -115,61 +128,61 @@ seedSettings();
 const seedProducts = [
   {
     id: 'aeon-vanguard', slug: 'aeon-vanguard', sku: 'GH-AEON-001',
-    name: 'Aeon Vanguard', category: 'lancamentos', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Aeon Vanguard', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
     price: 24990, compare: 29990, stock: 40, image: '/theme-assets/vibe-1.jpg', featured: 1,
     description: 'Entre em batalhas cinematograficas, forme seu esquadrao e domine uma campanha futurista com multiplayer competitivo.'
   },
   {
     id: 'neon-drift', slug: 'neon-drift', sku: 'GH-NEON-002',
-    name: 'Neon Drift', category: 'lancamentos', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Neon Drift', category: 'lancamentos', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
     price: 18990, compare: 22990, stock: 32, image: '/theme-assets/vibe-7.jpg', featured: 1,
     description: 'Corridas noturnas em alta velocidade, carros personalizaveis e uma cidade neon inteira para explorar.'
   },
   {
     id: 'shadow-protocol', slug: 'shadow-protocol', sku: 'GH-SHADOW-003',
-    name: 'Shadow Protocol', category: 'pre-vendas', platforms: ['PS5', 'PC'],
+    name: 'Shadow Protocol', category: 'pre-vendas', genre: 'acao', platforms: ['PS5', 'PC'],
     price: 27990, compare: null, stock: 60, image: '/theme-assets/vibe-2.jpg', featured: 1,
     description: 'Uma operacao secreta pode mudar o destino do mundo. Planeje, infiltre e escolha em quem confiar.'
   },
   {
     id: 'arena-legends-26', slug: 'arena-legends-26', sku: 'GH-ARENA-004',
-    name: 'Arena Legends 26', category: 'pronta-entrega', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    name: 'Arena Legends 26', category: 'pronta-entrega', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
     price: 15990, compare: 21990, stock: 25, image: '/theme-assets/vibe-3.jpg', featured: 1,
     description: 'Monte seu time, dispute temporadas online e alcance a elite do maior campeonato virtual.'
   },
   {
     id: 'iron-front', slug: 'iron-front', sku: 'GH-IRON-005',
-    name: 'Iron Front', category: 'pronta-entrega', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Iron Front', category: 'pronta-entrega', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
     price: 12990, compare: 17990, stock: 50, image: '/theme-assets/vibe-4.jpg', featured: 0,
     description: 'Combate tatico intenso com mapas amplos, veiculos e cooperacao entre esquadroes.'
   },
   {
     id: 'kingdoms-reborn', slug: 'kingdoms-reborn', sku: 'GH-KING-006',
-    name: 'Kingdoms Reborn', category: 'pre-vendas', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Kingdoms Reborn', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
     price: 22990, compare: null, stock: 80, image: '/theme-assets/vibe-5.jpg', featured: 1,
     description: 'Reconstrua um reino perdido, enfrente criaturas lendarias e escreva uma nova historia.'
   },
   {
     id: 'velocity-x', slug: 'velocity-x', sku: 'GH-VELO-007',
-    name: 'Velocity X', category: 'pronta-entrega', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    name: 'Velocity X', category: 'pronta-entrega', genre: 'corrida', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
     price: 9990, compare: 14990, stock: 45, image: '/theme-assets/vibe-6.jpg', featured: 0,
     description: 'Acelere em circuitos urbanos e desafie pilotos do mundo todo em corridas eletrizantes.'
   },
   {
     id: 'last-horizon', slug: 'last-horizon', sku: 'GH-HORIZON-008',
-    name: 'Last Horizon', category: 'lancamentos', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Last Horizon', category: 'lancamentos', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
     price: 19990, compare: 24990, stock: 38, image: '/theme-assets/vibe-8.jpg', featured: 1,
     description: 'Explore planetas desconhecidos, sobreviva ao impossivel e encontre o ultimo refugio da humanidade.'
   },
   {
     id: 'nightfall', slug: 'nightfall', sku: 'GH-NIGHT-009',
-    name: 'Nightfall', category: 'pronta-entrega', platforms: ['PS5', 'PC'],
+    name: 'Nightfall', category: 'pronta-entrega', genre: 'terror', platforms: ['PS5', 'PC'],
     price: 11990, compare: 15990, stock: 22, image: '/theme-assets/vibe-9.jpg', featured: 0,
     description: 'Terror e sobrevivencia em uma cidade onde cada sombra esconde uma nova ameaca.'
   },
   {
     id: 'galaxy-raiders', slug: 'galaxy-raiders', sku: 'GH-GALAXY-010',
-    name: 'Galaxy Raiders', category: 'lancamentos', platforms: ['PS5', 'Xbox', 'PC'],
+    name: 'Galaxy Raiders', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
     price: 17990, compare: 20990, stock: 55, image: '/theme-assets/vibe-10.jpg', featured: 1,
     description: 'Reuna sua tripulacao e conquiste sistemas inteiros em uma aventura espacial cooperativa.'
   }
@@ -178,9 +191,9 @@ const seedProducts = [
 if (db.prepare('SELECT COUNT(*) AS total FROM products').get().total === 0) {
   const insertProduct = db.prepare(`
     INSERT INTO products (
-      id, slug, sku, name, description, category, platforms_json,
-      price_cents, compare_at_price_cents, stock, image_url, featured, active
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+        id, slug, sku, name, description, category, genre, platforms_json,
+        price_cents, compare_at_price_cents, stock, image_url, featured, active
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
   `);
 
   const seed = db.transaction(() => {
@@ -192,6 +205,7 @@ if (db.prepare('SELECT COUNT(*) AS total FROM products').get().total === 0) {
         product.name,
         product.description,
         product.category,
+        product.genre,
         JSON.stringify(product.platforms),
         product.price,
         product.compare,
@@ -203,6 +217,13 @@ if (db.prepare('SELECT COUNT(*) AS total FROM products').get().total === 0) {
   });
 
   seed();
+}
+
+if (addedGenreColumn) {
+  const updateGenre = db.prepare('UPDATE products SET genre = ? WHERE id = ?');
+  db.transaction(() => {
+    for (const product of seedProducts) updateGenre.run(product.genre, product.id);
+  })();
 }
 
 function mapProduct(row) {

@@ -1,23 +1,98 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
-<main id="MainContent" class="store-main">
+
+<main id="MainContent" role="main">
   <section class="product-page page-width">
     <div class="product-page__grid">
-      <div class="product-page__gallery"><div class="product-page__art"><% if (product.image_url) { %><img class="product-page__art-fill" src="<%= product.image_url %>" alt="<%= product.name %>"><% } else { %><span class="store-product-placeholder">GH</span><% } %><% if (discountPercent(product)) { %><span class="product-page__art-badge">-<%= discountPercent(product) %>%</span><% } %></div></div>
+      <div class="product-page__gallery">
+        <div class="product-page__art">
+          <% if (product.image_url) { %>
+            <img id="ProductFeaturedImage" class="product-page__art-fill" src="<%= product.image_url %>" alt="<%= product.name %>" width="900">
+          <% } else { %>
+            <span class="store-product-placeholder">GH</span>
+          <% } %>
+          <% if (discountPercent(product)) { %><span class="product-page__art-badge">-<%= discountPercent(product) %>%</span><% } %>
+        </div>
+      </div>
+
       <div class="product-page__info">
-        <span class="product-page__format-badge"><%= product.category === 'pre-vendas' ? 'Pré-venda digital' : 'Chave digital original' %></span>
-        <p class="product-page__genre"><%= product.category.replace('-', ' ').toUpperCase() %></p>
+        <span class="product-page__format-badge">Chave digital original</span>
+        <p class="product-page__genre"><%= ({ acao: 'Ação', aventura: 'Aventura', corrida: 'Corrida', esportes: 'Esportes', guerra: 'Guerra', rpg: 'RPG', terror: 'Terror' })[product.genre] || product.genre %></p>
         <h1 class="product-page__title"><%= product.name %></h1>
-        <div class="product-page__price-block"><div class="product-page__price"><span class="product-page__price-current"><%= formatMoney(product.price_cents) %></span><% if (product.compare_at_price_cents) { %><s class="product-card__price-compare"><%= formatMoney(product.compare_at_price_cents) %></s><% } %></div><p class="product-page__pix"><%= formatMoney(Math.round(product.price_cents * (1 - Number(settings.pix_discount_percent || 0) / 100))) %> no Pix (<%= settings.pix_discount_percent %>% de desconto)</p></div>
-        <p class="product-page__promo">🎮 Código digital enviado após a confirmação do pagamento</p>
-        <div class="product-page__option" data-platform-selector><label>Escolha a plataforma</label><div class="product-page__option-values"><% product.platforms.forEach(function(platform, index) { %><button type="button" class="product-page__option-value <%= index === 0 ? 'is-selected' : '' %>" data-platform="<%= platform %>" aria-pressed="<%= index === 0 ? 'true' : 'false' %>"><%= platform %></button><% }) %></div></div>
-        <div class="product-page__option-qty-row"><div class="product-page__qty"><button type="button" data-product-minus>−</button><input type="number" value="1" min="1" max="10" data-product-quantity aria-label="Quantidade"><button type="button" data-product-plus>+</button></div><span class="store-stock"><%= product.stock > 0 ? `${product.stock} em estoque` : 'Produto esgotado' %></span></div>
-        <div class="product-page__buy-actions"><button type="button" class="button button--primary product-page__buy-now" data-buy-product="<%= product.id %>" <%= product.stock <= 0 ? 'disabled' : '' %>>Comprar agora</button><button type="button" class="button button--secondary product-page__add-to-cart" data-add-product="<%= product.id %>" <%= product.stock <= 0 ? 'disabled' : '' %>>Adicionar ao carrinho</button></div>
-        <p class="product-page__trust">🔒 Compra segura · ⚡ Entrega digital</p><p class="product-page__payment-methods">Pagamento por Pix · Atendimento pelo WhatsApp</p>
+
+        <div class="product-page__price-block">
+          <div class="product-page__price">
+            <span class="product-page__price-current"><%= formatMoney(product.price_cents) %></span>
+            <% if (product.compare_at_price_cents) { %><s class="product-card__price-compare"><%= formatMoney(product.compare_at_price_cents) %></s><% } %>
+          </div>
+          <% const pixPercent = Math.max(0, Math.min(30, Number(settings.pix_discount_percent || 0))); %>
+          <p class="product-page__pix"><%= formatMoney(Math.round(product.price_cents * (100 - pixPercent) / 100)) %> no Pix (<%= pixPercent %>% de desconto)</p>
+        </div>
+
+        <p class="product-page__promo">🎮 Escolha a plataforma correta antes de finalizar</p>
+
+        <div class="product-page__option-qty-row">
+          <div class="product-page__qty" role="group" aria-label="Quantidade">
+            <button type="button" data-product-minus data-qty-minus aria-label="Diminuir quantidade">&minus;</button>
+            <input type="number" id="Quantity" value="1" min="1" max="10" data-product-quantity data-qty-input aria-label="Quantidade">
+            <button type="button" data-product-plus data-qty-plus aria-label="Aumentar quantidade">+</button>
+          </div>
+        </div>
+
+        <div class="product-page__option" data-platform-group data-platform-selector>
+          <label>Plataforma</label>
+          <div class="product-page__option-values">
+            <% product.platforms.forEach(function(platform, index) { %><button type="button" class="product-page__option-value <%= index === 0 ? 'is-selected' : '' %>" data-platform="<%= platform %>" aria-pressed="<%= index === 0 ? 'true' : 'false' %>"><%= platform %></button><% }) %>
+          </div>
+        </div>
+
+        <div class="product-page__buy-actions">
+          <button type="button" class="button button--primary product-page__buy-now" data-buy-product="<%= product.id %>" <%= product.stock <= 0 ? 'disabled' : '' %>><%= product.stock > 0 ? 'Comprar agora' : 'Produto esgotado' %></button>
+          <button type="button" class="button button--secondary product-page__add-to-cart" data-add-product="<%= product.id %>" <%= product.stock <= 0 ? 'disabled' : '' %>><%= product.stock > 0 ? 'Adicionar ao carrinho' : 'Sem estoque' %></button>
+        </div>
+
+        <p class="product-page__trust">🔒 Compra segura &middot; ⚡ Processamento digital</p>
+        <p class="product-page__payment-methods">Pagamento via Pix ou atendimento personalizado</p>
+        <p class="store-stock"><%= product.stock > 0 ? product.stock + ' unidade' + (product.stock === 1 ? '' : 's') + ' disponível' + (product.stock === 1 ? '' : 'is') : 'Produto indisponível' %></p>
       </div>
     </div>
-    <div class="product-page__body"><div class="product-page__about"><h2 class="product-page__section-title">Sobre o jogo</h2><div class="product-page__description"><p><%= product.description %></p></div><ul class="product-page__facts"><li><strong>Formato</strong><span>Chave digital original</span></li><li><strong>Plataformas</strong><span><%= product.platforms.join(', ') %></span></li><li><strong>Entrega</strong><span>Após confirmação do pagamento</span></li></ul></div><div class="product-page__faq"><h2 class="product-page__section-title">Dúvidas frequentes</h2><details><summary>Como recebo meu jogo?</summary><p>Após a confirmação do pagamento, a equipe processa o pedido e envia os dados de ativação pelo e-mail informado.</p></details><details><summary>A chave é original?</summary><p>Sim. Cada item é vendido para ativação na plataforma escolhida durante a compra.</p></details><details><summary>Como acompanho o pedido?</summary><p>O link exclusivo exibido ao finalizar a compra mostra o estado atual do pedido.</p></details></div></div>
+
+    <div class="product-page__body">
+      <div class="product-page__about">
+        <h2 class="product-page__section-title">Sobre o jogo</h2>
+        <div class="product-page__description rte"><p><%= product.description || 'Uma nova aventura espera por você. Confira a plataforma, adicione ao carrinho e finalize seu pedido com segurança.' %></p></div>
+        <ul class="product-page__facts">
+          <li><strong>Formato</strong><span>Chave digital original</span></li>
+          <li><strong>Entrega</strong><span>Após confirmação do pagamento</span></li>
+          <li><strong>Plataformas</strong><span><%= product.platforms.join(' · ') %></span></li>
+        </ul>
+      </div>
+
+      <div class="product-page__reviews">
+        <h2 class="product-page__section-title">O que os jogadores dizem</h2>
+        <div class="reviews-grid">
+          <article class="review-card"><div class="review-card__head"><span class="review-card__avatar">RA</span><div><p class="review-card__name">Rafael Almeida</p><p class="review-card__stars" aria-label="5 de 5 estrelas">★★★★★</p></div></div><p class="review-card__text">“Atendimento rápido e todas as informações chegaram certinhas.”</p></article>
+          <article class="review-card"><div class="review-card__head"><span class="review-card__avatar">JF</span><div><p class="review-card__name">Juliana Ferreira</p><p class="review-card__stars" aria-label="5 de 5 estrelas">★★★★★</p></div></div><p class="review-card__text">“Catálogo bonito, compra simples e suporte muito atencioso.”</p></article>
+          <article class="review-card"><div class="review-card__head"><span class="review-card__avatar">BC</span><div><p class="review-card__name">Bruno Carvalho</p><p class="review-card__stars" aria-label="5 de 5 estrelas">★★★★★</p></div></div><p class="review-card__text">“Encontrei o jogo que queria e acompanhei tudo pelo link do pedido.”</p></article>
+        </div>
+      </div>
+
+      <div class="product-page__faq">
+        <h2 class="product-page__section-title">Dúvidas frequentes</h2>
+        <details><summary>Como eu recebo o jogo depois de comprar?</summary><p>Depois da confirmação do pagamento, a equipe processa o pedido e envia as orientações ao contato informado.</p></details>
+        <details><summary>A chave é original?</summary><p>Sim. Os produtos são destinados à plataforma selecionada no momento da compra.</p></details>
+        <details><summary>Quais formas de pagamento estão disponíveis?</summary><p>O checkout permite gerar um pedido via Pix ou solicitar atendimento para combinar o pagamento.</p></details>
+        <details><summary>Como acompanho meu pedido?</summary><p>Ao finalizar a compra, você recebe um link privado com o andamento do pedido.</p></details>
+      </div>
+    </div>
   </section>
-  <% if (related.length) { %><section class="carousel-section page-width page-width--wide"><div class="carousel-section__header"><div><h2 class="carousel-section__heading">Você também pode gostar</h2></div></div><div class="carousel" data-carousel><ul class="carousel__track" data-carousel-track><% related.forEach(function(item) { %><li class="carousel__slide"><%- include('partials/product-card', { product: item }) %></li><% }) %></ul></div></section><% } %>
+
+  <% if (related.length) { %>
+    <section class="carousel-section page-width page-width--wide" data-reveal>
+      <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Outros jogos</h2><p class="carousel-section__subheading">Baseado no que você está vendo</p></div><a href="/collections/all" class="carousel-section__view-all">Ver todos</a></div>
+      <div class="carousel" data-carousel><button type="button" class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Anterior">&larr;</button><ul class="carousel__track" data-carousel-track><% related.forEach(function(item) { %><li class="carousel__slide"><%- include('partials/product-card', { product: item }) %></li><% }) %></ul><button type="button" class="carousel__control carousel__control--next" data-carousel-next aria-label="Próximo">&rarr;</button></div>
+    </section>
+  <% } %>
 </main>
+
 <%- include('partials/footer') %>

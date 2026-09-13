@@ -1,4 +1,4 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
-<main id="MainContent" class="store-main"><section class="store-message page-width"><span class="store-message__code">GH</span><h1><%= title %></h1><p><%= message %></p><a class="button button--primary" href="/">Voltar ao início</a></section></main>
+<main id="MainContent" role="main"><section class="error-page page-width"><h1 class="error-page__title"><%= code || 'GH' %></h1><p class="error-page__text"><%= message %></p><a class="button button--primary" href="/">Voltar ao início</a></section></main>
 <%- include('partials/footer') %>

@@ -1,51 +1,43 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
 
-<main id="MainContent">
+<main id="MainContent" role="main">
   <section class="hero" data-hero-slider>
-    <article class="hero__slide is-active" data-hero-slide>
-      <div class="hero__media"><div class="hero__yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/o_yIvRZC0vQ?autoplay=1&mute=1&controls=0&loop=1&playlist=o_yIvRZC0vQ&start=136&playsinline=1" title="Trailer em destaque" allow="autoplay; encrypted-media" tabindex="-1"></iframe></div><div class="hero__scrim"></div><div class="hero__fade"></div></div>
-      <div class="page-width hero__inner"><div class="hero__content"><span class="hero__eyebrow">Lançamento da semana</span><h1 class="hero__heading">Direto pra linha<br>de frente</h1><p class="hero__subheading">Partidas intensas e aventuras inesquecíveis.<br>Entrega digital imediata, em qualquer plataforma.</p><div class="hero__actions"><a href="/produto/aeon-vanguard" class="button button--primary">Comprar agora · R$ 249,90</a><a href="/catalogo?category=lancamentos" class="button button--secondary">Ver lançamentos</a></div><div class="hero__meta"><div><strong>PS5 · Xbox · PC</strong>Disponível em</div><div><strong>4,8 / 5</strong>Mais bem avaliados</div><div><strong>Imediata</strong>Entrega digital</div></div></div></div>
-    </article>
-    <article class="hero__slide" data-hero-slide>
-      <div class="hero__media"><div class="hero__yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/nq1M_Wc4FIc?autoplay=1&mute=1&controls=0&loop=1&playlist=nq1M_Wc4FIc&start=10&playsinline=1" title="Trailer em destaque" allow="autoplay; encrypted-media" tabindex="-1"></iframe></div><div class="hero__scrim"></div><div class="hero__fade"></div></div>
-      <div class="page-width hero__inner"><div class="hero__content"><span class="hero__eyebrow">Oferta da semana</span><h2 class="hero__heading">Balance rumo<br>à ação</h2><p class="hero__subheading">Descubra mundos incríveis e personagens lendários.<br>Escolha sua plataforma e comece agora.</p><div class="hero__actions"><a href="/catalogo" class="button button--primary">Ver catálogo completo</a><a href="/catalogo?category=pre-vendas" class="button button--secondary">Ver pré-vendas</a></div></div></div>
-    </article>
-    <article class="hero__slide" data-hero-slide>
-      <div class="hero__media"><div class="hero__yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/OmTRcjxxedo?autoplay=1&mute=1&controls=0&loop=1&playlist=OmTRcjxxedo&playsinline=1" title="Trailer em destaque" allow="autoplay; encrypted-media" tabindex="-1"></iframe></div><div class="hero__scrim"></div><div class="hero__fade"></div></div>
-      <div class="page-width hero__inner"><div class="hero__content"><span class="hero__eyebrow">Pré-venda aberta</span><h2 class="hero__heading">Uma nova era<br>começa agora</h2><p class="hero__subheading">Garanta os jogos mais aguardados antes do lançamento.<br>Receba sua chave digital assim que forem liberados.</p><div class="hero__actions"><a href="/catalogo?category=pre-vendas" class="button button--primary">Garantir na pré-venda</a><a href="/catalogo" class="button button--secondary">Explorar jogos</a></div></div></div>
-    </article>
-    <button type="button" class="hero__nav hero__nav--prev" data-hero-prev aria-label="Banner anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 18-6-6 6-6"/></svg></button>
-    <button type="button" class="hero__nav hero__nav--next" data-hero-next aria-label="Próximo banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg></button>
-    <div class="hero__dots"><button class="hero__dot is-active" data-hero-dot="0" aria-label="Primeiro banner"></button><button class="hero__dot" data-hero-dot="1" aria-label="Segundo banner"></button><button class="hero__dot" data-hero-dot="2" aria-label="Terceiro banner"></button></div>
+    <% [
+      { video: 'o_yIvRZC0vQ', start: 136, end: 180, eyebrow: 'Lançamento da semana', heading: 'Direto pra linha<br>de frente', text: 'Curta partidas intensas de Call of Duty em multiplayer 4K.<br>Jogue no dia do lançamento com entrega digital imediata, em qualquer plataforma.', primary: 'Comprar agora · R$ 249,90', primaryUrl: '/products/aeon-vanguard', secondary: 'Ver lançamentos', secondaryUrl: '/collections/lancamentos', rating: '4,8 / 5', reviews: '2.311 avaliações' },
+      { video: 'nq1M_Wc4FIc', start: 10, end: 60, eyebrow: 'Oferta da semana', heading: 'Balance rumo<br>à ação', text: 'Voe pelos arranha-céus de Nova York com o Homem-Aranha.<br>Entrega digital imediata, em qualquer plataforma.', primary: 'Ver catálogo completo', primaryUrl: '/collections/all', secondary: 'Ver pré-vendas', secondaryUrl: '/collections/pre-vendas', rating: '4,9 / 5', reviews: '1.870 avaliações' },
+      { video: 'OmTRcjxxedo', start: 0, end: 45, eyebrow: 'Pré-venda aberta', heading: 'Uma nova era<br>em Pandora', text: 'Uma aventura inesquecível no universo de Avatar.<br>Entrega digital imediata, em qualquer plataforma.', primary: 'Ver catálogo completo', primaryUrl: '/collections/all', secondary: 'Ver pré-vendas', secondaryUrl: '/collections/pre-vendas', rating: '4,9 / 5', reviews: '1.870 avaliações' }
+    ].forEach(function(slide, index) { %>
+      <div class="hero__slide <%= index === 0 ? 'is-active' : '' %>" data-hero-slide>
+        <div class="hero__media"><div class="hero__yt-wrap" data-youtube-hero data-video-id="<%= slide.video %>" data-start="<%= slide.start %>" data-end="<%= slide.end %>"></div><div class="hero__scrim"></div><div class="hero__fade"></div></div>
+        <div class="page-width hero__inner"><div class="hero__content"><span class="hero__eyebrow"><%= slide.eyebrow %></span><h1 class="hero__heading"><%- slide.heading %></h1><p class="hero__subheading"><%- slide.text %></p><div class="hero__actions"><a href="<%= slide.primaryUrl %>" class="button button--primary"><%= slide.primary %></a><a href="<%= slide.secondaryUrl %>" class="button button--secondary"><%= slide.secondary %></a></div><div class="hero__meta"><div><strong>PS5 · Xbox · PC</strong>Disponível em</div><div><strong><%= slide.rating %></strong><%= slide.reviews %></div><div><strong>Imediata</strong>Entrega digital</div></div></div></div>
+      </div>
+    <% }) %>
+    <button type="button" class="hero__nav hero__nav--prev" data-hero-prev aria-label="Banner anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button type="button" class="hero__nav hero__nav--next" data-hero-next aria-label="Próximo banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="hero__dots" data-hero-dots><% for (let index = 0; index < 3; index += 1) { %><button type="button" class="hero__dot <%= index === 0 ? 'is-active' : '' %>" data-hero-dot="<%= index %>" aria-label="Ir para o banner <%= index + 1 %>"></button><% } %></div>
   </section>
 
-  <section class="carousel-section page-width page-width--wide reveal-ready">
-    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Lançamentos</h2><p class="carousel-section__subheading">Os jogos mais recentes do catálogo</p></div><a href="/catalogo?category=lancamentos" class="carousel-section__view-all">Ver todos</a></div>
-    <div class="carousel" data-carousel><button class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Voltar">←</button><ul class="carousel__track" data-carousel-track><% launches.forEach(function(product) { %><li class="carousel__slide"><%- include('partials/product-card', { product }) %></li><% }) %></ul><button class="carousel__control carousel__control--next" data-carousel-next aria-label="Avançar">→</button></div>
+  <section class="carousel-section page-width page-width--wide" data-reveal>
+    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Lançamentos</h2><p class="carousel-section__subheading">Os jogos mais recentes do catálogo</p></div><a href="/collections/lancamentos" class="carousel-section__view-all">Ver todos</a></div>
+    <div class="carousel" data-carousel><button type="button" class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Anterior">&larr;</button><ul class="carousel__track" data-carousel-track><% launches.forEach(function(product) { %><li class="carousel__slide"><%- include('partials/product-card', { product }) %></li><% }) %></ul><button type="button" class="carousel__control carousel__control--next" data-carousel-next aria-label="Próximo">&rarr;</button></div>
   </section>
 
-  <section class="carousel-section page-width page-width--wide reveal-ready">
-    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Pré-vendas</h2><p class="carousel-section__subheading">Garanta o seu antes do lançamento oficial</p></div><a href="/catalogo?category=pre-vendas" class="carousel-section__view-all">Ver todos</a></div>
-    <div class="carousel" data-carousel><button class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Voltar">←</button><ul class="carousel__track" data-carousel-track><% preorders.forEach(function(product) { %><li class="carousel__slide"><%- include('partials/product-card', { product }) %></li><% }) %></ul><button class="carousel__control carousel__control--next" data-carousel-next aria-label="Avançar">→</button></div>
+  <section class="carousel-section page-width page-width--wide" data-reveal>
+    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Pré-vendas</h2><p class="carousel-section__subheading">Garanta o seu antes do lançamento oficial</p></div><a href="/collections/pre-vendas" class="carousel-section__view-all">Ver todos</a></div>
+    <div class="carousel" data-carousel><button type="button" class="carousel__control carousel__control--prev" data-carousel-prev aria-label="Anterior">&larr;</button><ul class="carousel__track" data-carousel-track><% preorders.forEach(function(product) { %><li class="carousel__slide"><%- include('partials/product-card', { product }) %></li><% }) %></ul><button type="button" class="carousel__control carousel__control--next" data-carousel-next aria-label="Próximo">&rarr;</button></div>
   </section>
 
-  <section class="store-promo page-width page-width--wide reveal-ready">
-    <div><span>Oferta especial</span><h2>Monte sua coleção</h2><p>Escolha seus jogos preferidos, misture plataformas e finalize tudo em um único pedido.</p></div><a class="button button--primary" href="/catalogo">Explorar catálogo</a>
-  </section>
+  <section class="combo-promo page-width page-width--wide" data-reveal><div class="combo-promo__inner"><div class="combo-promo__media"><div class="combo-promo__grid" aria-hidden="true"><% for (let index = 0; index < 6; index += 1) { %><i></i><% } %></div></div><div class="combo-promo__content"><span class="combo-promo__eyebrow">Oferta especial</span><h2 class="combo-promo__heading">Combo de 6 jogos</h2><p class="combo-promo__text">Monte seu combo e adicione todos os jogos ao carrinho com um clique.</p><button type="button" class="button button--primary" data-combo-builder-open>Montar combo</button></div></div></section>
 
-  <section class="collection-grid-section page-width page-width--wide reveal-ready">
-    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Pronta entrega</h2><p class="carousel-section__subheading">Chave enviada após a confirmação do pagamento</p></div><a href="/catalogo?category=pronta-entrega" class="carousel-section__view-all">Ver todos</a></div>
+  <section class="collection-grid-section page-width page-width--wide" data-reveal>
+    <div class="carousel-section__header"><div><h2 class="carousel-section__heading">Pronta entrega</h2><p class="carousel-section__subheading">Chave enviada por e-mail após a confirmação do pagamento</p></div><a href="/collections/all" class="carousel-section__view-all">Ver todos</a></div>
     <ul class="product-grid"><% ready.forEach(function(product) { %><li><%- include('partials/product-card', { product }) %></li><% }) %></ul>
   </section>
 
-  <section class="platform-selector page-width page-width--wide reveal-ready">
+  <section class="platform-selector page-width page-width--wide">
     <h2 class="carousel-section__heading">Compre por plataforma</h2><p class="carousel-section__subheading">Todo o catálogo, filtrado do jeito que você joga</p>
-    <ul class="platform-selector__grid">
-      <% [['PS5','platform-ps5.jpg'],['PS4','platform-ps4.jpg'],['XBOX','platform-xbox.jpg'],['PC','platform-pc.jpg']].forEach(function(item) { %>
-        <li><a href="/catalogo?platform=<%= item[0] %>" class="platform-selector__item"><img class="platform-selector__photo" src="/theme-assets/<%= item[1] %>" alt=""><span class="platform-selector__scrim"></span><span class="platform-selector__count"><%= platformCounts[item[0] === 'XBOX' ? 'Xbox' : item[0]] || 0 %> jogos</span><span class="platform-selector__name"><%= item[0] === 'XBOX' ? 'Xbox' : item[0] %></span></a></li>
-      <% }) %>
-    </ul>
+    <ul class="platform-selector__grid"><% [['PS5','platform-ps5.jpg','ps5'],['PS4','platform-ps4.jpg','ps4'],['Xbox','platform-xbox.jpg','xbox'],['PC','platform-pc.jpg','pc']].forEach(function(item) { %><li data-reveal-flip><a href="/collections/<%= item[2] %>" class="platform-selector__item"><img class="platform-selector__photo" src="/theme-assets/<%= item[1] %>" alt="" loading="lazy"><div class="platform-selector__scrim"></div><span class="platform-selector__count"><%= platformCounts[item[0]] || 0 %> jogos</span><span class="platform-selector__name"><%= item[0] %></span></a></li><% }) %></ul>
   </section>
 </main>
 

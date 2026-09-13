@@ -67,6 +67,84 @@ const moneyFormatter = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL'
 });
 
+const collectionDefinitions = {
+  all: { title: 'Todos os jogos', description: 'Explore o catálogo completo da GameHub.' },
+  lancamentos: { title: 'Lançamentos', description: 'Os jogos mais recentes do catálogo.', category: 'lancamentos', video: ['ae-mpZQLM7w', 0, 75] },
+  'pre-vendas': { title: 'Pré-vendas', description: 'Garanta o seu antes do lançamento oficial.', category: 'pre-vendas' },
+  'pronta-entrega': { title: 'Pronta entrega', description: 'Chaves digitais disponíveis para processamento imediato.', category: 'pronta-entrega' },
+  ps5: { title: 'PlayStation 5', description: 'Jogos digitais para PS5.', platform: 'PS5' },
+  ps4: { title: 'PlayStation 4', description: 'Jogos digitais para PS4.', platform: 'PS4', video: ['u83VdXAVq08', 19, 65] },
+  xbox: { title: 'Xbox', description: 'Jogos digitais para Xbox.', platform: 'XBOX' },
+  pc: { title: 'PC', description: 'Jogos digitais para computador.', platform: 'PC' },
+  acao: { title: 'Ação', description: 'Aventuras intensas para quem gosta de adrenalina.', genre: 'acao', video: ['_EPG6aFLgOk', 39, 79] },
+  corrida: { title: 'Corrida', description: 'Velocidade, competição e grandes circuitos.', genre: 'corrida', video: ['qBYjb_xVqqs', 36, 65] },
+  esportes: { title: 'Esportes', description: 'Entre em campo e dispute os maiores campeonatos.', genre: 'esportes', video: ['hDISJ1N6azA', 3, 50] },
+  guerra: { title: 'Guerra', description: 'Estratégia e combate em grandes batalhas.', genre: 'guerra', video: ['2-2aqLlFsrc', 3, 62] },
+  rpg: { title: 'RPG', description: 'Grandes mundos, personagens e histórias para explorar.', genre: 'rpg' },
+  terror: { title: 'Terror', description: 'Suspense e sobrevivência para testar sua coragem.', genre: 'terror' },
+  aventura: { title: 'Aventura', description: 'Descubra mundos e viva novas jornadas.', genre: 'aventura' }
+};
+
+const contentPages = {
+  sobre: {
+    title: 'Sobre a GameHub',
+    intro: 'A GameHub nasceu para aproximar jogadores de novas aventuras com atendimento claro e uma compra simples.',
+    sections: [
+      ['Nossa missão', 'Reunir jogos para PlayStation, Xbox e PC em uma experiência segura, rápida e fácil de usar.'],
+      ['Como funciona', 'Você escolhe a plataforma, finaliza o pedido e acompanha o andamento por um link exclusivo.']
+    ]
+  },
+  'central-de-ajuda': {
+    title: 'Central de ajuda',
+    intro: 'Encontre respostas rápidas sobre pedidos, pagamento e entrega digital.',
+    sections: [
+      ['Pagamento', 'No checkout você pode gerar um pedido Pix ou solicitar atendimento para combinar o pagamento.'],
+      ['Entrega', 'A equipe libera os dados de ativação depois que o pagamento é confirmado no painel.'],
+      ['Acompanhamento', 'Guarde o link exibido no fim da compra para consultar o estado do pedido.']
+    ]
+  },
+  'fale-conosco': {
+    title: 'Fale conosco',
+    intro: 'Precisa de ajuda para comprar ou acompanhar um pedido? Entre em contato pelos canais abaixo.',
+    contact: true,
+    sections: []
+  },
+  'status-do-pedido': {
+    title: 'Status do pedido',
+    intro: 'O acompanhamento é protegido. Abra o link exclusivo gerado quando você finalizou a compra.',
+    sections: [['Não encontrou o link?', 'Fale com o atendimento e informe o número do pedido e o e-mail utilizado na compra.']]
+  },
+  'trabalhe-conosco': {
+    title: 'Trabalhe conosco',
+    intro: 'Quer fazer parte da GameHub? Envie uma apresentação para nosso e-mail de atendimento.',
+    contact: true,
+    sections: []
+  },
+  conta: {
+    title: 'Minha conta',
+    intro: 'Seus pedidos são acompanhados pelos links privados gerados no checkout.',
+    sections: [['Acompanhar compra', 'Use o link salvo no final do pedido. Se precisar recuperar o acesso, fale com nosso atendimento.']]
+  }
+};
+
+const policyPages = {
+  'privacy-policy': {
+    title: 'Política de privacidade',
+    intro: 'Usamos os dados informados somente para processar pedidos, prestar atendimento e proteger a operação da loja.',
+    sections: [['Dados tratados', 'Nome, e-mail, telefone e informações opcionais do pedido são armazenados para atendimento e cumprimento da compra.'], ['Seus direitos', 'Você pode solicitar correção ou exclusão de dados que não precisem ser mantidos por obrigação legal.']]
+  },
+  'terms-of-service': {
+    title: 'Termos de uso',
+    intro: 'Ao utilizar a GameHub, você concorda em fornecer informações corretas e utilizar os produtos conforme as regras da plataforma escolhida.',
+    sections: [['Pedidos', 'Valores, plataforma, disponibilidade e condições são confirmados antes da criação do pedido.'], ['Atendimento', 'Dúvidas e solicitações devem informar o número do pedido para agilizar a análise.']]
+  },
+  'refund-policy': {
+    title: 'Trocas e reembolso',
+    intro: 'Pedidos ainda não processados podem ser analisados para cancelamento. Produtos digitais já ativados seguem as limitações informadas no atendimento.',
+    sections: [['Como solicitar', 'Entre em contato informando o número do pedido, o motivo da solicitação e o e-mail utilizado na compra.']]
+  }
+};
+
 function formatMoney(cents) {
   return moneyFormatter.format(Number(cents || 0) / 100);
 }
@@ -127,6 +205,7 @@ function pageData(req, extra = {}) {
   return {
     currentPath: req.path,
     settings: getSettings(),
+    comboProducts: getActiveProducts(48),
     formatMoney,
     discountPercent,
     ...extra
@@ -137,6 +216,60 @@ function getActiveProducts(limit) {
   const sql = `SELECT * FROM products WHERE active = 1 ORDER BY featured DESC, created_at DESC${limit ? ' LIMIT ?' : ''}`;
   const rows = limit ? db.prepare(sql).all(limit) : db.prepare(sql).all();
   return rows.map(mapProduct);
+}
+
+function catalogData(req, definition = collectionDefinitions.all) {
+  const query = cleanText(req.query.q, 80);
+  const category = cleanText(req.query.category, 40) || definition.category || '';
+  const genre = cleanText(req.query.genre, 40) || definition.genre || '';
+  const platform = (cleanText(req.query.platform, 20) || definition.platform || '').toUpperCase();
+  const sortBy = cleanText(req.query.sort_by, 40) || 'featured';
+  const conditions = ['active = 1'];
+  const parameters = [];
+
+  if (query) {
+    conditions.push('(name LIKE ? OR description LIKE ? OR sku LIKE ?)');
+    const pattern = `%${query}%`;
+    parameters.push(pattern, pattern, pattern);
+  }
+  if (category) {
+    conditions.push('category = ?');
+    parameters.push(category);
+  }
+  if (genre) {
+    conditions.push('genre = ?');
+    parameters.push(genre);
+  }
+
+  const orderBy = {
+    'price-ascending': 'price_cents ASC',
+    'price-descending': 'price_cents DESC',
+    'title-ascending': 'name COLLATE NOCASE ASC',
+    'title-descending': 'name COLLATE NOCASE DESC',
+    'created-descending': 'created_at DESC',
+    featured: 'featured DESC, created_at DESC'
+  }[sortBy] || 'featured DESC, created_at DESC';
+
+  let products = db.prepare(`SELECT * FROM products WHERE ${conditions.join(' AND ')} ORDER BY ${orderBy}`).all(...parameters).map(mapProduct);
+  if (platform) products = products.filter((product) => product.platforms.some((item) => item.toUpperCase() === platform));
+
+  return {
+    products,
+    filters: { query, category, genre, platform, sortBy },
+    collection: {
+      title: query ? `Resultados para “${query}”` : definition.title,
+      description: definition.description,
+      handle: Object.entries(collectionDefinitions).find(([, value]) => value === definition)?.[0] || 'all',
+      video: definition.video || null
+    }
+  };
+}
+
+function renderProduct(req, res) {
+  const product = mapProduct(db.prepare('SELECT * FROM products WHERE slug = ? AND active = 1').get(req.params.slug));
+  if (!product) return res.status(404).render('message', pageData(req, { title: 'Página não encontrada', message: 'O produto que você tentou acessar não está disponível.', code: '404' }));
+  const related = getActiveProducts().filter((item) => item.id !== product.id && (item.genre === product.genre || item.platforms.some((platform) => product.platforms.includes(platform)))).slice(0, 8);
+  res.render('product', pageData(req, { title: `${product.name} — GameHub`, product, related }));
 }
 
 function getOrder(publicNumber, token) {
@@ -156,7 +289,7 @@ app.get('/', (req, res) => {
   const products = getActiveProducts();
   const launches = products.filter((product) => product.category === 'lancamentos').slice(0, 8);
   const preorders = products.filter((product) => product.category === 'pre-vendas').slice(0, 8);
-  const ready = products.filter((product) => product.category === 'pronta-entrega').slice(0, 10);
+  const ready = products.slice(0, 10);
   const platformCounts = {};
   for (const product of products) {
     for (const platform of product.platforms) platformCounts[platform] = (platformCounts[platform] || 0) + 1;
@@ -166,41 +299,74 @@ app.get('/', (req, res) => {
 });
 
 app.get('/catalogo', (req, res) => {
-  const query = cleanText(req.query.q, 80);
-  const category = cleanText(req.query.category, 40);
-  const platform = cleanText(req.query.platform, 20).toUpperCase();
-  const conditions = ['active = 1'];
-  const parameters = [];
-
-  if (query) {
-    conditions.push('(name LIKE ? OR description LIKE ? OR sku LIKE ?)');
-    const pattern = `%${query}%`;
-    parameters.push(pattern, pattern, pattern);
-  }
-  if (category) {
-    conditions.push('category = ?');
-    parameters.push(category);
-  }
-
-  let products = db.prepare(`SELECT * FROM products WHERE ${conditions.join(' AND ')} ORDER BY featured DESC, created_at DESC`).all(...parameters).map(mapProduct);
-  if (platform) products = products.filter((product) => product.platforms.map((item) => item.toUpperCase()).includes(platform));
-
-  res.render('catalog', pageData(req, {
-    title: query ? `Busca por ${query}` : 'Catálogo completo',
-    products,
-    filters: { query, category, platform }
-  }));
+  const definition = req.query.category && collectionDefinitions[cleanText(req.query.category, 40)]
+    ? collectionDefinitions[cleanText(req.query.category, 40)]
+    : collectionDefinitions.all;
+  const data = catalogData(req, definition);
+  res.render('catalog', pageData(req, { title: `${data.collection.title} — GameHub`, ...data }));
 });
 
-app.get('/produto/:slug', (req, res) => {
-  const product = mapProduct(db.prepare('SELECT * FROM products WHERE slug = ? AND active = 1').get(req.params.slug));
-  if (!product) return res.status(404).render('message', pageData(req, { title: 'Produto não encontrado', message: 'Este produto não está disponível.' }));
-  const related = getActiveProducts().filter((item) => item.id !== product.id && (item.category === product.category || item.platforms.some((platform) => product.platforms.includes(platform)))).slice(0, 5);
-  res.render('product', pageData(req, { title: product.name, product, related }));
+app.get('/collections', (req, res) => {
+  const products = getActiveProducts();
+  const handles = ['lancamentos', 'pre-vendas', 'pronta-entrega', 'acao', 'corrida', 'esportes', 'guerra', 'rpg', 'terror', 'aventura'];
+  const collections = handles.map((handle) => {
+    const definition = collectionDefinitions[handle];
+    const matches = products.filter((product) =>
+      (!definition.category || product.category === definition.category) &&
+      (!definition.genre || product.genre === definition.genre)
+    );
+    return { handle, title: definition.title, image: matches[0]?.image_url || '/theme-assets/vibe-1.jpg', count: matches.length };
+  });
+  res.render('collections', pageData(req, { title: 'Coleções — GameHub', collections }));
 });
 
-app.get('/carrinho', (req, res) => {
+app.get('/collections/:handle', (req, res) => {
+  const definition = collectionDefinitions[req.params.handle] || collectionDefinitions.all;
+  const data = catalogData(req, definition);
+  res.render('catalog', pageData(req, { title: `${data.collection.title} — GameHub`, ...data }));
+});
+
+app.get(['/produto/:slug', '/products/:slug'], renderProduct);
+
+app.get(['/carrinho', '/cart'], (req, res) => {
   res.render('cart', pageData(req, { title: 'Seu carrinho' }));
+});
+
+app.get('/search', (req, res) => {
+  const data = catalogData(req, collectionDefinitions.all);
+  res.render('search', pageData(req, { title: data.filters.query ? `Busca por ${data.filters.query} — GameHub` : 'Buscar — GameHub', ...data }));
+});
+
+app.get('/pages/plataformas', (req, res) => {
+  const products = getActiveProducts();
+  const platforms = [
+    ['PS5', 'platform-ps5.jpg', 'ps5'],
+    ['PS4', 'platform-ps4.jpg', 'ps4'],
+    ['Xbox', 'platform-xbox.jpg', 'xbox'],
+    ['PC', 'platform-pc.jpg', 'pc']
+  ].map(([name, image, handle]) => ({ name, image, handle, count: products.filter((product) => product.platforms.some((platform) => platform.toUpperCase() === name.toUpperCase())).length }));
+  res.render('platforms', pageData(req, { title: 'Escolha sua plataforma — GameHub', platforms }));
+});
+
+app.get('/pages/:slug', (req, res) => {
+  const page = contentPages[req.params.slug];
+  if (!page) return res.status(404).render('message', pageData(req, { title: 'Página não encontrada', message: 'A página que você tentou acessar não existe.', code: '404' }));
+  res.render('page', pageData(req, { title: `${page.title} — GameHub`, page }));
+});
+
+app.get('/policies/:slug', (req, res) => {
+  const page = policyPages[req.params.slug];
+  if (!page) return res.status(404).render('message', pageData(req, { title: 'Página não encontrada', message: 'A página que você tentou acessar não existe.', code: '404' }));
+  res.render('page', pageData(req, { title: `${page.title} — GameHub`, page }));
+});
+
+app.get('/conta', (req, res) => {
+  const page = contentPages.conta;
+  res.render('page', pageData(req, { title: `${page.title} — GameHub`, page }));
+});
+
+app.get(['/blogs', '/blogs/news'], (req, res) => {
+  res.render('blog', pageData(req, { title: 'Novidades — GameHub' }));
 });
 
 app.get('/checkout', (req, res) => {
@@ -215,6 +381,13 @@ app.get('/pedido/:publicNumber', (req, res) => {
 
 app.get('/admin', (req, res) => {
   res.render('admin', pageData(req, { title: 'Painel administrativo', adminConfigured: Boolean(adminPassword) }));
+});
+
+app.post('/api/newsletter', (req, res) => {
+  const email = cleanText(req.body.email, 180).toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'Informe um e-mail válido.' });
+  db.prepare('INSERT OR IGNORE INTO newsletter_subscribers (email) VALUES (?)').run(email);
+  res.status(201).json({ ok: true, message: 'Cadastro realizado. Você receberá as novidades da GameHub.' });
 });
 
 app.get('/api/products', (req, res) => {
@@ -378,6 +551,7 @@ app.get('/api/admin/dashboard', requireAdmin, (_req, res) => {
       COALESCE(SUM(CASE WHEN status = 'awaiting_payment' THEN 1 ELSE 0 END), 0) AS pending_count
     FROM orders
   `).get();
+  totals.subscriber_count = db.prepare('SELECT COUNT(*) AS total FROM newsletter_subscribers').get().total;
   res.json({ settings: getSettings(), products, orders, coupons, totals });
 });
 
@@ -404,10 +578,10 @@ app.post('/api/admin/products', requireAdmin, (req, res) => {
     const id = crypto.randomUUID();
     db.prepare(`
       INSERT INTO products (
-        id, slug, sku, name, description, category, platforms_json,
+        id, slug, sku, name, description, category, genre, platforms_json,
         price_cents, compare_at_price_cents, stock, image_url, featured, active
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(id, product.slug, product.sku, product.name, product.description, product.category, JSON.stringify(product.platforms), product.price, product.compare, product.stock, product.image, product.featured, product.active);
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(id, product.slug, product.sku, product.name, product.description, product.category, product.genre, JSON.stringify(product.platforms), product.price, product.compare, product.stock, product.image, product.featured, product.active);
     res.status(201).json({ product: serializeProduct(db.prepare('SELECT * FROM products WHERE id = ?').get(id)) });
   } catch (error) {
     res.status(400).json({ error: databaseErrorMessage(error) });
@@ -419,11 +593,11 @@ app.put('/api/admin/products/:id', requireAdmin, (req, res) => {
     const product = normalizeProductInput(req.body);
     const result = db.prepare(`
       UPDATE products SET
-        slug = ?, sku = ?, name = ?, description = ?, category = ?, platforms_json = ?,
+        slug = ?, sku = ?, name = ?, description = ?, category = ?, genre = ?, platforms_json = ?,
         price_cents = ?, compare_at_price_cents = ?, stock = ?, image_url = ?, featured = ?, active = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
-    `).run(product.slug, product.sku, product.name, product.description, product.category, JSON.stringify(product.platforms), product.price, product.compare, product.stock, product.image, product.featured, product.active, req.params.id);
+    `).run(product.slug, product.sku, product.name, product.description, product.category, product.genre, JSON.stringify(product.platforms), product.price, product.compare, product.stock, product.image, product.featured, product.active, req.params.id);
     if (!result.changes) return res.status(404).json({ error: 'Produto não encontrado.' });
     res.json({ product: serializeProduct(db.prepare('SELECT * FROM products WHERE id = ?').get(req.params.id)) });
   } catch (error) {
@@ -500,6 +674,7 @@ function normalizeProductInput(input) {
   const compareValue = Number.parseInt(input.compare_at_price_cents, 10);
   const compare = Number.isFinite(compareValue) && compareValue > price ? compareValue : null;
   const stock = Math.max(0, Number.parseInt(input.stock, 10) || 0);
+  const validGenres = ['acao', 'aventura', 'corrida', 'esportes', 'guerra', 'rpg', 'terror'];
   if (name.length < 2) throw new Error('Informe o nome do produto.');
   if (!sku) throw new Error('Informe o SKU.');
   if (!Number.isFinite(price) || price < 0) throw new Error('Informe um preço válido.');
@@ -510,6 +685,7 @@ function normalizeProductInput(input) {
     sku,
     description: cleanText(input.description, 5000),
     category: ['lancamentos', 'pre-vendas', 'pronta-entrega'].includes(input.category) ? input.category : 'pronta-entrega',
+    genre: validGenres.includes(input.genre) ? input.genre : 'acao',
     platforms,
     price,
     compare,
@@ -529,7 +705,7 @@ function databaseErrorMessage(error) {
 
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Rota não encontrada.' });
-  res.status(404).render('message', pageData(req, { title: 'Página não encontrada', message: 'A página que você tentou acessar não existe.' }));
+  res.status(404).render('message', pageData(req, { title: 'Página não encontrada', message: 'A página que você tentou acessar não existe.', code: '404' }));
 });
 
 app.use((error, req, res, _next) => {

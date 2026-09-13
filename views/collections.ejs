@@ -1,0 +1,9 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="MainContent" role="main">
+  <section class="collections-page page-width">
+    <h1 class="collections-page__title">Coleções</h1>
+    <ul class="collections-page__grid"><% collections.forEach(function(collection) { %><li class="collections-page__item" data-reveal><a href="/collections/<%= collection.handle %>"><img src="<%= collection.image %>" alt="<%= collection.title %>" loading="lazy"><span><%= collection.title %></span><small><%= collection.count %> jogo<%= collection.count === 1 ? '' : 's' %></small></a></li><% }) %></ul>
+  </section>
+</main>
+<%- include('partials/footer') %>

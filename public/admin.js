@@ -78,7 +78,8 @@
     target.innerHTML = `
       <article class="admin-metric"><span>Pedidos</span><strong>${dashboard.totals.order_count}</strong></article>
       <article class="admin-metric"><span>Faturamento pago</span><strong>${formatMoney(dashboard.totals.paid_total_cents)}</strong></article>
-      <article class="admin-metric"><span>Aguardando pagamento</span><strong>${dashboard.totals.pending_count}</strong></article>`;
+      <article class="admin-metric"><span>Aguardando pagamento</span><strong>${dashboard.totals.pending_count}</strong></article>
+      <article class="admin-metric"><span>Newsletter</span><strong>${dashboard.totals.subscriber_count}</strong></article>`;
   }
 
   function renderOverviewLists() {
@@ -114,7 +115,7 @@
   function renderProducts() {
     const target = root.querySelector('[data-admin-products]');
     target.innerHTML = dashboard.products.map((product) => `
-      <tr><td><div class="admin-product-cell"><img src="${escapeHtml(product.image_url || '/theme-assets/vibe-1.jpg')}" alt=""><div><strong>${escapeHtml(product.name)}</strong><br><small>${escapeHtml(product.category)}</small></div></div></td><td>${escapeHtml(product.sku)}</td><td>${product.platforms.map(escapeHtml).join(', ')}</td><td>${formatMoney(product.price_cents)}</td><td><strong>${product.stock}</strong></td><td>${product.active ? 'Sim' : 'Não'}</td><td><button class="admin-edit" data-edit-product="${escapeHtml(product.id)}">Editar</button></td></tr>`).join('');
+      <tr><td><div class="admin-product-cell"><img src="${escapeHtml(product.image_url || '/theme-assets/vibe-1.jpg')}" alt=""><div><strong>${escapeHtml(product.name)}</strong><br><small>${escapeHtml(product.category)} · ${escapeHtml(product.genre)}</small></div></div></td><td>${escapeHtml(product.sku)}</td><td>${product.platforms.map(escapeHtml).join(', ')}</td><td>${formatMoney(product.price_cents)}</td><td><strong>${product.stock}</strong></td><td>${product.active ? 'Sim' : 'Não'}</td><td><button class="admin-edit" data-edit-product="${escapeHtml(product.id)}">Editar</button></td></tr>`).join('');
   }
 
   function renderCoupons() {
@@ -181,6 +182,7 @@
     productForm.elements.sku.value = product?.sku || '';
     productForm.elements.slug.value = product?.slug || '';
     productForm.elements.category.value = product?.category || 'pronta-entrega';
+    productForm.elements.genre.value = product?.genre || 'acao';
     productForm.elements.platforms.value = product?.platforms.join(', ') || '';
     productForm.elements.price_cents.value = product?.price_cents ?? '';
     productForm.elements.compare_at_price_cents.value = product?.compare_at_price_cents ?? '';
@@ -225,7 +227,7 @@
       }
       const id = values.get('id');
       const payload = {
-        name: values.get('name'), sku: values.get('sku'), slug: values.get('slug'), category: values.get('category'),
+        name: values.get('name'), sku: values.get('sku'), slug: values.get('slug'), category: values.get('category'), genre: values.get('genre'),
         platforms: String(values.get('platforms')).split(','), price_cents: values.get('price_cents'),
         compare_at_price_cents: values.get('compare_at_price_cents'), stock: values.get('stock'), image_url: imageUrl,
         description: values.get('description'), featured: values.get('featured') === 'on', active: values.get('active') === 'on'

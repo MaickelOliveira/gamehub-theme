@@ -1,0 +1,10 @@
+<div id="ComboBuilder" class="combo-builder" hidden>
+  <div class="combo-builder__overlay" data-combo-builder-close></div>
+  <div class="combo-builder__panel" role="dialog" aria-modal="true" aria-label="Monte seu combo">
+    <div class="combo-builder__header"><div><h2>Monte seu combo de 6 jogos</h2><p class="combo-builder__hint">Escolha 6 jogos do catálogo para adicionar todos ao carrinho de uma vez.</p></div><button type="button" class="combo-builder__close" data-combo-builder-close aria-label="Fechar">&times;</button></div>
+    <div class="combo-builder__grid-wrap"><ul class="combo-builder__grid" id="ComboBuilderGrid">
+      <% comboProducts.forEach(function(product) { %><li><button type="button" class="combo-card" data-combo-card data-product-id="<%= product.id %>" data-platform="<%= product.platforms[0] || 'PC' %>" <%= product.stock <= 0 ? 'disabled data-unavailable' : '' %> aria-pressed="false"><span class="combo-card__media"><% if (product.image_url) { %><img src="<%= product.image_url %>" alt="<%= product.name %>" loading="lazy"><% } else { %><span class="store-product-placeholder">GH</span><% } %><span class="combo-card__check" aria-hidden="true">&#10003;</span></span><span class="combo-card__title"><%= product.name %></span><span class="combo-card__price"><%= formatMoney(product.price_cents) %></span></button></li><% }) %>
+    </ul></div>
+    <div class="combo-builder__footer"><span class="combo-builder__count"><span id="ComboBuilderCount">0</span>/6 selecionados</span><button type="button" class="button button--primary" id="ComboBuilderAdd" disabled>Adicionar 6 ao carrinho</button></div>
+  </div>
+</div>

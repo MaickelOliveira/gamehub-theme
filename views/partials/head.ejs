@@ -2,14 +2,17 @@
 <html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0a0f0b">
-  <meta name="description" content="Jogos digitais para PlayStation, Xbox e PC com entrega rápida.">
+  <meta name="description" content="Jogos digitais para PlayStation, Xbox e PC com compra segura e atendimento especializado.">
   <title><%= title %></title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
   <link rel="stylesheet" href="/theme-assets/base.css">
   <link rel="stylesheet" href="/store.css">
 </head>
-<body data-page="<%= currentPath %>">
+<body class="template-<%= currentPath === '/' ? 'index' : currentPath.split('/').filter(Boolean)[0] || 'page' %>" data-page="<%= currentPath %>">
+  <a class="skip-to-content" href="#MainContent">Pular para o conteúdo</a>

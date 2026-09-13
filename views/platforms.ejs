@@ -1,0 +1,9 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="MainContent" role="main">
+  <section class="platform-selector page-width page-width--wide platform-selector--page">
+    <h1 class="carousel-section__heading">Escolha sua plataforma</h1><p class="carousel-section__subheading">Escolha seu console e veja o catálogo completo</p>
+    <ul class="platform-selector__grid"><% platforms.forEach(function(platform) { %><li data-reveal-flip><a href="/collections/<%= platform.handle %>" class="platform-selector__item"><img class="platform-selector__photo" src="/theme-assets/<%= platform.image %>" alt="" loading="lazy"><div class="platform-selector__scrim"></div><span class="platform-selector__count"><%= platform.count %> jogos</span><span class="platform-selector__name"><%= platform.name %></span></a></li><% }) %></ul>
+  </section>
+</main>
+<%- include('partials/footer') %>

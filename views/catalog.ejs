@@ -1,21 +1,18 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
-<main id="MainContent" class="store-main">
-  <section class="catalog-hero page-width page-width--wide">
-    <span class="store-kicker">GameHub Store</span>
-    <h1><%= title %></h1>
-    <p>Jogos digitais originais para sua plataforma preferida.</p>
-  </section>
-  <section class="catalog-layout page-width page-width--wide">
-    <form class="catalog-filters" action="/catalogo" method="get">
-      <label>Buscar<input type="search" name="q" value="<%= filters.query %>" placeholder="Nome ou código do jogo"></label>
-      <label>Categoria<select name="category"><option value="">Todas</option><option value="lancamentos" <%= filters.category === 'lancamentos' ? 'selected' : '' %>>Lançamentos</option><option value="pre-vendas" <%= filters.category === 'pre-vendas' ? 'selected' : '' %>>Pré-vendas</option><option value="pronta-entrega" <%= filters.category === 'pronta-entrega' ? 'selected' : '' %>>Pronta entrega</option></select></label>
-      <label>Plataforma<select name="platform"><option value="">Todas</option><% ['PS5','PS4','XBOX','PC'].forEach(function(value) { %><option value="<%= value %>" <%= filters.platform === value ? 'selected' : '' %>><%= value === 'XBOX' ? 'Xbox' : value %></option><% }) %></select></label>
-      <button class="button button--primary" type="submit">Filtrar</button><a class="store-clear-filter" href="/catalogo">Limpar filtros</a>
-    </form>
-    <div class="catalog-results"><div class="catalog-results__head"><strong><%= products.length %> produto<%= products.length === 1 ? '' : 's' %></strong></div>
-      <% if (products.length) { %><ul class="product-grid"><% products.forEach(function(product) { %><li><%- include('partials/product-card', { product }) %></li><% }) %></ul><% } else { %><div class="store-empty"><h2>Nenhum jogo encontrado</h2><p>Tente remover algum filtro ou fazer uma nova busca.</p><a class="button button--primary" href="/catalogo">Ver catálogo completo</a></div><% } %>
+<main id="MainContent" role="main">
+  <section class="collection-hero">
+    <div class="collection-hero__media">
+      <% if (collection.video) { %><div class="hero__yt-wrap" data-youtube-hero data-video-id="<%= collection.video[0] %>" data-start="<%= collection.video[1] %>" data-end="<%= collection.video[2] %>"></div><% } else { %><div class="collection-hero__image" style="background-image:url('<%= products[0]?.image_url || '/theme-assets/vibe-1.jpg' %>')"></div><% } %>
+      <div class="collection-hero__scrim"></div><div class="collection-hero__fade"></div>
     </div>
+    <div class="page-width collection-hero__inner"><span class="collection-hero__eyebrow">Categoria</span><h1 class="collection-hero__title"><%= collection.title %></h1><p class="collection-hero__count"><%= products.length %> <%= products.length === 1 ? 'jogo encontrado' : 'jogos encontrados' %></p></div>
+  </section>
+
+  <section class="collection-page page-width page-width--wide">
+    <div class="collection-page__header"><h2 class="collection-page__title"><%= collection.title %></h2><% if (collection.description) { %><div class="collection-page__description rte"><p><%= collection.description %></p></div><% } %></div>
+    <div class="collection-page__toolbar"><p class="collection-page__count"><%= products.length %> produto<%= products.length === 1 ? '' : 's' %></p><form method="get" action="<%= currentPath %>"><% if (filters.query) { %><input type="hidden" name="q" value="<%= filters.query %>"><% } %><% if (filters.category && collection.handle === 'all') { %><input type="hidden" name="category" value="<%= filters.category %>"><% } %><% if (filters.genre && collection.handle === 'all') { %><input type="hidden" name="genre" value="<%= filters.genre %>"><% } %><% if (filters.platform && collection.handle === 'all') { %><input type="hidden" name="platform" value="<%= filters.platform %>"><% } %><label for="SortBy">Ordenar por</label><select name="sort_by" id="SortBy" data-auto-submit><option value="featured" <%= filters.sortBy === 'featured' ? 'selected' : '' %>>Em destaque</option><option value="created-descending" <%= filters.sortBy === 'created-descending' ? 'selected' : '' %>>Mais recentes</option><option value="price-ascending" <%= filters.sortBy === 'price-ascending' ? 'selected' : '' %>>Menor preço</option><option value="price-descending" <%= filters.sortBy === 'price-descending' ? 'selected' : '' %>>Maior preço</option><option value="title-ascending" <%= filters.sortBy === 'title-ascending' ? 'selected' : '' %>>Nome: A–Z</option></select></form></div>
+    <% if (products.length) { %><ul class="product-grid"><% products.forEach(function(product) { %><li><%- include('partials/product-card', { product }) %></li><% }) %></ul><% } else { %><p class="carousel-section__empty">Nenhum produto encontrado nesta coleção.</p><div class="store-empty-action"><a class="button button--primary" href="/collections/all">Ver catálogo completo</a></div><% } %>
   </section>
 </main>
 <%- include('partials/footer') %>

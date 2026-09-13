@@ -79,6 +79,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .product-page__option-value.is-selected { border-color: var(--color-accent); color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 9%, transparent); }
 .product-page__facts li span { text-align: right; }
 .product-card__add:disabled { cursor: not-allowed; opacity: .55; box-shadow: none; }
+.product-card__platform-picker[hidden] { display: none; }
+.page-content__title, .search-page__title { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1.25rem; }
+.page-content__body { max-width: 820px; color: var(--color-text-muted); line-height: 1.75; }
+.page-content__intro { color: var(--color-text); font-size: 1.08rem; }
+.page-content__section { padding: 1.25rem 0; border-bottom: 1px solid var(--color-border); }
+.page-content__section h2 { color: var(--color-text); font-size: 1.15rem; margin-bottom: .35rem; }
+.page-content__contact { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.site-footer__newsletter-success { margin: .65rem 0 0; color: var(--color-accent); font-size: .8rem; }
+.site-footer__newsletter-success.is-error { color: #ff7075; }
+.store-empty-action { margin-top: 1rem; }
+.collections-page__item small { display: block; margin-top: .25rem; color: var(--color-text-muted); font-size: .76rem; }
+.platform-selector--page { padding-top: 3rem; padding-bottom: 5rem; }
 
 .store-page-heading { margin-bottom: 2rem; }
 .cart-page { max-width: 1080px; }
@@ -161,7 +173,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .admin-content { max-width: 1500px; margin: 0 auto; padding: 2rem clamp(1rem, 3vw, 2rem) 5rem; }
 .admin-title { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 .admin-title h1 { margin-top: .3rem; font-size: clamp(1.8rem, 4vw, 2.7rem); }
-.admin-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.admin-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
 .admin-metric { padding: 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; }
 .admin-metric span { color: var(--color-text-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
 .admin-metric strong { display: block; margin-top: .45rem; font-family: var(--font-heading); font-size: 1.6rem; }

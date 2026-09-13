@@ -1,13 +1,14 @@
-<article class="product-card">
-  <a href="/produto/<%= product.slug %>" class="product-card__media">
+<div class="product-card">
+  <a href="/products/<%= product.slug %>" class="product-card__media">
     <% if (product.image_url) { %><img src="<%= product.image_url %>" alt="<%= product.name %>" loading="lazy"><% } else { %><span class="store-product-placeholder">GH</span><% } %>
     <% if (discountPercent(product)) { %><span class="product-card__badge product-card__badge--discount">-<%= discountPercent(product) %>%</span><% } else if (product.category === 'pre-vendas') { %><span class="product-card__badge product-card__badge--preorder">Pré-venda</span><% } %>
   </a>
   <div class="product-card__platforms"><% product.platforms.forEach(function(platform) { %><span class="product-card__platform"><%= platform %></span><% }) %></div>
-  <h3 class="product-card__title"><a href="/produto/<%= product.slug %>"><%= product.name %></a></h3>
+  <h3 class="product-card__title"><a href="/products/<%= product.slug %>"><%= product.name %></a></h3>
   <div class="product-card__price"><% if (product.compare_at_price_cents) { %><s class="product-card__price-compare"><%= formatMoney(product.compare_at_price_cents) %></s><% } %><span class="product-card__price-current"><%= formatMoney(product.price_cents) %></span></div>
   <div class="product-card__actions">
-    <a class="product-card__buy" href="/produto/<%= product.slug %>"><%= product.stock > 0 ? 'Comprar' : 'Esgotado' %></a>
-    <button type="button" class="product-card__add" data-add-product="<%= product.id %>" <%= product.stock <= 0 ? 'disabled' : '' %>><%= product.stock > 0 ? 'Adicionar ao carrinho +' : 'Sem estoque' %></button>
+    <button type="button" class="product-card__buy" data-card-buy="<%= product.id %>" <%= product.platforms.length > 1 ? 'data-needs-platform' : '' %> <%= product.stock <= 0 ? 'disabled' : '' %>><%= product.stock > 0 ? 'Comprar' : 'Esgotado' %></button>
+    <button type="button" class="product-card__add" data-card-add="<%= product.id %>" <%= product.platforms.length > 1 ? 'data-needs-platform' : '' %> <%= product.stock <= 0 ? 'disabled' : '' %>><%= product.stock > 0 ? 'Adicionar ao carrinho +' : 'Sem estoque' %></button>
+    <% if (product.platforms.length > 1) { %><div class="product-card__platform-picker" data-platform-picker hidden><p class="product-card__platform-picker-label">Escolha a plataforma</p><div class="product-card__platform-picker-options"><% product.platforms.forEach(function(platform) { %><button type="button" class="product-card__platform-option" data-card-platform="<%= platform %>"><%= platform %></button><% }) %></div><button type="button" class="product-card__platform-picker-close" data-platform-picker-close aria-label="Cancelar">&times;</button></div><% } %>
   </div>
-</article>
+</div>

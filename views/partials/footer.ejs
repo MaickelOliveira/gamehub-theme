@@ -5,24 +5,28 @@
         <span class="site-header__logo-mark" aria-hidden="true"></span>
         <span class="site-header__logo-text"><%= settings.store_name %></span>
       </div>
-      <p class="site-footer__about">Sua próxima aventura começa aqui. Jogos digitais para todas as plataformas.</p>
-      <div class="site-footer__pay-badges"><span class="pay-badge pay-badge--pix">Pix</span><span class="pay-badge pay-badge--visa">VISA</span><span class="pay-badge pay-badge--mastercard">Mastercard</span></div>
+      <p class="site-footer__about">Sua loja de jogos digitais, com atendimento especializado e títulos para todas as plataformas.</p>
+      <div class="site-footer__pay-badges"><span class="pay-badge pay-badge--pix">Pix</span><span class="pay-badge">Atendimento</span></div>
     </div>
     <div class="site-footer__block">
-      <h3>Loja</h3>
-      <ul><li><a href="/catalogo">Catálogo</a></li><li><a href="/catalogo?category=lancamentos">Lançamentos</a></li><li><a href="/catalogo?category=pre-vendas">Pré-vendas</a></li></ul>
+      <h3>Institucional</h3>
+      <ul><li><a href="/pages/sobre">Sobre a GameHub</a></li><li><a href="/pages/trabalhe-conosco">Trabalhe conosco</a></li><li><a href="/policies/terms-of-service">Termos de uso</a></li><li><a href="/policies/privacy-policy">Privacidade</a></li></ul>
     </div>
     <div class="site-footer__block">
-      <h3>Plataformas</h3>
-      <ul><li><a href="/catalogo?platform=PS5">PS5</a></li><li><a href="/catalogo?platform=PS4">PS4</a></li><li><a href="/catalogo?platform=XBOX">Xbox</a></li><li><a href="/catalogo?platform=PC">PC</a></li></ul>
+      <h3>Ajuda</h3>
+      <ul><li><a href="/pages/central-de-ajuda">Central de ajuda</a></li><li><a href="/policies/refund-policy">Trocas e reembolso</a></li><li><a href="/pages/status-do-pedido">Status do pedido</a></li><li><a href="/pages/fale-conosco">Fale conosco</a></li></ul>
     </div>
     <div class="site-footer__block">
-      <h3>Atendimento</h3>
-      <ul><li><a href="mailto:<%= settings.support_email %>"><%= settings.support_email %></a></li><li><a href="/admin">Painel administrativo</a></li></ul>
+      <h3>Receba novidades e ofertas</h3>
+      <form class="site-footer__newsletter-form" data-newsletter-form><input type="email" name="email" placeholder="Seu melhor e-mail" required><button type="submit">Cadastrar</button></form><p class="site-footer__newsletter-success" data-newsletter-message hidden></p>
     </div>
   </div>
-  <div class="site-footer__bottom page-width"><span>© <%= new Date().getFullYear() %> <%= settings.store_name %>.</span><span>Compra segura e entrega digital.</span></div>
+  <div class="site-footer__bottom page-width"><p>© <%= new Date().getFullYear() %> <%= settings.store_name %>. Todos os direitos reservados.</p><p class="site-footer__payment-note">Compra segura e atendimento especializado.</p></div>
 </footer>
+
+<%- include('combo-builder') %>
+
+<button type="button" class="sound-toggle" id="SoundToggle" data-muted="false" aria-label="Silenciar vídeo" hidden><svg class="sound-toggle__muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><line x1="16" y1="9" x2="21" y2="14"/><line x1="21" y1="9" x2="16" y2="14"/></svg><svg class="sound-toggle__unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9"/><path d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg></button>
 
 <script src="/store.js" defer></script>
 </body>
