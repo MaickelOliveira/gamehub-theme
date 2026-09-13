@@ -1,30 +1,44 @@
-# Game Hub — tema Shopify
+# Game Hub
 
-Este repositorio contem um tema Shopify e pode ser executado no EasyPanel por
-meio do servidor de visualizacao da Shopify CLI.
+E-commerce independente preparado para rodar no EasyPanel, sem depender da
+Shopify. Inclui catalogo, estoque, carrinho, checkout com Pix, pedidos e painel
+administrativo.
 
-## Configuracao no EasyPanel
+## EasyPanel
 
-Use o `Dockerfile` da raiz, publique a porta `3000` e adicione estas variaveis
-em **Environment**:
+1. Use o `Dockerfile` da raiz.
+2. Publique a porta `3000`.
+3. Monte um volume persistente em `/data`.
+4. Defina pelo menos `ADMIN_PASSWORD` e `SESSION_SECRET` em **Environment**.
+5. Execute um novo deploy.
+
+O banco SQLite e criado automaticamente em `/data/gamehub.db`. A loja abre sem
+variaveis obrigatorias; sem `ADMIN_PASSWORD`, apenas o painel administrativo
+fica bloqueado.
+
+As antigas variaveis `SHOPIFY_FLAG_STORE` e `SHOPIFY_CLI_THEME_TOKEN` nao sao
+mais usadas e podem ser removidas do EasyPanel.
+
+## Variaveis de ambiente
 
 ```text
-SHOPIFY_FLAG_STORE=sua-loja.myshopify.com
-SHOPIFY_CLI_THEME_TOKEN=senha-gerada-pelo-theme-access
+ADMIN_PASSWORD=uma-senha-forte
+SESSION_SECRET=uma-chave-aleatoria-longa
+PORT=3000
+DATA_DIR=/data
 ```
 
-Se a vitrine estiver protegida por senha, adicione tambem:
+As configuracoes comerciais, como chave Pix, WhatsApp, desconto e e-mail, sao
+alteradas no painel `/admin` e ficam salvas no banco.
 
-```text
-SHOPIFY_FLAG_STORE_PASSWORD=senha-da-vitrine
+O checkout cria o pedido, reserva o estoque e mostra a chave Pix configurada. A
+confirmacao do pagamento e feita no painel administrativo.
+
+## Desenvolvimento local
+
+```bash
+npm install
+npm run dev
 ```
 
-O token deve ser criado pelo aplicativo oficial **Theme Access** da Shopify e
-deve existir apenas no ambiente do EasyPanel. Nunca coloque esse token no Git.
-
-Depois de salvar as variaveis, execute um novo deploy. O container escuta em
-`0.0.0.0:3000`.
-
-> Este modo usa `shopify theme dev`, portanto funciona como uma visualizacao do
-> tema ligada aos dados da loja Shopify. A publicacao oficial da loja continua
-> sendo administrada pela Shopify.
+O tema Liquid antigo permanece no repositorio apenas como referencia visual.

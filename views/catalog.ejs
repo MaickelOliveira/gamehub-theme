@@ -1,0 +1,21 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="MainContent" class="store-main">
+  <section class="catalog-hero page-width page-width--wide">
+    <span class="store-kicker">GameHub Store</span>
+    <h1><%= title %></h1>
+    <p>Jogos digitais originais para sua plataforma preferida.</p>
+  </section>
+  <section class="catalog-layout page-width page-width--wide">
+    <form class="catalog-filters" action="/catalogo" method="get">
+      <label>Buscar<input type="search" name="q" value="<%= filters.query %>" placeholder="Nome ou código do jogo"></label>
+      <label>Categoria<select name="category"><option value="">Todas</option><option value="lancamentos" <%= filters.category === 'lancamentos' ? 'selected' : '' %>>Lançamentos</option><option value="pre-vendas" <%= filters.category === 'pre-vendas' ? 'selected' : '' %>>Pré-vendas</option><option value="pronta-entrega" <%= filters.category === 'pronta-entrega' ? 'selected' : '' %>>Pronta entrega</option></select></label>
+      <label>Plataforma<select name="platform"><option value="">Todas</option><% ['PS5','PS4','XBOX','PC'].forEach(function(value) { %><option value="<%= value %>" <%= filters.platform === value ? 'selected' : '' %>><%= value === 'XBOX' ? 'Xbox' : value %></option><% }) %></select></label>
+      <button class="button button--primary" type="submit">Filtrar</button><a class="store-clear-filter" href="/catalogo">Limpar filtros</a>
+    </form>
+    <div class="catalog-results"><div class="catalog-results__head"><strong><%= products.length %> produto<%= products.length === 1 ? '' : 's' %></strong></div>
+      <% if (products.length) { %><ul class="product-grid"><% products.forEach(function(product) { %><li><%- include('partials/product-card', { product }) %></li><% }) %></ul><% } else { %><div class="store-empty"><h2>Nenhum jogo encontrado</h2><p>Tente remover algum filtro ou fazer uma nova busca.</p><a class="button button--primary" href="/catalogo">Ver catálogo completo</a></div><% } %>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>

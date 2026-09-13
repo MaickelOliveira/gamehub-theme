@@ -1,0 +1,28 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="MainContent" class="store-main">
+  <section class="checkout page-width" data-pix-discount="<%= settings.pix_discount_percent %>">
+    <div class="store-page-heading"><span class="store-kicker">Ambiente seguro</span><h1>Finalizar compra</h1><p>Preencha seus dados para gerar o pedido.</p></div>
+    <div class="checkout__layout">
+      <form class="checkout__form store-panel" data-checkout-form>
+        <h2>Dados do comprador</h2>
+        <div class="store-form-grid">
+          <label class="store-field store-field--wide">Nome completo<input required name="name" autocomplete="name" minlength="3"></label>
+          <label class="store-field">E-mail<input required type="email" name="email" autocomplete="email"></label>
+          <label class="store-field">WhatsApp<input required name="phone" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999"></label>
+          <label class="store-field">CPF (opcional)<input name="document" inputmode="numeric" autocomplete="off"></label>
+          <label class="store-field store-field--wide">Observações (opcional)<textarea name="notes" rows="3" placeholder="Alguma informação importante sobre o pedido?"></textarea></label>
+        </div>
+        <h2>Pagamento</h2>
+        <label class="payment-choice is-selected"><input type="radio" name="payment_method" value="pix" checked><span class="payment-choice__icon">PIX</span><span><strong>Pix</strong><small><%= settings.pix_discount_percent %>% de desconto no total</small></span></label>
+        <label class="payment-choice"><input type="radio" name="payment_method" value="contact"><span class="payment-choice__icon">💬</span><span><strong>Combinar pelo atendimento</strong><small>Finalize o pedido e fale com a equipe</small></span></label>
+        <label class="store-field">Cupom de desconto<input name="coupon_code" autocomplete="off" placeholder="Digite o código"></label>
+        <label class="store-consent"><input required type="checkbox"> Confirmo que o e-mail e a plataforma escolhida estão corretos.</label>
+        <div class="store-form-error" data-checkout-error hidden></div>
+        <button class="button button--primary checkout__submit" type="submit">Criar pedido seguro</button>
+      </form>
+      <aside class="checkout__summary store-panel"><h2>Resumo</h2><div data-checkout-summary></div></aside>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>

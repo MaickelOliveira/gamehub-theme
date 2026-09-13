@@ -1,0 +1,87 @@
+<div class="announcement-bar" role="status">
+  <div class="announcement-bar__track">
+    <div class="announcement-bar__group">
+      <p><span class="announcement-bar__highlight">●</span> <%= settings.announcement %></p>
+      <p>Compra segura</p>
+      <p>Suporte especializado</p>
+    </div>
+    <div class="announcement-bar__group" aria-hidden="true">
+      <p><span class="announcement-bar__highlight">●</span> <%= settings.announcement %></p>
+      <p>Compra segura</p>
+      <p>Suporte especializado</p>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner page-width">
+    <button type="button" class="site-header__menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="MobileNav" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <a href="/" class="site-header__logo" aria-label="Página inicial da <%= settings.store_name %>">
+      <span class="site-header__logo-mark" aria-hidden="true"></span>
+      <span class="site-header__logo-text"><%= settings.store_name %></span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Navegação principal">
+      <ul class="site-header__nav-list">
+        <li class="site-header__nav-item"><a class="site-header__nav-link" href="/catalogo?category=lancamentos">Lançamentos</a></li>
+        <li class="site-header__nav-item"><a class="site-header__nav-link" href="/catalogo?category=pre-vendas">Pré-vendas</a></li>
+        <li class="site-header__nav-item has-dropdown">
+          <a class="site-header__nav-link" href="/catalogo">Plataformas</a>
+          <ul class="site-header__dropdown">
+            <li><a href="/catalogo?platform=PS5">PS5</a></li>
+            <li><a href="/catalogo?platform=PS4">PS4</a></li>
+            <li><a href="/catalogo?platform=XBOX">Xbox</a></li>
+            <li><a href="/catalogo?platform=PC">PC</a></li>
+          </ul>
+        </li>
+        <li class="site-header__nav-item"><a class="site-header__nav-link" href="/catalogo">Catálogo</a></li>
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <form action="/catalogo" method="get" role="search" class="site-header__search">
+        <input type="search" name="q" placeholder="Buscar jogos" aria-label="Buscar jogos">
+        <button type="submit" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+      </form>
+      <button type="button" id="ThemeToggle" class="site-header__icon-link" aria-label="Alternar modo claro ou escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href="/admin" class="site-header__icon-link" aria-label="Painel administrativo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </a>
+      <button type="button" class="site-header__icon-link site-header__cart" data-cart-open aria-label="Abrir carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.2 11h10.9l2-7H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span class="site-header__cart-count" data-cart-count>0</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="MobileNav" class="site-header__mobile-nav" data-mobile-nav hidden aria-label="Navegação móvel">
+    <ul>
+      <li><a href="/catalogo?category=lancamentos">Lançamentos</a></li>
+      <li><a href="/catalogo?category=pre-vendas">Pré-vendas</a></li>
+      <li><a href="/catalogo?platform=PS5">PlayStation 5</a></li>
+      <li><a href="/catalogo?platform=XBOX">Xbox</a></li>
+      <li><a href="/catalogo?platform=PC">PC</a></li>
+      <li><a href="/catalogo">Catálogo completo</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="CartDrawer" class="cart-drawer" hidden>
+  <button class="cart-drawer__overlay" data-cart-close aria-label="Fechar carrinho"></button>
+  <aside class="cart-drawer__panel" role="dialog" aria-modal="true" aria-label="Seu carrinho">
+    <div class="cart-drawer__header">
+      <h2>Seu carrinho</h2>
+      <button type="button" class="cart-drawer__close" data-cart-close aria-label="Fechar">&times;</button>
+    </div>
+    <div id="CartDrawerContent" class="cart-drawer__content"></div>
+  </aside>
+</div>
+
+<div class="toast-region" data-toast-region aria-live="polite"></div>

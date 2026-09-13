@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="page-width site-footer__grid">
+    <div class="site-footer__block site-footer__block--brand">
+      <div class="site-footer__logo-row">
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+        <span class="site-header__logo-text"><%= settings.store_name %></span>
+      </div>
+      <p class="site-footer__about">Sua próxima aventura começa aqui. Jogos digitais para todas as plataformas.</p>
+      <div class="site-footer__pay-badges"><span class="pay-badge pay-badge--pix">Pix</span><span class="pay-badge pay-badge--visa">VISA</span><span class="pay-badge pay-badge--mastercard">Mastercard</span></div>
+    </div>
+    <div class="site-footer__block">
+      <h3>Loja</h3>
+      <ul><li><a href="/catalogo">Catálogo</a></li><li><a href="/catalogo?category=lancamentos">Lançamentos</a></li><li><a href="/catalogo?category=pre-vendas">Pré-vendas</a></li></ul>
+    </div>
+    <div class="site-footer__block">
+      <h3>Plataformas</h3>
+      <ul><li><a href="/catalogo?platform=PS5">PS5</a></li><li><a href="/catalogo?platform=PS4">PS4</a></li><li><a href="/catalogo?platform=XBOX">Xbox</a></li><li><a href="/catalogo?platform=PC">PC</a></li></ul>
+    </div>
+    <div class="site-footer__block">
+      <h3>Atendimento</h3>
+      <ul><li><a href="mailto:<%= settings.support_email %>"><%= settings.support_email %></a></li><li><a href="/admin">Painel administrativo</a></li></ul>
+    </div>
+  </div>
+  <div class="site-footer__bottom page-width"><span>© <%= new Date().getFullYear() %> <%= settings.store_name %>.</span><span>Compra segura e entrega digital.</span></div>
+</footer>
+
+<script src="/store.js" defer></script>
+</body>
+</html>
