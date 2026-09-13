@@ -32,6 +32,7 @@ db.exec(`
     compare_at_price_cents INTEGER CHECK (compare_at_price_cents IS NULL OR compare_at_price_cents >= price_cents),
     stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
     image_url TEXT NOT NULL DEFAULT '',
+    trailer_video_id TEXT NOT NULL DEFAULT '',
     featured INTEGER NOT NULL DEFAULT 0 CHECK (featured IN (0, 1)),
     active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -100,6 +101,10 @@ const productColumns = db.prepare('PRAGMA table_info(products)').all();
 const addedGenreColumn = !productColumns.some((column) => column.name === 'genre');
 if (addedGenreColumn) {
   db.exec("ALTER TABLE products ADD COLUMN genre TEXT NOT NULL DEFAULT 'acao'");
+}
+const addedTrailerVideoColumn = !productColumns.some((column) => column.name === 'trailer_video_id');
+if (addedTrailerVideoColumn) {
+  db.exec("ALTER TABLE products ADD COLUMN trailer_video_id TEXT NOT NULL DEFAULT ''");
 }
 db.exec('CREATE INDEX IF NOT EXISTS products_active_genre_idx ON products (active, genre, created_at DESC)');
 
@@ -611,11 +616,55 @@ const seedProducts = [
   }
 ];
 
+const defaultTrailerVideos = Object.freeze({
+  'marvels-wolverine': '3Z42tBfBLJY',
+  'grand-theft-auto-vi': 'QdBZY2fkU-0',
+  'silent-hill-townfall': 'CvN3dP92wxU',
+  'control-resonant': 'WhQm-ExRz60',
+  'rayman-legends-retold': '2_7BQ9hLGkk',
+  'ace-combat-8': 'JQYx_867ua0',
+  'star-wars-galactic-racer': '2MtgIoToa7I',
+  'castlevania-belmonts-curse': 'wioDhevSSU4',
+  'call-of-duty-modern-warfare-4': 'jLbst85USN8',
+  'phantom-blade-zero': 'hXyPbvj7A7w',
+  'battlefield-6': 'pgNCgJG0vnY',
+  'ea-sports-fc-26': 'TSi0iJYSQ24',
+  'nba-2k26': 'zY1dEu7nGKc',
+  'assassins-creed-shadows': 'vovkzbtYBC8',
+  'monster-hunter-wilds': 'a_wNFT4j6qI',
+  'split-fiction': 'fcwngWPXQtg',
+  'doom-the-dark-ages': '4tk8lkmYGWQ',
+  'clair-obscur-expedition-33': '-qgOZDRDynw',
+  'forza-horizon-5': 'FYH9n37B7Yw',
+  'marvels-spider-man-2': 'nq1M_Wc4FIc',
+  'god-of-war-ragnarok': 'hfJ4Km46A-0',
+  'horizon-forbidden-west': 'Lq594XmpPBg',
+  'the-last-of-us-part-1': 'R2Ebc_OFeug',
+  'ghost-of-tsushima': 'A5gVt028Hww',
+  'ratchet-clank-rift-apart': '55PRv_e00wc',
+  'helldivers-2': 'UC5EpJR0GBQ',
+  returnal: 'k4nSLa8a588',
+  'black-myth-wukong': 'uT6RZBz9ueM',
+  'forza-motorsport': 'em4gv1Ietko',
+  'halo-infinite': 'PyMlV5_HRWk',
+  starfield: 'pYqyVpCV-3c',
+  'indiana-jones-great-circle': 'sq97d1RkdRM',
+  'sea-of-thieves': 'r5JIBaasuE8',
+  'elden-ring': 'E3Huy2cdih0',
+  'cyberpunk-2077': 'qIcTM8WXFjk',
+  'hogwarts-legacy': 'BtyBjOW8sGY',
+  'red-dead-redemption-2': 'F63h3v9QV7w',
+  'grand-theft-auto-v': 'hvoD7ehZPcM',
+  'tekken-8': '2hPuRQz6IlM',
+  'the-witcher-3': '1-l29HlKkXU'
+});
+
 const insertProduct = db.prepare(`
   INSERT OR IGNORE INTO products (
       id, slug, sku, name, description, category, genre, platforms_json,
-      price_cents, compare_at_price_cents, stock, image_url, featured, active
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+      price_cents, compare_at_price_cents, stock, image_url, trailer_video_id,
+      featured, active
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
 `);
 
 const seed = db.transaction(() => {
@@ -647,9 +696,19 @@ const seed = db.transaction(() => {
       product.compare,
       product.stock,
       product.image,
+      defaultTrailerVideos[product.id] || '',
       product.featured
     );
     if (product.legacyImage) upgradeDefaultImage.run(product.image, product.id, product.legacyImage);
+  }
+
+  const setDefaultTrailer = db.prepare(`
+    UPDATE products
+    SET trailer_video_id = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ? AND (trailer_video_id = '' OR trailer_video_id IS NULL)
+  `);
+  for (const [productId, videoId] of Object.entries(defaultTrailerVideos)) {
+    setDefaultTrailer.run(videoId, productId);
   }
 });
 

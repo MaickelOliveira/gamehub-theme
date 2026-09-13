@@ -57,6 +57,34 @@
       </div>
     </div>
 
+    <% if (product.trailer_video_id) { %>
+      <section class="product-trailer" data-product-trailer aria-label="Trailer oficial de <%= product.name %>">
+        <div
+          class="hero__yt-wrap product-trailer__player"
+          data-youtube-hero
+          data-video-id="<%= product.trailer_video_id %>"
+          data-start="0"
+          data-end="0"
+          style="background-image:url('https://i.ytimg.com/vi/<%= product.trailer_video_id %>/maxresdefault.jpg')"
+        >
+          <iframe
+            id="youtube-product-<%= product.id %>"
+            src="https://www.youtube.com/embed/<%= product.trailer_video_id %>?autoplay=1&amp;mute=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;enablejsapi=1&amp;loop=1&amp;playlist=<%= product.trailer_video_id %>&amp;origin=<%= encodeURIComponent(siteOrigin) %>"
+            title="Trailer oficial de <%= product.name %>"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="product-trailer__scrim" aria-hidden="true"></div>
+        <div class="product-trailer__content">
+          <span>Trailer oficial</span>
+          <h2>Veja <%= product.name %> em ação</h2>
+          <a class="button button--secondary" href="https://www.youtube.com/watch?v=<%= product.trailer_video_id %>" target="_blank" rel="noopener noreferrer">Abrir no YouTube</a>
+        </div>
+      </section>
+    <% } %>
+
     <div class="product-page__body">
       <div class="product-page__about">
         <h2 class="product-page__section-title">Sobre o jogo</h2>
