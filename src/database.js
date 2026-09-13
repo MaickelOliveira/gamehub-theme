@@ -125,7 +125,7 @@ const seedSettings = db.transaction(() => {
 
 seedSettings();
 
-const seedProducts = [
+const legacySeedProducts = [
   {
     id: 'aeon-vanguard', slug: 'aeon-vanguard', sku: 'GH-AEON-001',
     name: 'Aeon Vanguard', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
@@ -368,6 +368,249 @@ const seedProducts = [
   }
 ];
 
+const seedProducts = [
+  {
+    id: 'marvels-wolverine', slug: 'marvels-wolverine', sku: 'GH-REAL-001',
+    name: 'Marvel’s Wolverine', category: 'pre-vendas', genre: 'acao', platforms: ['PS5'],
+    price: 34990, compare: null, stock: 80, image: '/theme-assets/game-covers/official/marvels-wolverine.webp', featured: 1,
+    description: 'Assuma as garras de Logan em uma aventura brutal e cinematografica criada pela Insomniac Games.'
+  },
+  {
+    id: 'grand-theft-auto-vi', slug: 'grand-theft-auto-vi', sku: 'GH-REAL-002',
+    name: 'Grand Theft Auto VI', category: 'pre-vendas', genre: 'acao', platforms: ['PS5', 'Xbox'],
+    price: 39990, compare: null, stock: 100, image: '/theme-assets/game-covers/official/grand-theft-auto-vi.webp', featured: 1,
+    description: 'Explore Leonida e Vice City na nova aventura de mundo aberto da Rockstar Games.'
+  },
+  {
+    id: 'silent-hill-townfall', slug: 'silent-hill-townfall', sku: 'GH-REAL-003',
+    name: 'SILENT HILL: Townfall', category: 'pre-vendas', genre: 'terror', platforms: ['PS5', 'PC'],
+    price: 24990, compare: null, stock: 70, image: '/theme-assets/game-covers/official/silent-hill-townfall.webp', featured: 1,
+    description: 'Volte a uma cidade insular tomada por segredos, confrontos e terror psicologico.'
+  },
+  {
+    id: 'control-resonant', slug: 'control-resonant', sku: 'GH-REAL-004',
+    name: 'CONTROL Resonant', category: 'pre-vendas', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 29990, compare: null, stock: 75, image: '/theme-assets/game-covers/official/control-resonant.webp', featured: 1,
+    description: 'Domine poderes paranaturais e atravesse uma Manhattan distorcida nesta nova historia de Control.'
+  },
+  {
+    id: 'rayman-legends-retold', slug: 'rayman-legends-retold', sku: 'GH-REAL-005',
+    name: 'Rayman Legends Retold', category: 'pre-vendas', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 19990, compare: null, stock: 65, image: '/theme-assets/game-covers/official/rayman-legends-retold.webp', featured: 1,
+    description: 'Redescubra o classico de plataforma com visual renovado, novas fases e cooperativo local.'
+  },
+  {
+    id: 'ace-combat-8', slug: 'ace-combat-8', sku: 'GH-REAL-006',
+    name: 'ACE COMBAT 8: WINGS OF THEVE', category: 'pre-vendas', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 34990, compare: null, stock: 60, image: '/theme-assets/game-covers/official/ace-combat-8.webp', featured: 1,
+    description: 'Entre no cockpit e dispute combates aereos intensos em uma campanha cinematografica.'
+  },
+  {
+    id: 'star-wars-galactic-racer', slug: 'star-wars-galactic-racer', sku: 'GH-REAL-007',
+    name: 'STAR WARS: Galactic Racer', category: 'pre-vendas', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 29990, compare: null, stock: 80, image: '/theme-assets/game-covers/official/star-wars-galactic-racer.webp', featured: 1,
+    description: 'Acelere em circuitos clandestinos da Orla Exterior com veiculos de Star Wars.'
+  },
+  {
+    id: 'castlevania-belmonts-curse', slug: 'castlevania-belmonts-curse', sku: 'GH-REAL-008',
+    name: 'Castlevania: Belmont’s Curse', category: 'pre-vendas', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 14990, compare: null, stock: 90, image: '/theme-assets/game-covers/official/castlevania-belmonts-curse.webp', featured: 1,
+    description: 'Explore um mundo medieval sombrio nesta nova aventura de acao da familia Belmont.'
+  },
+  {
+    id: 'call-of-duty-modern-warfare-4', slug: 'call-of-duty-modern-warfare-4', sku: 'GH-REAL-009',
+    name: 'Call of Duty: Modern Warfare 4', category: 'pre-vendas', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 34990, compare: null, stock: 100, image: '/theme-assets/game-covers/official/call-of-duty-modern-warfare-4.webp', featured: 1,
+    description: 'Enfrente uma guerra moderna com campanha, multiplayer competitivo e cooperacao online.'
+  },
+  {
+    id: 'phantom-blade-zero', slug: 'phantom-blade-zero', sku: 'GH-REAL-010',
+    name: 'Phantom Blade Zero', category: 'pre-vendas', genre: 'rpg', platforms: ['PS5', 'PC'],
+    price: 29990, compare: null, stock: 75, image: '/theme-assets/game-covers/official/phantom-blade-zero.webp', featured: 1,
+    description: 'Combine artes marciais e fantasia sombria em um RPG de acao veloz inspirado no wuxia.'
+  },
+  {
+    id: 'battlefield-6', slug: 'battlefield-6', sku: 'GH-REAL-011',
+    name: 'Battlefield 6', category: 'lancamentos', genre: 'guerra', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 29990, compare: 34990, stock: 48, image: '/theme-assets/game-covers/official/battlefield-6.webp', featured: 1,
+    description: 'Participe de batalhas em grande escala com veiculos, destruicao e combate entre esquadroes.'
+  },
+  {
+    id: 'ea-sports-fc-26', slug: 'ea-sports-fc-26', sku: 'GH-REAL-012',
+    name: 'EA SPORTS FC 26', category: 'lancamentos', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 24990, compare: 34990, stock: 55, image: '/theme-assets/game-covers/official/ea-sports-fc-26.webp', featured: 1,
+    description: 'Monte seu elenco e entre em campo nos principais clubes, ligas e modos do futebol mundial.'
+  },
+  {
+    id: 'nba-2k26', slug: 'nba-2k26', sku: 'GH-REAL-013',
+    name: 'NBA 2K26', category: 'lancamentos', genre: 'esportes', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 24990, compare: 32990, stock: 44, image: '/theme-assets/game-covers/official/nba-2k26.webp', featured: 1,
+    description: 'Construa sua carreira, monte um time e viva a experiencia completa do basquete profissional.'
+  },
+  {
+    id: 'assassins-creed-shadows', slug: 'assassins-creed-shadows', sku: 'GH-REAL-014',
+    name: 'Assassin’s Creed Shadows', category: 'lancamentos', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 27990, compare: 34990, stock: 42, image: '/theme-assets/game-covers/official/assassins-creed-shadows.webp', featured: 1,
+    description: 'Explore o Japao feudal alternando entre furtividade shinobi e combate samurai.'
+  },
+  {
+    id: 'monster-hunter-wilds', slug: 'monster-hunter-wilds', sku: 'GH-REAL-015',
+    name: 'Monster Hunter Wilds', category: 'lancamentos', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 27990, compare: 34990, stock: 46, image: '/theme-assets/game-covers/official/monster-hunter-wilds.webp', featured: 1,
+    description: 'Cace criaturas gigantes em ecossistemas vivos e evolua seu equipamento em grupo.'
+  },
+  {
+    id: 'split-fiction', slug: 'split-fiction', sku: 'GH-REAL-016',
+    name: 'Split Fiction', category: 'lancamentos', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 24990, compare: 29990, stock: 39, image: '/theme-assets/game-covers/official/split-fiction.webp', featured: 1,
+    description: 'Atravesse mundos de fantasia e ficcao cientifica em uma aventura cooperativa para dois.'
+  },
+  {
+    id: 'doom-the-dark-ages', slug: 'doom-the-dark-ages', sku: 'GH-REAL-017',
+    name: 'DOOM: The Dark Ages', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 27990, compare: 34990, stock: 51, image: '/theme-assets/game-covers/official/doom-the-dark-ages.webp', featured: 1,
+    description: 'Assuma o papel do DOOM Slayer em uma guerra medieval contra as forcas do inferno.'
+  },
+  {
+    id: 'clair-obscur-expedition-33', slug: 'clair-obscur-expedition-33', sku: 'GH-REAL-018',
+    name: 'Clair Obscur: Expedition 33', category: 'lancamentos', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 22990, compare: 27990, stock: 45, image: '/theme-assets/game-covers/official/clair-obscur-expedition-33.webp', featured: 1,
+    description: 'Lidere uma expedicao em um RPG por turnos com combates reativos e direcao artistica marcante.'
+  },
+  {
+    id: 'forza-horizon-5', slug: 'forza-horizon-5', sku: 'GH-REAL-019',
+    name: 'Forza Horizon 5', category: 'lancamentos', genre: 'corrida', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 22990, compare: 29990, stock: 58, image: '/theme-assets/game-covers/official/forza-horizon-5.webp', featured: 1,
+    description: 'Explore o Mexico em centenas de carros, eventos online e corridas de mundo aberto.'
+  },
+  {
+    id: 'marvels-spider-man-2', slug: 'marvels-spider-man-2', sku: 'GH-REAL-020',
+    name: 'Marvel’s Spider-Man 2', category: 'lancamentos', genre: 'acao', platforms: ['PS5', 'PC'],
+    price: 24990, compare: 34990, stock: 50, image: '/theme-assets/game-covers/official/marvels-spider-man-2.webp', featured: 1,
+    description: 'Balance por Nova York com Peter Parker e Miles Morales em uma aventura contra Venom.'
+  },
+  {
+    id: 'god-of-war-ragnarok', slug: 'god-of-war-ragnarok', sku: 'GH-REAL-021',
+    name: 'God of War Ragnarök', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PS4', 'PC'],
+    price: 22990, compare: 34990, stock: 35, image: '/theme-assets/game-covers/official/god-of-war-ragnarok.webp', featured: 1,
+    description: 'Viaje pelos Nove Reinos com Kratos e Atreus em busca de respostas antes do Ragnarok.'
+  },
+  {
+    id: 'horizon-forbidden-west', slug: 'horizon-forbidden-west', sku: 'GH-REAL-022',
+    name: 'Horizon Forbidden West', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PS4', 'PC'],
+    price: 19990, compare: 29990, stock: 36, image: '/theme-assets/game-covers/official/horizon-forbidden-west.webp', featured: 1,
+    description: 'Acompanhe Aloy pelo Oeste Proibido em um mundo de maquinas colossais e novas tribos.'
+  },
+  {
+    id: 'the-last-of-us-part-1', slug: 'the-last-of-us-part-1', sku: 'GH-REAL-023',
+    name: 'The Last of Us Part I', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PC'],
+    price: 19990, compare: 29990, stock: 33, image: '/theme-assets/game-covers/official/the-last-of-us-part-1.webp', featured: 1,
+    description: 'Reviva a jornada de Joel e Ellie em uma recriacao completa da premiada aventura.'
+  },
+  {
+    id: 'ghost-of-tsushima', slug: 'ghost-of-tsushima', sku: 'GH-REAL-024',
+    name: 'Ghost of Tsushima Director’s Cut', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PS4', 'PC'],
+    price: 19990, compare: 29990, stock: 41, image: '/theme-assets/game-covers/official/ghost-of-tsushima.webp', featured: 1,
+    description: 'Domine a katana e a furtividade como Jin Sakai na luta pela ilha de Tsushima.'
+  },
+  {
+    id: 'ratchet-clank-rift-apart', slug: 'ratchet-clank-rift-apart', sku: 'GH-REAL-025',
+    name: 'Ratchet & Clank: Rift Apart', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'PC'],
+    price: 17990, compare: 29990, stock: 37, image: '/theme-assets/game-covers/official/ratchet-clank-rift-apart.webp', featured: 0,
+    description: 'Salte entre dimensoes com armas criativas e uma aventura intergalactica cheia de humor.'
+  },
+  {
+    id: 'helldivers-2', slug: 'helldivers-2', sku: 'GH-REAL-026',
+    name: 'HELLDIVERS 2', category: 'pronta-entrega', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 19990, compare: 24990, stock: 62, image: '/theme-assets/game-covers/official/helldivers-2.webp', featured: 1,
+    description: 'Defenda a Super Terra em missoes cooperativas caoticas para ate quatro jogadores.'
+  },
+  {
+    id: 'returnal', slug: 'returnal', sku: 'GH-REAL-027',
+    name: 'Returnal', category: 'pronta-entrega', genre: 'acao', platforms: ['PS5', 'PC'],
+    price: 17990, compare: 29990, stock: 29, image: '/theme-assets/game-covers/official/returnal.webp', featured: 0,
+    description: 'Quebre um ciclo temporal hostil em um roguelike de acao e ficcao cientifica.'
+  },
+  {
+    id: 'black-myth-wukong', slug: 'black-myth-wukong', sku: 'GH-REAL-028',
+    name: 'Black Myth: Wukong', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 24990, compare: 29990, stock: 47, image: '/theme-assets/game-covers/official/black-myth-wukong.webp', featured: 1,
+    description: 'Enfrente criaturas lendarias em um RPG de acao inspirado na mitologia chinesa.'
+  },
+  {
+    id: 'forza-motorsport', slug: 'forza-motorsport', sku: 'GH-REAL-029',
+    name: 'Forza Motorsport', category: 'pronta-entrega', genre: 'corrida', platforms: ['Xbox', 'PC'],
+    price: 19990, compare: 29990, stock: 44, image: '/theme-assets/game-covers/official/forza-motorsport.webp', featured: 0,
+    description: 'Construa e pilote carros em circuitos detalhados com clima e iluminacao dinamicos.'
+  },
+  {
+    id: 'halo-infinite', slug: 'halo-infinite', sku: 'GH-REAL-030',
+    name: 'Halo Infinite', category: 'pronta-entrega', genre: 'guerra', platforms: ['Xbox', 'PC'],
+    price: 14990, compare: 24990, stock: 53, image: '/theme-assets/game-covers/official/halo-infinite.webp', featured: 0,
+    description: 'Vista a armadura do Master Chief e enfrente os Banidos em uma campanha expansiva.'
+  },
+  {
+    id: 'starfield', slug: 'starfield', sku: 'GH-REAL-031',
+    name: 'Starfield', category: 'pronta-entrega', genre: 'rpg', platforms: ['Xbox', 'PC'],
+    price: 19990, compare: 29990, stock: 40, image: '/theme-assets/game-covers/official/starfield.webp', featured: 0,
+    description: 'Crie seu explorador e viaje entre sistemas estelares em busca do maior misterio da humanidade.'
+  },
+  {
+    id: 'indiana-jones-great-circle', slug: 'indiana-jones-great-circle', sku: 'GH-REAL-032',
+    name: 'Indiana Jones and the Great Circle', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 24990, compare: 34990, stock: 38, image: '/theme-assets/game-covers/official/indiana-jones-great-circle.webp', featured: 1,
+    description: 'Resolva enigmas e enfrente inimigos em uma aventura original de Indiana Jones.'
+  },
+  {
+    id: 'sea-of-thieves', slug: 'sea-of-thieves', sku: 'GH-REAL-033',
+    name: 'Sea of Thieves', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 14990, compare: 22990, stock: 61, image: '/theme-assets/game-covers/official/sea-of-thieves.webp', featured: 0,
+    description: 'Forme sua tripulacao, navegue por mares abertos e construa sua propria lenda pirata.'
+  },
+  {
+    id: 'elden-ring', slug: 'elden-ring', sku: 'GH-REAL-034',
+    name: 'ELDEN RING', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 19990, compare: 29990, stock: 49, image: '/theme-assets/game-covers/official/elden-ring.webp', featured: 1,
+    description: 'Explore as Terras Intermedias e enfrente chefes monumentais em um vasto RPG de acao.'
+  },
+  {
+    id: 'cyberpunk-2077', slug: 'cyberpunk-2077', sku: 'GH-REAL-035',
+    name: 'Cyberpunk 2077', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 14990, compare: 24990, stock: 57, image: '/theme-assets/game-covers/official/cyberpunk-2077.webp', featured: 1,
+    description: 'Construa sua lenda em Night City em um RPG de mundo aberto cheio de escolhas.'
+  },
+  {
+    id: 'hogwarts-legacy', slug: 'hogwarts-legacy', sku: 'GH-REAL-036',
+    name: 'Hogwarts Legacy', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 14990, compare: 24990, stock: 63, image: '/theme-assets/game-covers/official/hogwarts-legacy.webp', featured: 1,
+    description: 'Viva uma jornada pelo mundo bruxo, aprenda feiticos e explore Hogwarts no seculo XIX.'
+  },
+  {
+    id: 'red-dead-redemption-2', slug: 'red-dead-redemption-2', sku: 'GH-REAL-037',
+    name: 'Red Dead Redemption 2', category: 'pronta-entrega', genre: 'aventura', platforms: ['PS4', 'Xbox', 'PC'],
+    price: 12990, compare: 24990, stock: 52, image: '/theme-assets/game-covers/official/red-dead-redemption-2.webp', featured: 1,
+    description: 'Acompanhe Arthur Morgan e a gangue Van der Linde em uma epopeia do Velho Oeste.'
+  },
+  {
+    id: 'grand-theft-auto-v', slug: 'grand-theft-auto-v', sku: 'GH-REAL-038',
+    name: 'Grand Theft Auto V', category: 'pronta-entrega', genre: 'acao', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 9990, compare: 19990, stock: 74, image: '/theme-assets/game-covers/official/grand-theft-auto-v.webp', featured: 0,
+    description: 'Explore Los Santos em tres historias conectadas e entre no universo de GTA Online.'
+  },
+  {
+    id: 'tekken-8', slug: 'tekken-8', sku: 'GH-REAL-039',
+    name: 'TEKKEN 8', category: 'pronta-entrega', genre: 'acao', platforms: ['PS5', 'Xbox', 'PC'],
+    price: 17990, compare: 29990, stock: 43, image: '/theme-assets/game-covers/official/tekken-8.webp', featured: 0,
+    description: 'Escolha seu lutador e domine arenas destrutiveis no novo capitulo do torneio Iron Fist.'
+  },
+  {
+    id: 'the-witcher-3', slug: 'the-witcher-3', sku: 'GH-REAL-040',
+    name: 'The Witcher 3: Wild Hunt', category: 'pronta-entrega', genre: 'rpg', platforms: ['PS5', 'PS4', 'Xbox', 'PC'],
+    price: 7990, compare: 19990, stock: 68, image: '/theme-assets/game-covers/official/the-witcher-3.webp', featured: 0,
+    description: 'Cace monstros como Geralt de Rivia em uma aventura de mundo aberto repleta de escolhas.'
+  }
+];
+
 const insertProduct = db.prepare(`
   INSERT OR IGNORE INTO products (
       id, slug, sku, name, description, category, genre, platforms_json,
@@ -376,6 +619,14 @@ const insertProduct = db.prepare(`
 `);
 
 const seed = db.transaction(() => {
+  const catalogMigrationKey = 'catalog_real_games_v1';
+  const catalogAlreadyMigrated = db.prepare('SELECT 1 FROM settings WHERE key = ?').get(catalogMigrationKey);
+  if (!catalogAlreadyMigrated) {
+    const removeLegacyProduct = db.prepare('DELETE FROM products WHERE id = ?');
+    for (const product of legacySeedProducts) removeLegacyProduct.run(product.id);
+    insertSetting.run(catalogMigrationKey, 'done');
+  }
+
   const upgradeDefaultImage = db.prepare(`
     UPDATE products
     SET image_url = ?, updated_at = CURRENT_TIMESTAMP
