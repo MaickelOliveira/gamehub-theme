@@ -109,9 +109,11 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 /* ---------- Announcement bar ---------- */
 .announcement-bar {
   position: relative;
-  background: #232323;
-  color: #111;
+  background: linear-gradient(90deg, #061009 0%, #0D2113 50%, #061009 100%);
+  color: var(--color-accent);
   overflow: hidden;
+  border-block: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.28);
 }
 .announcement-bar::before,
 .announcement-bar::after {
@@ -119,19 +121,14 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
   position: absolute;
   left: 0;
   right: 0;
-  height: 8px;
-  background: repeating-linear-gradient(
-    45deg,
-    #F2C300,
-    #F2C300 22px,
-    #111 22px,
-    #111 44px
-  );
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.65;
   z-index: 2;
 }
 .announcement-bar::before { top: 0; }
 .announcement-bar::after { bottom: 0; }
-.announcement-bar__highlight { color: #E5484D; }
+.announcement-bar__highlight { color: #F4F7F5; }
 .announcement-bar__track {
   position: relative;
   z-index: 1;
@@ -143,13 +140,13 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 .announcement-bar p {
   margin: 0;
   white-space: nowrap;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
-  padding: 0.6rem 0.4rem;
+  padding: 0.52rem 0.55rem;
   color: var(--color-accent);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.55);
 }
 @keyframes announcement-marquee {
   from { transform: translateX(0); }
