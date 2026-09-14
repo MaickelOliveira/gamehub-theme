@@ -89,15 +89,44 @@
     </div>
 
     <div class="product-page__body">
-      <div class="product-page__about">
-        <h2 class="product-page__section-title">Sobre o jogo</h2>
-        <div class="product-page__description rte"><p><%= product.description || 'Uma nova aventura espera por você. Confira a plataforma, adicione ao carrinho e finalize seu pedido com segurança.' %></p></div>
-        <ul class="product-page__facts">
-          <li><strong>Formato</strong><span>Chave digital original</span></li>
-          <li><strong>Entrega</strong><span>Após confirmação do pagamento</span></li>
-          <li><strong>Plataformas</strong><span><%= product.platforms.join(' · ') %></span></li>
-        </ul>
-      </div>
+      <%
+        const genreDetails = ({
+          acao: { label: 'Ação', text: 'a ação ganha ritmo cinematográfico, combates dinâmicos e desafios que mantêm cada momento intenso', highlights: ['Combate dinâmico', 'Ritmo cinematográfico', 'Desafios intensos'] },
+          aventura: { label: 'Aventura', text: 'a exploração, a narrativa e as descobertas se combinam em uma jornada feita para jogar no seu ritmo', highlights: ['Mundo para explorar', 'História envolvente', 'Grandes descobertas'] },
+          corrida: { label: 'Corrida', text: 'velocidade, domínio das pistas e evolução dos veículos formam uma experiência competitiva e cheia de adrenalina', highlights: ['Alta velocidade', 'Pistas desafiadoras', 'Competição emocionante'] },
+          esportes: { label: 'Esportes', text: 'estratégia, habilidade e evolução se encontram em partidas pensadas tanto para jogar sozinho quanto com amigos', highlights: ['Modos competitivos', 'Evolução constante', 'Diversão com amigos'] },
+          guerra: { label: 'Guerra', text: 'combates táticos, cenários de grande escala e trabalho em equipe criam confrontos variados e impactantes', highlights: ['Combate tático', 'Batalhas grandiosas', 'Trabalho em equipe'] },
+          rpg: { label: 'RPG', text: 'exploração, evolução do personagem e decisões importantes constroem uma aventura profunda e cheia de possibilidades', highlights: ['Evolução do personagem', 'Exploração livre', 'Escolhas importantes'] },
+          terror: { label: 'Terror', text: 'suspense, atmosfera e sobrevivência conduzem uma experiência imersiva em que cada descoberta aumenta a tensão', highlights: ['Atmosfera imersiva', 'Suspense constante', 'Sobrevivência'] }
+        })[product.genre] || { label: 'Jogo digital', text: 'você encontra uma experiência completa, envolvente e preparada para a plataforma escolhida', highlights: ['Experiência completa', 'Conteúdo envolvente', 'Diversão garantida'] };
+        const categoryLabel = ({ 'pre-vendas': 'Pré-venda', lancamentos: 'Lançamento', 'pronta-entrega': 'Pronta entrega' })[product.category] || 'Catálogo';
+        const deliveryLabel = product.category === 'pre-vendas' ? 'Envio após o lançamento' : 'Após a confirmação do pagamento';
+      %>
+      <section class="product-page__about">
+        <div class="product-page__about-heading">
+          <span class="product-page__about-kicker">Conheça a experiência</span>
+          <h2 class="product-page__section-title">Sobre <%= product.name %></h2>
+        </div>
+        <div class="product-page__about-grid">
+          <div class="product-page__description">
+            <p class="product-page__description-lead"><%= product.description || 'Uma nova aventura espera por você. Confira a plataforma, adicione ao carrinho e finalize seu pedido com segurança.' %></p>
+            <p class="product-page__description-detail">Em <%= product.name %>, <%= genreDetails.text %>.</p>
+            <ul class="product-page__highlights" aria-label="Destaques de <%= product.name %>">
+              <% genreDetails.highlights.forEach(function(highlight) { %><li><%= highlight %></li><% }) %>
+            </ul>
+          </div>
+          <div class="product-page__details-card">
+            <span class="product-page__details-title">Informações do jogo</span>
+            <ul class="product-page__facts">
+              <li><small>Gênero</small><strong><%= genreDetails.label %></strong></li>
+              <li><small>Disponibilidade</small><strong><%= categoryLabel %></strong></li>
+              <li><small>Formato</small><strong>Chave digital original</strong></li>
+              <li><small>Entrega</small><strong><%= deliveryLabel %></strong></li>
+              <li class="product-page__fact--wide"><small>Plataformas</small><strong><%= product.platforms.join(' · ') %></strong></li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <div class="product-page__reviews">
         <h2 class="product-page__section-title">O que os jogadores dizem</h2>
